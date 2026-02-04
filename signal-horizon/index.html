@@ -836,16 +836,18 @@
         }
 
         .preset-ultra {
-            background: linear-gradient(135deg, #9b59b6, #e91e63) !important;
-            color: #fff !important;
             border-color: #9b59b6 !important;
         }
 
         .preset-ultra:hover {
-            box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+            border-color: #e91e63 !important;
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.3);
         }
 
         .preset-ultra.active {
+            background: linear-gradient(135deg, #9b59b6, #e91e63) !important;
+            color: #fff !important;
+            border-color: #e91e63 !important;
             box-shadow: 0 0 25px rgba(155, 89, 182, 0.6);
         }
 
@@ -1043,6 +1045,228 @@
             min-width: 160px;
             flex-shrink: 0;
         }
+
+        /* =====================================================================
+           Tag Pills System
+           ===================================================================== */
+        .tag-pills-section {
+            margin-top: 0.75rem;
+        }
+
+        .tag-pills-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-pills-header span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .clear-tags-btn {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.4rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .clear-tags-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tag-pills-container {
+            max-height: 120px;
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            padding: 0.5rem;
+            background: var(--bg-surface);
+            border-radius: 8px;
+        }
+
+        .tag-category-label {
+            width: 100%;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .tag-category-label:first-child {
+            margin-top: 0;
+        }
+
+        .tag-pill {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.65rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .tag-pill:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .tag-pill.selected {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* =====================================================================
+           Audio Monitor: EQ Visualizer + Beat Validator
+           ===================================================================== */
+        .audio-monitor {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .audio-monitor.active {
+            opacity: 1;
+        }
+
+        .audio-monitor-waiting {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .audio-monitor.active .audio-monitor-waiting {
+            display: none;
+        }
+
+        .audio-monitor:not(.active) .eq-canvas-container,
+        .audio-monitor:not(.active) .beat-validator {
+            display: none;
+        }
+
+        .audio-monitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .audio-monitor-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .eq-canvas-container {
+            background: var(--bg-base);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        #eq-canvas {
+            width: 100%;
+            height: 60px;
+            display: block;
+        }
+
+        .beat-validator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .metronome-toggle {
+            padding: 0.5rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .metronome-toggle:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .metronome-toggle.active {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .bpm-display {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            min-width: 80px;
+        }
+
+        .beat-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.05s;
+        }
+
+        .beat-indicator.pulse {
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.3);
+        }
+
+        .beat-status {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        @keyframes beat-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 
 </head>
@@ -1105,10 +1329,6 @@
                         <label>Title</label>
                         <input type="text" id="title" placeholder="My Epic Track">
                     </div>
-                    <div class="form-group">
-                        <label>Tags</label>
-                        <input type="text" id="tags" placeholder="electronic, ambient, chill">
-                    </div>
                 </div>
 
                 <!-- Quick Presets with Genre Tabs -->
@@ -1121,8 +1341,27 @@
                 <!-- Style & Lyrics -->
                 <div class="row">
                     <div class="card">
-                        <div class="card-title">Style Description</div>
-                        <textarea id="caption" rows="4" placeholder="Describe the music style..."></textarea>
+                        <div class="card-title"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            Style Description
+                            <button type="button" class="clear-tags-btn"
+                                onclick="clearStyleDescription()">Clear</button>
+                        </div>
+                        <textarea id="caption" rows="3" placeholder="Describe the music style..."
+                            oninput="updateFinalPrompt()"></textarea>
+                        <div class="form-group" style="margin-top: 0.75rem;">
+                            <label style="font-size: 0.75rem;">Style Tags <span style="color: var(--text-muted);">(added
+                                    to prompt)</span></label>
+                            <input type="text" id="tags" placeholder="electronic, ambient, chill"
+                                oninput="syncTagPillsFromInput(); updateFinalPrompt();">
+                            <div class="tag-pills-section">
+                                <div class="tag-pills-header">
+                                    <span>Quick Tags</span>
+                                    <button type="button" class="clear-tags-btn" onclick="clearAllTags()">Clear</button>
+                                </div>
+                                <div class="tag-pills-container" id="tag-pills"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card">
                         <div class="card-title">Lyrics</div>
@@ -1537,7 +1776,7 @@
                         <p class="setting-hint" style="margin-bottom: 0.5rem;">This is the complete prompt sent to
                             ACE-Step (style + rhythm modifiers)</p>
                         <div id="final-prompt-text"
-                            style="background: var(--bg-base); padding: 1rem; border-radius: 8px; font-size: 0.85rem; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 150px; overflow-y: auto;">
+                            style="background: var(--bg-base); padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.85rem; color: var(--text); word-break: break-word; max-height: 150px; overflow-y: auto;">
                             <em style="color: var(--text-muted);">Enter a style description to see the final
                                 prompt...</em>
                         </div>
@@ -1564,6 +1803,29 @@
                         <div id="progress-bar"
                             style="background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); height: 100%; width: 0%; transition: width 0.3s;">
                         </div>
+                    </div>
+                </div>
+
+                <!-- Audio Monitor: EQ + Beat Validator -->
+                <div class="audio-monitor" id="audio-monitor">
+                    <div class="audio-monitor-header">
+                        <span class="audio-monitor-title">🎚️ Audio Monitor</span>
+                    </div>
+                    <div class="audio-monitor-waiting">
+                        ▶️ Play a track to activate EQ visualizer and beat validator
+                    </div>
+                    <div class="eq-canvas-container">
+                        <canvas id="eq-canvas"></canvas>
+                    </div>
+                    <div class="beat-validator">
+                        <button class="metronome-toggle" id="metronome-toggle">
+                            🥁 Beat Check
+                        </button>
+                        <span class="bpm-display" id="bpm-display">-- BPM</span>
+                        <div class="beat-indicator" id="beat-indicator"></div>
+                        <span class="beat-status" id="beat-status">Click Beat Check to validate timing</span>
+                        <p class="setting-hint" style="margin-top: 0.5rem; font-size: 0.7rem;">💡 BPM is a target - AI
+                            music may vary ±5-10 BPM</p>
                     </div>
                 </div>
 
@@ -2280,6 +2542,396 @@
     <script>
         const API_BASE = '';  // Same origin - served by Signal Horizon server
 
+        // =====================================================================
+        // Audio Monitor: EQ Visualizer + Beat Validator
+        // =====================================================================
+        const AudioMonitor = {
+            audioContext: null,
+            analyser: null,
+            currentSource: null,
+            currentAudio: null,
+            animationId: null,
+            metronomeEnabled: false,
+            metronomeTimerId: null,
+            nextBeatTime: 0,
+            currentBPM: 120,
+
+            // Initialize AudioContext (lazy - on first use)
+            init() {
+                if (!this.audioContext) {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.analyser.fftSize = 128; // 64 frequency bins
+                    this.analyser.smoothingTimeConstant = 0.8;
+                    this.analyser.connect(this.audioContext.destination);
+                }
+                // Resume if suspended (browser autoplay policy)
+                if (this.audioContext.state === 'suspended') {
+                    this.audioContext.resume();
+                }
+            },
+
+            // Attach to an audio element
+            attachToAudio(audioElement, bpm) {
+                this.init();
+
+                // Disconnect previous source if different audio
+                if (this.currentAudio && this.currentAudio !== audioElement) {
+                    this.stopEQ();
+                    this.stopMetronome();
+                }
+
+                // Don't re-create source for same audio element
+                if (this.currentAudio === audioElement && this.currentSource) {
+                    this.currentBPM = bpm || 120;
+                    this.updateBPMDisplay();
+                    return;
+                }
+
+                // Create new media element source
+                try {
+                    this.currentSource = this.audioContext.createMediaElementSource(audioElement);
+                    this.currentSource.connect(this.analyser);
+                    this.currentAudio = audioElement;
+                    this.currentBPM = bpm || 120;
+                } catch (e) {
+                    // Source already created for this element - just update BPM
+                    this.currentBPM = bpm || 120;
+                }
+
+                this.updateBPMDisplay();
+                this.showMonitor();
+                this.startEQ();
+            },
+
+            // Show the monitor panel
+            showMonitor() {
+                const monitor = document.getElementById('audio-monitor');
+                if (monitor) monitor.classList.add('active');
+            },
+
+            // Hide monitor when nothing playing
+            hideMonitor() {
+                const monitor = document.getElementById('audio-monitor');
+                if (monitor) monitor.classList.remove('active');
+            },
+
+            updateBPMDisplay() {
+                const bpmDisplay = document.getElementById('bpm-display');
+                if (bpmDisplay) {
+                    bpmDisplay.textContent = this.currentBPM + ' BPM';
+                }
+            },
+
+            // EQ Visualizer
+            startEQ() {
+                const canvas = document.getElementById('eq-canvas');
+                if (!canvas || !this.analyser) return;
+
+                const ctx = canvas.getContext('2d');
+                const bufferLength = this.analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+
+                // Set canvas size
+                canvas.width = canvas.offsetWidth * 2;
+                canvas.height = 120;
+
+                const draw = () => {
+                    this.animationId = requestAnimationFrame(draw);
+
+                    this.analyser.getByteFrequencyData(dataArray);
+
+                    // Clear canvas
+                    ctx.fillStyle = '#0a0a0a';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw frequency bars
+                    const barWidth = (canvas.width / bufferLength) - 2;
+                    let x = 0;
+
+                    for (let i = 0; i < bufferLength; i++) {
+                        const barHeight = (dataArray[i] / 255) * canvas.height;
+
+                        // Gradient from accent cyan to magenta
+                        const ratio = i / bufferLength;
+                        const r = Math.floor(0 + ratio * 255);
+                        const g = Math.floor(212 - ratio * 212);
+                        const b = Math.floor(255 - ratio * 85);
+
+                        ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+                        x += barWidth + 2;
+                    }
+                };
+
+                draw();
+            },
+
+            stopEQ() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
+            },
+
+            // Metronome / Beat Validator
+            toggleMetronome() {
+                this.metronomeEnabled = !this.metronomeEnabled;
+                const toggleBtn = document.getElementById('metronome-toggle');
+                const statusEl = document.getElementById('beat-status');
+
+                if (this.metronomeEnabled) {
+                    toggleBtn.classList.add('active');
+                    statusEl.textContent = 'Listening for beat alignment...';
+                    this.startMetronome();
+                } else {
+                    toggleBtn.classList.remove('active');
+                    statusEl.textContent = 'Click Beat Check to validate timing';
+                    this.stopMetronome();
+                }
+            },
+
+            startMetronome() {
+                if (!this.audioContext || !this.currentAudio) return;
+
+                // Sync to audio's current time
+                const audioCurrentTime = this.currentAudio.currentTime;
+                const secondsPerBeat = 60.0 / this.currentBPM;
+
+                // Calculate next beat time aligned to start
+                const beatsElapsed = Math.floor(audioCurrentTime / secondsPerBeat);
+                this.nextBeatTime = this.audioContext.currentTime +
+                    ((beatsElapsed + 1) * secondsPerBeat - audioCurrentTime);
+
+                this.scheduleBeat();
+            },
+
+            scheduleBeat() {
+                const scheduleAheadTime = 0.1; // 100ms lookahead
+                const secondsPerBeat = 60.0 / this.currentBPM;
+
+                while (this.nextBeatTime < this.audioContext.currentTime + scheduleAheadTime) {
+                    this.playClick(this.nextBeatTime);
+                    this.schedulePulse(this.nextBeatTime);
+                    this.nextBeatTime += secondsPerBeat;
+                }
+
+                this.metronomeTimerId = setTimeout(() => {
+                    if (this.metronomeEnabled && this.currentAudio && !this.currentAudio.paused) {
+                        this.scheduleBeat();
+                    }
+                }, 25);
+            },
+
+            playClick(time) {
+                if (!this.audioContext) return;
+
+                // Create a short click using oscillator
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+
+                osc.frequency.value = 1000; // High click
+                osc.type = 'square';
+
+                gain.gain.setValueAtTime(0.3, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+
+                osc.start(time);
+                osc.stop(time + 0.05);
+            },
+
+            schedulePulse(time) {
+                const delay = (time - this.audioContext.currentTime) * 1000;
+                if (delay > 0) {
+                    setTimeout(() => this.flashBeatIndicator(), delay);
+                } else {
+                    this.flashBeatIndicator();
+                }
+            },
+
+            flashBeatIndicator() {
+                const indicator = document.getElementById('beat-indicator');
+                if (indicator) {
+                    indicator.classList.add('pulse');
+                    setTimeout(() => indicator.classList.remove('pulse'), 100);
+                }
+            },
+
+            stopMetronome() {
+                if (this.metronomeTimerId) {
+                    clearTimeout(this.metronomeTimerId);
+                    this.metronomeTimerId = null;
+                }
+            },
+
+            // Called when audio stops/pauses
+            onAudioStop() {
+                this.stopMetronome();
+            }
+        };
+
+        // Global audio play event - attach monitor to any playing audio
+        document.addEventListener('play', function (e) {
+            if (e.target.tagName === 'AUDIO') {
+                // Pause other audio (existing behavior)
+                document.querySelectorAll('audio').forEach(audio => {
+                    if (audio !== e.target && !audio.paused) {
+                        audio.pause();
+                    }
+                });
+
+                // Get BPM from generation settings
+                const bpmInput = document.getElementById('bpm');
+                const bpm = bpmInput ? parseInt(bpmInput.value) || 120 : 120;
+
+                // Attach monitor to this audio
+                AudioMonitor.attachToAudio(e.target, bpm);
+            }
+        }, true);
+
+        // Stop monitor when audio pauses/ends
+        document.addEventListener('pause', function (e) {
+            if (e.target.tagName === 'AUDIO') {
+                AudioMonitor.onAudioStop();
+            }
+        }, true);
+
+        document.addEventListener('ended', function (e) {
+            if (e.target.tagName === 'AUDIO') {
+                AudioMonitor.onAudioStop();
+                AudioMonitor.hideMonitor();
+            }
+        }, true);
+
+        // Metronome toggle button
+        document.getElementById('metronome-toggle')?.addEventListener('click', () => {
+            AudioMonitor.toggleMetronome();
+        });
+
+
+        // =====================================================================
+        // Common Tags System - Quick Tag Pills
+        // =====================================================================
+        const COMMON_TAGS = {
+            'Genre': [
+                'pop', 'rock', 'hip-hop', 'rap', 'electronic', 'edm', 'house', 'techno',
+                'trance', 'drum and bass', 'dubstep', 'jazz', 'blues', 'country', 'folk',
+                'r&b', 'soul', 'funk', 'reggae', 'metal', 'punk', 'indie', 'alternative',
+                'classical', 'orchestral', 'lo-fi', 'synthwave', 'chillwave', 'ambient', 'trap'
+            ],
+            'Mood': [
+                'happy', 'sad', 'melancholic', 'uplifting', 'energetic', 'dreamy', 'dark',
+                'nostalgic', 'euphoric', 'intimate', 'aggressive', 'peaceful', 'mysterious',
+                'romantic', 'epic', 'triumphant', 'haunting', 'playful', 'moody', 'atmospheric',
+                'hopeful', 'anxious', 'serene', 'powerful', 'bittersweet'
+            ],
+            'Instruments': [
+                'piano', 'acoustic guitar', 'electric guitar', 'bass', 'drums', 'strings',
+                'synth', 'saxophone', 'trumpet', 'violin', 'cello', 'flute', 'organ',
+                '808 drums', 'synthesizer', 'brass', 'percussion', 'harp', 'mandolin',
+                'ukulele', 'banjo', 'harmonica', 'choir', 'pads', 'arpeggio'
+            ],
+            'Vocal': [
+                'female vocal', 'male vocal', 'falsetto', 'raspy', 'breathy', 'powerful',
+                'whispered', 'harmonies', 'spoken word', 'rap vocal',
+                'auto-tune', 'vocoder', 'ad-libs', 'belting'
+            ],
+            'Production': [
+                'lo-fi', 'high-fidelity', 'live recording', 'studio-polished',
+                'bedroom pop', 'minimal', 'layered', 'punchy', 'warm', 'bright',
+                'crisp', 'raw', 'polished', 'vintage', 'modern'
+            ],
+            'Tempo': [
+                'slow tempo', 'mid-tempo', 'fast-paced', 'groovy', 'driving',
+                'laid-back', 'uptempo', 'downtempo'
+            ],
+            'Era': [
+                '80s', '90s', '2000s', '2010s', 'retro', 'vintage', 'modern',
+                'futuristic', 'classic', 'contemporary'
+            ]
+        };
+
+        // Initialize tag pills
+        function initTagPills() {
+            const container = document.getElementById('tag-pills');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            Object.entries(COMMON_TAGS).forEach(([category, tags]) => {
+                // Add category label
+                const label = document.createElement('div');
+                label.className = 'tag-category-label';
+                label.textContent = category;
+                container.appendChild(label);
+
+                // Add pills for this category
+                tags.forEach(tag => {
+                    const pill = document.createElement('span');
+                    pill.className = 'tag-pill';
+                    pill.textContent = tag;
+                    pill.dataset.tag = tag;
+                    pill.onclick = () => toggleTag(tag);
+                    container.appendChild(pill);
+                });
+            });
+        }
+
+        // Toggle tag selection
+        function toggleTag(tag) {
+            const input = document.getElementById('tags');
+            if (!input) return;
+
+            let tags = input.value
+                .split(',')
+                .map(t => t.trim())
+                .filter(t => t.length > 0);
+
+            const index = tags.findIndex(t => t.toLowerCase() === tag.toLowerCase());
+
+            if (index >= 0) {
+                // Remove tag
+                tags.splice(index, 1);
+            } else {
+                // Add tag
+                tags.push(tag);
+            }
+
+            input.value = tags.join(', ');
+            syncTagPillsFromInput();
+            updateFinalPrompt();
+        }
+
+        // Clear all tags
+        function clearAllTags() {
+            const input = document.getElementById('tags');
+            if (input) {
+                input.value = '';
+            }
+            syncTagPillsFromInput();
+            updateFinalPrompt();
+        }
+
+        // Sync pill states with input field
+        function syncTagPillsFromInput() {
+            const input = document.getElementById('tags');
+            if (!input) return;
+
+            const currentTags = input.value
+                .split(',')
+                .map(t => t.trim().toLowerCase())
+                .filter(t => t.length > 0);
+
+            document.querySelectorAll('.tag-pill').forEach(pill => {
+                const pillTag = pill.dataset.tag.toLowerCase();
+                pill.classList.toggle('selected', currentTags.includes(pillTag));
+            });
+        }
+
         // Genre Presets Data - 9 Genres with Complete Settings
         const PRESETS = {
             "The Treq": {
@@ -2700,18 +3352,30 @@
                 const toggle = document.createElement('label');
                 toggle.className = 'rhythm-toggle';
                 toggle.innerHTML = `
-                    <input type="checkbox" id="rhythm-${key}" onchange="updateRhythmPreview()">
+                    <input type="checkbox" id="rhythm-${key}">
                     <span class="rhythm-toggle-icon">${mod.icon}</span>
                     <span class="rhythm-toggle-label">${mod.label}</span>
                 `;
-                toggle.onclick = (e) => {
-                    if (e.target.type !== 'checkbox') {
-                        const cb = toggle.querySelector('input');
-                        cb.checked = !cb.checked;
+
+                // Get the checkbox reference
+                const checkbox = toggle.querySelector('input');
+
+                // Checkbox change handler
+                checkbox.addEventListener('change', () => {
+                    toggle.classList.toggle('active', checkbox.checked);
+                    updateRhythmPreview();
+                });
+
+                // Label click handler (for clicking on icon/label, not checkbox)
+                toggle.addEventListener('click', (e) => {
+                    if (e.target !== checkbox) {
+                        e.preventDefault(); // Prevent default label behavior
+                        checkbox.checked = !checkbox.checked;
+                        toggle.classList.toggle('active', checkbox.checked);
                         updateRhythmPreview();
                     }
-                    toggle.classList.toggle('active', toggle.querySelector('input').checked);
-                };
+                });
+
                 grid.appendChild(toggle);
             });
 
@@ -2744,6 +3408,7 @@
 
         function updateFinalPrompt() {
             const caption = document.getElementById('caption')?.value || '';
+            const tags = document.getElementById('tags')?.value || '';
             const vocalPersonaEl = document.getElementById('vocal-persona');
             const vocalPersona = vocalPersonaEl ? vocalPersonaEl.value : '';
             const rhythmModifiers = buildRhythmModifiers();
@@ -2751,27 +3416,48 @@
 
             if (!finalPromptEl) return;
 
-            // Show placeholder only if nothing is set
-            if (!caption && !vocalPersona && !rhythmModifiers) {
-                finalPromptEl.innerHTML = '<em style="color: var(--text-muted);">Enter a style description to see the final prompt...</em>';
+            // Show placeholder if nothing is set
+            if (!caption && !tags && !vocalPersona && !rhythmModifiers) {
+                finalPromptEl.innerHTML = '<em style="color: var(--text-muted);">Enter a style description or select tags to see the final prompt...</em>';
                 return;
             }
 
-            // Build display - start with caption
+            // Build display with color coding (exact same order as generateMusic sends)
             let display = '';
+
+            // Caption (white)
             if (caption) {
                 display = caption;
             }
+
+            // Tags (purple)
+            if (tags) {
+                if (display) display += ', ';
+                display += `<span style="color: #a855f7;">${tags}</span>`;
+            }
+
+            // Vocal Persona (orange)
             if (vocalPersona) {
                 if (display) display += ', ';
-                display += `<span style="color: #ff9f43; font-weight: 500;">${vocalPersona}</span>`;
+                display += `<span style="color: #ff9f43;">${vocalPersona}</span>`;
             }
+
+            // Rhythm Modifiers (cyan)
             if (rhythmModifiers) {
                 if (display) display += ', ';
-                display += `<span style="color: var(--accent); font-weight: 500;">${rhythmModifiers}</span>`;
+                display += `<span style="color: var(--accent);">${rhythmModifiers}</span>`;
             }
 
             finalPromptEl.innerHTML = display;
+        }
+
+        // Clear style description
+        function clearStyleDescription() {
+            const caption = document.getElementById('caption');
+            if (caption) {
+                caption.value = '';
+            }
+            updateFinalPrompt();
         }
 
         function toggleFinalPrompt() {
@@ -2789,6 +3475,20 @@
                 const cb = document.getElementById(`rhythm-${key}`);
                 if (cb?.checked) {
                     selected.push(mod.levels[intensity]);
+                }
+            });
+
+            return selected.join(', ');
+        }
+
+        // Get just the labels of selected rhythm modifiers for display
+        function getSelectedRhythmLabels() {
+            const selected = [];
+
+            Object.entries(RHYTHM_MODIFIERS).forEach(([key, mod]) => {
+                const cb = document.getElementById(`rhythm-${key}`);
+                if (cb?.checked) {
+                    selected.push(mod.label);
                 }
             });
 
@@ -2953,6 +3653,9 @@
             document.querySelectorAll('.preset-card').forEach(c => {
                 c.classList.toggle('selected', c.querySelector('.preset-name').textContent === name);
             });
+
+            // Update final prompt preview
+            updateFinalPrompt();
         }
 
         // Navigation
@@ -3037,12 +3740,15 @@
             return true;
         }
 
-        // Initialize lyrics listener
+        // Initialize lyrics listener and tag pills
         document.addEventListener('DOMContentLoaded', () => {
             const lyricsTextarea = document.getElementById('lyrics');
             if (lyricsTextarea) {
                 lyricsTextarea.addEventListener('input', checkLyricsContent);
             }
+
+            // Initialize tag pills
+            initTagPills();
         });
 
         // Generate Music - with progress bar and cancel
@@ -3077,6 +3783,7 @@
 
             // Build the final prompt with modifiers
             let finalPrompt = caption;
+            if (tags) finalPrompt += `, ${tags}`;
             if (vocalPersona) finalPrompt += `, ${vocalPersona}`;
             if (rhythmModifiers) finalPrompt += `, ${rhythmModifiers}`;
 

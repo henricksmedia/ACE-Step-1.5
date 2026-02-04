@@ -1,0 +1,30 @@
+{
+  "id": "7273cb9b-77f9-4e02-8e25-0fb277475c84",
+  "title": "The Edge",
+  "slug": "the-edge",
+  "folder": "2026-02-04_14-45-44_the-edge",
+  "created_at": "2026-02-04T14:48:18.043842",
+  "caption": "liquid drum and bass, rolling breakbeats, deep sub bass, atmospheric pads, smooth and energetic, dance music female vocals, euphoric and bright",
+  "lyrics": "[INTRO]\nWait—\nhold on—\nno, like this—\n\n[VERSE 1]\nI keep moving before I’m ready\nlike my feet know something I don’t\nEvery thought skips\nhalfway through itself\n\nI meant to stop\nI swear I did\nbut the ground keeps rewinding\nunder me\n\n[PRE-CHORUS]\nMy head runs faster\nthan my mouth can keep up\n\n[CHORUS]\nI’m racing the edge\nnot the fall\nnot the ending\n\nJust the moment\nright before\neverything stutters\n\nI don’t want to disappear\nI want to feel the glitch\n\n[VERSE 2]\nThere’s noise in my chest\nthat won’t sit still\nmemories buffering\nout of order\n\nI say your—\nno—\nI don’t say it\n\nI leave it hanging\nlike a dropped signal\n\n[BREAK / DECONSTRUCTION]\nstep—\ncut—\nrepeat—\n\nHands shaking\nframe skipping\nstill not stopping\n\n[CHORUS – FRACTURED]\nI’m at the edge\nedge\nedge\n\nNot jumping\nnot staying\n\nJust late\nagain\n\n[BRIDGE]\nIf I slow down\neverything catches me\n\nIf I keep going\nI might outrun\nmy own weight\n\n[FINAL CHORUS]\nI’m racing the edge of the planet\nto see what breaks first\nthe ground\nor me\n\nI’m not looking for answers\nI’m looking for impact\n\n[OUTRO]\nStill moving\nStill here\n\n—don’t cut it yet—",
+  "bpm": 174,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 150,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 9.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "afd98580-c760-5938-5b62-298002b85c83.mp3",
+      "seed": 351030184
+    },
+    {
+      "file": "eb327bb4-1615-5a5c-b8b5-b31f341edf91.mp3",
+      "seed": 2477089639
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}
