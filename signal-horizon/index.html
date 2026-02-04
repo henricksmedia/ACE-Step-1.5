@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Horizon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-base: #0a0a0a;
+            --bg-surface: #141414;
+            --bg-card: #1a1a1a;
+            --bg-elevated: #222222;
+            --accent: #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.4);
+            --accent-secondary: #ff00aa;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --border: #2a2a2a;
+            --success: #00ff88;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-base);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-surface);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
+            letter-spacing: 2px;
+        }
+
+        .header-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-left: 1.5rem;
+        }
+
+        .header-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Layout */
+        .app {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border);
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-card);
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            border-left-color: var(--accent);
+        }
+
+        .nav-icon {
+            font-size: 1.25rem;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* Preset Tabs */
+        .preset-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .preset-tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-tab:hover {
+            border-color: var(--accent);
+        }
+
+        .preset-tab.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* Preset Grid */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .preset-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preset-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .preset-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .preset-card:hover::before {
+            opacity: 1;
+        }
+
+        .preset-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .preset-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-bpm {
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Lyrics Editor */
+        .lyrics-structure {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .structure-btn {
+            padding: 0.4rem 0.75rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .structure-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        /* Row */
+        .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .row>* {
+            flex: 1;
+        }
+
+        /* Checkbox */
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        /* Slider */
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+
+        .slider-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider-value {
+            color: var(--accent);
+            font-weight: 500;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent), #0099cc);
+            border: none;
+            border-radius: 16px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px var(--accent-glow);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Status */
+        .status {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-muted);
+        }
+
+        .status.generating {
+            color: var(--accent);
+        }
+
+        .status.error {
+            color: #ff4444;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-title {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .result-badge {
+            background: var(--success);
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .result-card audio {
+            width: 100%;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .result-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .result-actions button:hover {
+            border-color: var(--accent);
+        }
+
+        /* Library Grid */
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .library-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .library-item-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .library-item-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Tooltip Styles */
+        .label-with-help {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .help-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            cursor: help;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .help-icon:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text);
+            white-space: normal;
+            width: 220px;
+            text-align: left;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 10px;
+            height: 10px;
+            background: var(--bg-elevated);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .help-icon:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip-title {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .tooltip-example {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        /* Settings Presets */
+        .settings-presets {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .settings-preset-btn {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .settings-preset-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .settings-preset-btn.active {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .settings-preset-btn span:first-child {
+            font-size: 1.1rem;
+        }
+
+        .settings-preset-btn span:last-child {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .settings-preset-btn.active span:last-child {
+            color: var(--accent);
+        }
+
+        /* Subtle hint text */
+        .setting-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            font-style: italic;
+        }
+
+        /* Select styling */
+        select {
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 0.875rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Number input styling */
+        input[type="number"] {
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 0.875rem;
+            width: 100%;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Admin Page Styles */
+        .admin-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .admin-section-header:hover {
+            color: var(--accent);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .admin-field {
+            background: var(--bg-surface);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .admin-field label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .admin-field input,
+        .admin-field select {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .quality-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .quality-badge.low {
+            background: #ffc107;
+            color: #000;
+        }
+
+        .quality-badge.good {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .quality-badge.high {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .quality-badge.ultra {
+            background: linear-gradient(135deg, #9b59b6, #e91e63);
+            color: #fff;
+        }
+
+        .preset-ultra {
+            background: linear-gradient(135deg, #9b59b6, #e91e63) !important;
+            color: #fff !important;
+            border-color: #9b59b6 !important;
+        }
+
+        .preset-ultra:hover {
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
+        }
+
+        .preset-ultra.active {
+            box-shadow: 0 0 25px rgba(155, 89, 182, 0.6);
+        }
+
+        .est-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .export-import-btns {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .export-import-btns button {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .export-import-btns button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">✧ SIGNAL HORIZON</div>
+        <div class="header-links">
+            <a href="http://127.0.0.1:7860" target="_blank">⚙️ Full UI</a>
+        </div>
+    </header>
+
+    <div class="app">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="nav-item active" data-page="create">
+                <span class="nav-icon">🎵</span>
+                <span>Create</span>
+            </div>
+            <div class="nav-item" data-page="presets">
+                <span class="nav-icon">🎨</span>
+                <span>Presets</span>
+            </div>
+            <div class="nav-item" data-page="library">
+                <span class="nav-icon">📁</span>
+                <span>Library</span>
+            </div>
+            <div class="nav-item" data-page="admin">
+                <span class="nav-icon">🔧</span>
+                <span>Admin</span>
+            </div>
+            <div class="nav-item" data-page="help" style="margin-top: auto;">
+                <span class="nav-icon">❓</span>
+                <span>Help</span>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Create Page -->
+            <div class="page active" id="page-create">
+                <h2 style="margin-bottom: 1.5rem;">Create New Track</h2>
+
+                <!-- Title -->
+                <div class="card">
+                    <div class="card-title">Track Info</div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="title" placeholder="My Epic Track">
+                    </div>
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <input type="text" id="tags" placeholder="electronic, ambient, chill">
+                    </div>
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="card">
+                    <div class="card-title">Quick Style</div>
+                    <div class="preset-grid" id="quick-presets"></div>
+                </div>
+
+                <!-- Style & Lyrics -->
+                <div class="row">
+                    <div class="card">
+                        <div class="card-title">Style Description</div>
+                        <textarea id="caption" rows="4" placeholder="Describe the music style..."></textarea>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Lyrics</div>
+                        <div class="lyrics-structure">
+                            <button class="structure-btn" onclick="insertLyricTag('[Intro]')">Intro</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Verse]')">Verse</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Chorus]')">Chorus</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Bridge]')">Bridge</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Outro]')">Outro</button>
+                        </div>
+                        <textarea id="lyrics" rows="4"
+                            placeholder="[Verse 1]&#10;Your lyrics here...">[Instrumental]</textarea>
+                        <div class="checkbox-row" style="margin-top: 0.75rem;">
+                            <input type="checkbox" id="instrumental" checked>
+                            <label for="instrumental" style="margin: 0;">Instrumental</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Settings -->
+                <div class="card">
+                    <div class="card-title">🎵 Music Settings</div>
+                    <p class="setting-hint">Control how your track sounds — leave on Auto for AI-chosen values</p>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                BPM
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Tempo / Speed</span>
+                                        How fast your track will play. Lower = chill, higher = energetic.
+                                        <span class="tooltip-example">💡 60-80: Ballad, Lo-fi<br>100-120: Pop,
+                                            Rock<br>130-150: EDM, Dance</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <input type="number" id="bpm" min="60" max="200" value="120" placeholder="120">
+                        </div>
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Key
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Musical Key</span>
+                                        Sets the mood of your music. Major = happy/bright, Minor = sad/moody.
+                                        <span class="tooltip-example">💡 Auto lets the AI pick the best key for your
+                                            style</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <select id="key-scale">
+                                <option value="">Auto ✨</option>
+                                <option value="C major">C Major (Happy)</option>
+                                <option value="C minor">C Minor (Moody)</option>
+                                <option value="D major">D Major (Bright)</option>
+                                <option value="D minor">D Minor (Pensive)</option>
+                                <option value="E major">E Major (Uplifting)</option>
+                                <option value="E minor">E Minor (Intense)</option>
+                                <option value="F major">F Major (Warm)</option>
+                                <option value="F minor">F Minor (Deep)</option>
+                                <option value="G major">G Major (Cheerful)</option>
+                                <option value="G minor">G Minor (Dramatic)</option>
+                                <option value="A major">A Major (Joyful)</option>
+                                <option value="A minor">A Minor (Melancholic)</option>
+                                <option value="B major">B Major (Dreamy)</option>
+                                <option value="B minor">B Minor (Epic)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Time Sig
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Time Signature</span>
+                                        The rhythmic feel of your music — how beats are grouped.
+                                        <span class="tooltip-example">💡 4/4: Most pop/rock<br>3/4: Waltz<br>6/8:
+                                            Ballads, jigs</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <select id="time-signature">
+                                <option value="">Auto ✨</option>
+                                <option value="4" selected>4/4 (Standard)</option>
+                                <option value="3">3/4 (Waltz)</option>
+                                <option value="6">6/8 (Flowing)</option>
+                                <option value="2">2/4 (March)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Language
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Lyrics Language</span>
+                                        What language any vocals/lyrics should be in. Only applies when you have lyrics.
+                                        <span class="tooltip-example">💡 For instrumental tracks, this setting doesn't
+                                            matter</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <select id="language">
+                                <option value="en" selected>🇺🇸 English</option>
+                                <option value="zh">🇨🇳 Chinese</option>
+                                <option value="ja">🇯🇵 Japanese</option>
+                                <option value="ko">🇰🇷 Korean</option>
+                                <option value="unknown">Auto ✨</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generation Settings -->
+                <div class="card">
+                    <div class="card-title">⚙️ Generation Settings</div>
+                    <p class="setting-hint">Controls quality vs. speed — pick a preset or fine-tune manually</p>
+
+                    <!-- Quality Presets -->
+                    <div class="settings-presets" style="margin-top: 1rem;">
+                        <button class="settings-preset-btn" onclick="applyQualityPreset('fast')">
+                            <span>⚡</span>
+                            <span>Fast</span>
+                            <span>~30s</span>
+                        </button>
+                        <button class="settings-preset-btn active" onclick="applyQualityPreset('balanced')">
+                            <span>⚖️</span>
+                            <span>Balanced</span>
+                            <span>~1min</span>
+                        </button>
+                        <button class="settings-preset-btn" onclick="applyQualityPreset('pro')">
+                            <span>✨</span>
+                            <span>Pro</span>
+                            <span>~2min</span>
+                        </button>
+                        <button class="settings-preset-btn preset-ultra" onclick="applyQualityPreset('ultra')">
+                            <span>🔥</span>
+                            <span>Ultra</span>
+                            <span>~4min</span>
+                        </button>
+                    </div>
+                    <div class="est-time" id="est-time">
+                        <span>⏱️ Estimated time:</span>
+                        <span id="est-time-value">~1 min per track</span>
+                        <span class="quality-badge good" id="quality-badge">🟢 Good</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Duration
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Track Length</span>
+                                        How long your generated track will be in seconds.
+                                        <span class="tooltip-example">💡 30-60s: Quick ideas<br>120s: Full song
+                                            intro<br>300s+: Full track</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <div class="slider-row">
+                                <input type="range" id="duration" min="30" max="600" value="60">
+                                <span class="slider-value" id="duration-value">60s</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Variations
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Number of Versions</span>
+                                        How many different versions to generate at once. More variations = more choices
+                                        but longer wait.
+                                        <span class="tooltip-example">💡 2-3 is usually ideal for comparing
+                                            options</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <div class="slider-row">
+                                <input type="range" id="batch" min="1" max="4" value="2">
+                                <span class="slider-value" id="batch-value">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Quality Steps
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">Generation Quality</span>
+                                        How much time the AI spends refining the music. Higher = better quality but
+                                        slower.
+                                        <span class="tooltip-example">💡 20-30: Fast preview<br>50-60: Good
+                                            balance<br>80-100: Best quality</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <div class="slider-row">
+                                <input type="range" id="infer-steps" min="8" max="100" value="60">
+                                <span class="slider-value" id="infer-steps-value">60</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="label-with-help">
+                                Prompt Strength
+                                <span class="help-icon">?
+                                    <span class="tooltip">
+                                        <span class="tooltip-title">How Closely to Follow Your Description</span>
+                                        Higher = sticks closely to your prompt (recommended for specific styles). Lower
+                                        = more randomness and surprises.
+                                        <span class="tooltip-example">💡 10-15: Best balance<br>15-20: Very
+                                            precise<br>5-10: More experimental</span>
+                                    </span>
+                                </span>
+                            </label>
+                            <div class="slider-row">
+                                <input type="range" id="guidance-scale" min="1" max="20" value="15" step="0.5">
+                                <span class="slider-value" id="guidance-scale-value">15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-with-help">
+                            Seed
+                            <span class="help-icon">?
+                                <span class="tooltip">
+                                    <span class="tooltip-title">Reproducibility</span>
+                                    Use the same seed number to recreate the exact same result. -1 means random each
+                                    time.
+                                    <span class="tooltip-example">💡 Found a track you love? Note its seed to regenerate
+                                        it later!</span>
+                                </span>
+                            </span>
+                        </label>
+                        <input type="number" id="seed" value="-1" placeholder="-1 for random">
+                        <p class="setting-hint">💡 Use -1 for random results, or enter a specific number to reproduce a
+                            result</p>
+                    </div>
+                </div>
+
+                <!-- Generate -->
+                <button class="generate-btn" id="generate-btn" onclick="generateMusic()">
+                    ⚡ Generate Music
+                </button>
+
+                <div class="status" id="status"></div>
+
+                <!-- Progress Bar -->
+                <div id="progress-container" class="card hidden" style="margin-top: 1rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span id="progress-text">Generating...</span>
+                        <button id="cancel-btn" onclick="cancelGeneration()"
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            Cancel</button>
+                    </div>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
+                        <div id="progress-bar"
+                            style="background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); height: 100%; width: 0%; transition: width 0.3s;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="card hidden" id="results-section">
+                    <div class="card-title">Generated Tracks</div>
+                    <div class="results-grid" id="results"></div>
+                </div>
+            </div>
+
+            <!-- Presets Page -->
+            <div class="page" id="page-presets">
+                <h2 style="margin-bottom: 1.5rem;">Preset Library</h2>
+                <div class="preset-tabs" id="preset-tabs"></div>
+                <div class="preset-grid" id="preset-grid"></div>
+            </div>
+
+            <!-- Library Page -->
+            <div class="page" id="page-library">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin: 0;">Your Library</h2>
+                    <button class="structure-btn" onclick="loadLibrary()">🔄 Refresh</button>
+                </div>
+                <div id="library-loading" style="text-align: center; padding: 2rem; display: none;">
+                    <p>Loading library...</p>
+                </div>
+                <div id="library-empty" class="empty-state">
+                    <div class="empty-state-icon">🎵</div>
+                    <p>Generated tracks will appear here</p>
+                </div>
+                <div class="library-grid" id="library-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+                </div>
+            </div>
+
+            <!-- Help Page -->
+            <div class="page" id="page-help">
+                <h2 style="margin-bottom: 1.5rem;">❓ Help & Troubleshooting</h2>
+
+                <!-- Quick Tips -->
+                <div class="card">
+                    <div class="card-title">💡 Quick Tips for Best Results</div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                        <div
+                            style="padding: 1rem; background: var(--bg-surface); border-radius: 12px; border-left: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">Quality Steps: 80-100</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Higher =
+                                cleaner audio but slower generation</p>
+                        </div>
+                        <div
+                            style="padding: 1rem; background: var(--bg-surface); border-radius: 12px; border-left: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">Prompt Strength: 12-15</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Balanced
+                                adherence to your style description</p>
+                        </div>
+                        <div
+                            style="padding: 1rem; background: var(--bg-surface); border-radius: 12px; border-left: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">Generate 3-4 Variations</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Quality varies
+                                by seed — more options = better picks</p>
+                        </div>
+                        <div
+                            style="padding: 1rem; background: var(--bg-surface); border-radius: 12px; border-left: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">Be Specific in Prompts</strong>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Name
+                                instruments, production styles, and influences</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Errors -->
+                <div class="card">
+                    <div class="card-title">🔧 Common Console Messages (Don't Panic!)</div>
+
+                    <!-- Error 1: ConnectionResetError -->
+                    <div
+                        style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span
+                                style="background: #2ecc71; color: #000; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">HARMLESS</span>
+                            <strong>ConnectionResetError [WinError 10054]</strong>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>What you see:</strong>
+                                "An existing connection was forcibly closed by the remote host"</p>
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
+                                Windows asyncio logs this when browser connections close normally. It's cleanup noise,
+                                not an error.</p>
+                            <p style="color: var(--success);"><strong>Resolution:</strong> ✅ Ignore it — your generation
+                                completed successfully!</p>
+                        </div>
+                    </div>
+
+                    <!-- Error 2: Generation Timeout -->
+                    <div
+                        style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span
+                                style="background: #f39c12; color: #000; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">FIXABLE</span>
+                            <strong>Generation Timeout</strong>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>What you see:</strong>
+                                "Timeout - generation took too long"</p>
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
+                                Long durations (300s+) with high quality steps take significant time. First generation
+                                is slower due to model warmup.</p>
+                            <p style="color: var(--success);"><strong>Resolution:</strong> Try shorter duration
+                                (60-120s), lower quality steps (50-60), or just wait longer — the track may still
+                                complete in the background.</p>
+                        </div>
+                    </div>
+
+                    <!-- Error 3: CORS Error -->
+                    <div
+                        style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span
+                                style="background: #e74c3c; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">NEEDS
+                                FIX</span>
+                            <strong>CORS Error / Failed to Fetch</strong>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>What you see:</strong>
+                                "Access-Control-Allow-Origin" or network errors in browser console</p>
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
+                                The Signal Horizon server isn't running, or you're accessing the UI from the wrong URL.
+                            </p>
+                            <p style="color: var(--success);"><strong>Resolution:</strong> Make sure you launched via
+                                the .bat file and access the UI at the URL shown in the console (usually
+                                http://127.0.0.1:8372)</p>
+                        </div>
+                    </div>
+
+                    <!-- Error 4: Audio Not Playing -->
+                    <div
+                        style="margin-bottom: 1.5rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span
+                                style="background: #f39c12; color: #000; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">FIXABLE</span>
+                            <strong>Audio Not Playing / 404 Error</strong>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>What you see:</strong>
+                                Audio player loads but no sound, or network tab shows 404</p>
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
+                                The audio file path may have issues or the server isn't serving the output directory
+                                correctly.</p>
+                            <p style="color: var(--success);"><strong>Resolution:</strong> Check that audio files exist
+                                in the outputs folder. Try refreshing the Library page. Restart the server if needed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Error 5: LLM Loading Error -->
+                    <div style="padding: 1rem; background: var(--bg-surface); border-radius: 12px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span
+                                style="background: #e74c3c; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600;">NEEDS
+                                FIX</span>
+                            <strong>LLM/Model Loading Failed</strong>
+                        </div>
+                        <div style="font-size: 0.85rem;">
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>What you see:</strong>
+                                Errors about missing models, CUDA out of memory, or path issues</p>
+                            <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
+                                Model files missing, GPU memory full, or incorrect path configuration.</p>
+                            <p style="color: var(--success);"><strong>Resolution:</strong> Ensure models are downloaded.
+                                Close other GPU-heavy apps. Use "Signal Horizon (Dev).bat" for testing without LLM.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Explained -->
+                <div class="card">
+                    <div class="card-title">⚙️ Settings Explained</div>
+                    <div style="display: grid; gap: 1rem;">
+                        <div
+                            style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
+                            <strong style="color: var(--accent);">Quality Steps</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">How many refinement passes. More
+                                = better but slower. 60 is balanced, 90+ for best quality.</span>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
+                            <strong style="color: var(--accent);">Prompt Strength</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">How closely AI follows your
+                                description. 15 = precise, 10 = more creative freedom, 5 = experimental.</span>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
+                            <strong style="color: var(--accent);">Seed</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Random number that determines
+                                the output. Same seed + same settings = same result. Use -1 for random.</span>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
+                            <strong style="color: var(--accent);">BPM</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Beats per minute (tempo). 70-90
+                                for chill, 100-120 for pop/rock, 130-150 for EDM/dance.</span>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
+                            <strong style="color: var(--accent);">Key</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Musical key sets the mood. Major
+                                keys = happy/bright. Minor keys = sad/moody. Auto lets AI decide.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="card">
+                    <div class="card-title">ℹ️ About Signal Horizon</div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                        Signal Horizon is a custom UI for <strong>ACE-Step 1.5</strong>, an open-source AI music
+                        generation model.
+                        It runs locally on your GPU, giving you full control and privacy. While it may not match
+                        cloud-based services
+                        like Suno in polish, it offers unlimited generation, no subscriptions, and the ability to create
+                        tracks up to 10 minutes long.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                        <strong>Pro tip:</strong> For best results, generate multiple variations and post-process your
+                        favorites with external audio tools.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Admin Page -->
+            <div class="page" id="page-admin">
+                <h2 style="margin-bottom: 1.5rem;">🔧 Admin Settings</h2>
+                <p class="setting-hint" style="margin-bottom: 1.5rem;">
+                    Fine-tune quality parameters for maximum output quality. Settings are saved to your browser.
+                </p>
+
+                <!-- Quality Preset Defaults -->
+                <div class="card">
+                    <div class="card-title">🎚️ Quality Preset Definitions</div>
+                    <p class="setting-hint">Configure what each preset button does on the Create page</p>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <!-- Fast Preset -->
+                        <div class="admin-field">
+                            <label>⚡ Fast Preset</label>
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div><small>Steps:</small> <input type="number" id="admin-fast-steps" value="16" min="8"
+                                        max="200" style="width: 70px;"></div>
+                                <div><small>Guidance:</small> <input type="number" id="admin-fast-guidance" value="5"
+                                        min="1" max="20" step="0.5" style="width: 70px;"></div>
+                            </div>
+                        </div>
+                        <!-- Balanced Preset -->
+                        <div class="admin-field">
+                            <label>⚖️ Balanced Preset</label>
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div><small>Steps:</small> <input type="number" id="admin-balanced-steps" value="60"
+                                        min="8" max="200" style="width: 70px;"></div>
+                                <div><small>Guidance:</small> <input type="number" id="admin-balanced-guidance"
+                                        value="8" min="1" max="20" step="0.5" style="width: 70px;"></div>
+                            </div>
+                        </div>
+                        <!-- Pro Preset -->
+                        <div class="admin-field">
+                            <label>✨ Pro Preset</label>
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div><small>Steps:</small> <input type="number" id="admin-pro-steps" value="100" min="8"
+                                        max="200" style="width: 70px;"></div>
+                                <div><small>Guidance:</small> <input type="number" id="admin-pro-guidance" value="9"
+                                        min="1" max="20" step="0.5" style="width: 70px;"></div>
+                            </div>
+                        </div>
+                        <!-- Ultra Preset -->
+                        <div class="admin-field" style="border-color: #9b59b6;">
+                            <label>🔥 Ultra Preset (Max Quality)</label>
+                            <div style="display: grid; gap: 0.5rem;">
+                                <div><small>Steps:</small> <input type="number" id="admin-ultra-steps" value="150"
+                                        min="8" max="200" style="width: 70px;"></div>
+                                <div><small>Guidance:</small> <input type="number" id="admin-ultra-guidance" value="8"
+                                        min="1" max="20" step="0.5" style="width: 70px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DiT Engine Settings -->
+                <div class="card">
+                    <div class="card-title">🎛️ DiT Engine (Audio Synthesis)</div>
+                    <p class="setting-hint">Advanced diffusion transformer settings for audio generation</p>
+
+                    <div class="admin-grid" style="margin-top: 1rem;">
+                        <div class="admin-field">
+                            <label>Shift (Timestep Distribution)</label>
+                            <input type="number" id="admin-shift" value="3.0" min="1" max="5" step="0.5">
+                            <small style="color: var(--text-muted);">Higher = clearer structure (3.0
+                                recommended)</small>
+                        </div>
+                        <div class="admin-field">
+                            <label>Inference Method</label>
+                            <select id="admin-infer-method">
+                                <option value="ode" selected>ODE (Euler) - Faster</option>
+                                <option value="sde">SDE (Stochastic) - More varied</option>
+                            </select>
+                        </div>
+                        <div class="admin-field">
+                            <label>Use ADG (Adaptive Dual Guidance)</label>
+                            <select id="admin-use-adg">
+                                <option value="false" selected>Off (Faster)</option>
+                                <option value="true">On (Better quality, slower)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LLM Planner Settings -->
+                <div class="card">
+                    <div class="card-title">🧠 LLM Planner (Song Structure)</div>
+                    <p class="setting-hint">Controls how the language model plans your music</p>
+
+                    <div class="admin-grid" style="margin-top: 1rem;">
+                        <div class="admin-field">
+                            <label>Thinking Mode (Chain-of-Thought)</label>
+                            <select id="admin-thinking">
+                                <option value="true" selected>Enabled (Better alignment)</option>
+                                <option value="false">Disabled (Faster)</option>
+                            </select>
+                        </div>
+                        <div class="admin-field">
+                            <label>LM CFG Scale</label>
+                            <input type="number" id="admin-lm-cfg" value="3.5" min="1" max="10" step="0.5">
+                            <small style="color: var(--text-muted);">How closely LM follows prompt</small>
+                        </div>
+                        <div class="admin-field">
+                            <label>LM Temperature</label>
+                            <input type="number" id="admin-lm-temp" value="0.85" min="0.1" max="2" step="0.05">
+                            <small style="color: var(--text-muted);">Lower = more focused, Higher = creative</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export/Import -->
+                <div class="card">
+                    <div class="card-title">💾 Backup & Restore</div>
+                    <div class="export-import-btns">
+                        <button onclick="exportAdminSettings()">📤 Export Settings</button>
+                        <button onclick="document.getElementById('import-file').click()">📥 Import Settings</button>
+                        <button onclick="resetAdminSettings()" style="background: #e74c3c22; border-color: #e74c3c;">🔄
+                            Reset to Defaults</button>
+                    </div>
+                    <input type="file" id="import-file" accept=".json" style="display: none;"
+                        onchange="importAdminSettings(event)">
+                    <p class="setting-hint" style="margin-top: 0.75rem;">Export your settings to share or backup. Import
+                        to restore.</p>
+                </div>
+
+                <button class="generate-btn" onclick="saveAdminSettings()" style="margin-top: 1rem;">
+                    💾 Save All Settings
+                </button>
+                <div id="admin-status" class="status" style="margin-top: 0.5rem;"></div>
+            </div>
+
+            <!-- Track Detail Modal -->
+            <div class="modal-overlay" id="track-modal"
+                style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; padding: 2rem; overflow-y: auto;">
+                <div class="modal-content"
+                    style="max-width: 800px; margin: 0 auto; background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 id="modal-title" style="margin: 0;">Track Details</h3>
+                        <button onclick="closeTrackModal()"
+                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-primary);">✕</button>
+                    </div>
+                    <div id="modal-body"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = '';  // Same origin - served by Signal Horizon server
+
+        // Genre Presets Data
+        const PRESETS = {
+            "EDM": {
+                "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135 },
+                "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks", bpm: 128 },
+                "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords", bpm: 122 },
+                "Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown", bpm: 138 },
+            },
+            "Pop": {
+                "Summer Hit": { style: "upbeat pop, catchy hooks, bright synths, dance rhythm, radio-friendly", bpm: 120 },
+                "Synth Pop": { style: "80s inspired synth pop, analog synthesizers, retro vibes, nostalgic", bpm: 118 },
+                "Dance Pop": { style: "dance pop, synth hooks, four-on-the-floor, euphoric chorus", bpm: 124 },
+            },
+            "Hip-Hop": {
+                "Trap Soul": { style: "trap soul, smooth 808s, atmospheric pads, melodic, emotional", bpm: 140 },
+                "Boom Bap": { style: "classic hip-hop, vinyl samples, hard drums, old school, jazzy", bpm: 90 },
+                "Drill": { style: "UK drill, sliding 808s, dark atmosphere, aggressive, menacing", bpm: 140 },
+            },
+            "Rock": {
+                "Classic Rock": { style: "classic rock, guitar riffs, powerful drums, stadium anthem", bpm: 120 },
+                "Indie Rock": { style: "indie rock, jangly guitars, raw production, alternative vibes", bpm: 128 },
+                "Metal": { style: "heavy metal, distorted guitars, double bass drums, aggressive", bpm: 160 },
+            },
+            "R&B": {
+                "Smooth R&B": { style: "smooth r&b, silky vocals, jazz chords, sensual groove", bpm: 85 },
+                "Neo-Soul": { style: "neo-soul, organic instruments, warm production, soulful", bpm: 95 },
+            },
+            "Country": {
+                "Nashville": { style: "country ballad, acoustic guitar, pedal steel, heartfelt lyrics", bpm: 96 },
+                "Country Rock": { style: "southern rock, driving guitars, country twang, energetic", bpm: 130 },
+            },
+            "Jazz": {
+                "Smooth Jazz": { style: "smooth jazz, saxophone lead, electric piano, relaxing", bpm: 100 },
+                "Lo-Fi Jazz": { style: "lo-fi jazz, vinyl crackle, mellow piano, chill vibes", bpm: 75 },
+            },
+            "Latin": {
+                "Reggaeton": { style: "reggaeton, dembow rhythm, urban latin, party vibes", bpm: 95 },
+                "Latin Pop": { style: "latin pop, tropical influences, romantic, danceable", bpm: 110 },
+            },
+        };
+
+        // =====================================================================
+        // Admin Settings & localStorage System
+        // =====================================================================
+
+        const SETTINGS_KEY = 'signalHorizon.adminSettings';
+
+        // Default settings (used if nothing in localStorage)
+        const DEFAULT_SETTINGS = {
+            version: 1,
+            presets: {
+                fast: { steps: 16, guidance: 5, shift: 1.0, thinking: false },
+                balanced: { steps: 60, guidance: 8, shift: 3.0, thinking: true },
+                pro: { steps: 100, guidance: 9, shift: 3.0, thinking: true },
+                ultra: { steps: 150, guidance: 8, shift: 3.0, thinking: true }
+            },
+            dit: {
+                shift: 3.0,
+                infer_method: 'ode',
+                use_adg: false
+            },
+            llm: {
+                thinking: true,
+                lm_cfg_scale: 3.5,
+                lm_temperature: 0.85
+            },
+            currentPreset: 'balanced'
+        };
+
+        // Load settings from localStorage (or defaults)
+        function loadSettings() {
+            try {
+                const stored = localStorage.getItem(SETTINGS_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    // Merge with defaults to handle new fields
+                    return {
+                        ...DEFAULT_SETTINGS, ...parsed,
+                        presets: { ...DEFAULT_SETTINGS.presets, ...parsed.presets },
+                        dit: { ...DEFAULT_SETTINGS.dit, ...parsed.dit },
+                        llm: { ...DEFAULT_SETTINGS.llm, ...parsed.llm }
+                    };
+                }
+            } catch (e) {
+                console.warn('Failed to load settings:', e);
+            }
+            return { ...DEFAULT_SETTINGS };
+        }
+
+        // Save settings to localStorage
+        function saveSettings(settings) {
+            try {
+                localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+                return true;
+            } catch (e) {
+                console.error('Failed to save settings:', e);
+                return false;
+            }
+        }
+
+        // Current settings instance
+        let adminSettings = loadSettings();
+
+        // Get quality presets (from admin settings)
+        function getQualityPresets() {
+            return adminSettings.presets;
+        }
+
+        // Apply quality preset to Create page
+        function applyQualityPreset(presetName) {
+            const presets = getQualityPresets();
+            const config = presets[presetName];
+            if (!config) return;
+
+            // Update sliders
+            document.getElementById('infer-steps').value = config.steps;
+            document.getElementById('guidance-scale').value = config.guidance;
+
+            // Update displayed values
+            document.getElementById('infer-steps-value').textContent = config.steps;
+            document.getElementById('guidance-scale-value').textContent = config.guidance;
+
+            // Remember current preset
+            adminSettings.currentPreset = presetName;
+
+            // Update button states
+            document.querySelectorAll('.settings-preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (event && event.target) {
+                event.target.closest('.settings-preset-btn')?.classList.add('active');
+            }
+
+            // Update quality badge and estimated time
+            updateQualityIndicators(presetName, config.steps);
+        }
+
+        // Update quality badge and time estimate
+        function updateQualityIndicators(presetName, steps) {
+            const badge = document.getElementById('quality-badge');
+            const estTime = document.getElementById('est-time-value');
+            const duration = parseInt(document.getElementById('duration')?.value || 60);
+            const batch = parseInt(document.getElementById('batch')?.value || 2);
+
+            // Calculate estimated time (rough formula)
+            const baseTime = (duration / 60) * (steps / 60) * batch;
+            const timeMultiplier = adminSettings.llm.thinking ? 1.3 : 1.0;
+            const estMinutes = Math.ceil(baseTime * timeMultiplier);
+
+            if (estTime) {
+                estTime.textContent = `~${estMinutes} min${batch > 1 ? ` (${batch} tracks)` : ''}`;
+            }
+
+            if (badge) {
+                badge.className = 'quality-badge';
+                if (presetName === 'ultra') {
+                    badge.classList.add('ultra');
+                    badge.textContent = '🟣 Ultra';
+                } else if (presetName === 'pro' || steps >= 80) {
+                    badge.classList.add('high');
+                    badge.textContent = '🔵 High';
+                } else if (presetName === 'balanced' || steps >= 40) {
+                    badge.classList.add('good');
+                    badge.textContent = '🟢 Good';
+                } else {
+                    badge.classList.add('low');
+                    badge.textContent = '🟡 Fast';
+                }
+            }
+        }
+
+        // Save admin settings from the Admin page
+        function saveAdminSettings() {
+            // Gather all values from admin page
+            adminSettings.presets.fast = {
+                steps: parseInt(document.getElementById('admin-fast-steps')?.value || 16),
+                guidance: parseFloat(document.getElementById('admin-fast-guidance')?.value || 5),
+                shift: 1.0,
+                thinking: false
+            };
+            adminSettings.presets.balanced = {
+                steps: parseInt(document.getElementById('admin-balanced-steps')?.value || 60),
+                guidance: parseFloat(document.getElementById('admin-balanced-guidance')?.value || 8),
+                shift: 3.0,
+                thinking: true
+            };
+            adminSettings.presets.pro = {
+                steps: parseInt(document.getElementById('admin-pro-steps')?.value || 100),
+                guidance: parseFloat(document.getElementById('admin-pro-guidance')?.value || 9),
+                shift: 3.0,
+                thinking: true
+            };
+            adminSettings.presets.ultra = {
+                steps: parseInt(document.getElementById('admin-ultra-steps')?.value || 150),
+                guidance: parseFloat(document.getElementById('admin-ultra-guidance')?.value || 8),
+                shift: 3.0,
+                thinking: true
+            };
+
+            // DiT settings
+            adminSettings.dit.shift = parseFloat(document.getElementById('admin-shift')?.value || 3.0);
+            adminSettings.dit.infer_method = document.getElementById('admin-infer-method')?.value || 'ode';
+            adminSettings.dit.use_adg = document.getElementById('admin-use-adg')?.value === 'true';
+
+            // LLM settings
+            adminSettings.llm.thinking = document.getElementById('admin-thinking')?.value !== 'false';
+            adminSettings.llm.lm_cfg_scale = parseFloat(document.getElementById('admin-lm-cfg')?.value || 3.5);
+            adminSettings.llm.lm_temperature = parseFloat(document.getElementById('admin-lm-temp')?.value || 0.85);
+
+            if (saveSettings(adminSettings)) {
+                const status = document.getElementById('admin-status');
+                if (status) {
+                    status.textContent = '✓ Settings saved!';
+                    status.className = 'status';
+                    setTimeout(() => { status.textContent = ''; }, 3000);
+                }
+            }
+        }
+
+        // Load admin settings into the Admin page fields
+        function loadAdminPageFields() {
+            // Presets
+            document.getElementById('admin-fast-steps').value = adminSettings.presets.fast.steps;
+            document.getElementById('admin-fast-guidance').value = adminSettings.presets.fast.guidance;
+            document.getElementById('admin-balanced-steps').value = adminSettings.presets.balanced.steps;
+            document.getElementById('admin-balanced-guidance').value = adminSettings.presets.balanced.guidance;
+            document.getElementById('admin-pro-steps').value = adminSettings.presets.pro.steps;
+            document.getElementById('admin-pro-guidance').value = adminSettings.presets.pro.guidance;
+            document.getElementById('admin-ultra-steps').value = adminSettings.presets.ultra.steps;
+            document.getElementById('admin-ultra-guidance').value = adminSettings.presets.ultra.guidance;
+
+            // DiT
+            document.getElementById('admin-shift').value = adminSettings.dit.shift;
+            document.getElementById('admin-infer-method').value = adminSettings.dit.infer_method;
+            document.getElementById('admin-use-adg').value = adminSettings.dit.use_adg.toString();
+
+            // LLM
+            document.getElementById('admin-thinking').value = adminSettings.llm.thinking.toString();
+            document.getElementById('admin-lm-cfg').value = adminSettings.llm.lm_cfg_scale;
+            document.getElementById('admin-lm-temp').value = adminSettings.llm.lm_temperature;
+        }
+
+        // Export settings as JSON file
+        function exportAdminSettings() {
+            const dataStr = JSON.stringify(adminSettings, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'signal-horizon-settings.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Import settings from JSON file
+        function importAdminSettings(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    adminSettings = { ...DEFAULT_SETTINGS, ...imported };
+                    saveSettings(adminSettings);
+                    loadAdminPageFields();
+                    document.getElementById('admin-status').textContent = '✓ Settings imported!';
+                    setTimeout(() => { document.getElementById('admin-status').textContent = ''; }, 3000);
+                } catch (err) {
+                    alert('Failed to import settings: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; // Reset file input
+        }
+
+        // Reset to defaults
+        function resetAdminSettings() {
+            if (!confirm('Reset all settings to defaults?')) return;
+            adminSettings = { ...DEFAULT_SETTINGS };
+            saveSettings(adminSettings);
+            loadAdminPageFields();
+            document.getElementById('admin-status').textContent = '✓ Reset to defaults!';
+            setTimeout(() => { document.getElementById('admin-status').textContent = ''; }, 3000);
+        }
+
+        let selectedPreset = null;
+
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initQuickPresets();
+            initPresetTabs();
+            initSliders();
+            initNavigation();
+            loadAdminPageFields(); // Load saved admin settings
+
+            // Apply saved preset on Create page
+            const currentPreset = adminSettings.currentPreset || 'balanced';
+            const presets = getQualityPresets();
+            if (presets[currentPreset]) {
+                document.getElementById('infer-steps').value = presets[currentPreset].steps;
+                document.getElementById('guidance-scale').value = presets[currentPreset].guidance;
+                document.getElementById('infer-steps-value').textContent = presets[currentPreset].steps;
+                document.getElementById('guidance-scale-value').textContent = presets[currentPreset].guidance;
+                updateQualityIndicators(currentPreset, presets[currentPreset].steps);
+            }
+        });
+
+        // Quick Presets (EDM focused)
+        function initQuickPresets() {
+            const container = document.getElementById('quick-presets');
+            const quickPresets = Object.entries(PRESETS['EDM']).slice(0, 4);
+
+            quickPresets.forEach(([name, data]) => {
+                const card = createPresetCard(name, data, true);
+                container.appendChild(card);
+            });
+
+            // Select first by default
+            if (quickPresets.length > 0) {
+                selectPreset(quickPresets[0][0], quickPresets[0][1]);
+            }
+        }
+
+        // Preset Tabs
+        function initPresetTabs() {
+            const tabsContainer = document.getElementById('preset-tabs');
+            Object.keys(PRESETS).forEach((genre, i) => {
+                const tab = document.createElement('button');
+                tab.className = 'preset-tab' + (i === 0 ? ' active' : '');
+                tab.textContent = genre;
+                tab.onclick = () => selectGenre(genre);
+                tabsContainer.appendChild(tab);
+            });
+            selectGenre(Object.keys(PRESETS)[0]);
+        }
+
+        function selectGenre(genre) {
+            document.querySelectorAll('.preset-tab').forEach(t => {
+                t.classList.toggle('active', t.textContent === genre);
+            });
+
+            const grid = document.getElementById('preset-grid');
+            grid.innerHTML = '';
+            Object.entries(PRESETS[genre] || {}).forEach(([name, data]) => {
+                grid.appendChild(createPresetCard(name, data));
+            });
+        }
+
+        function createPresetCard(name, data, isQuick = false) {
+            const card = document.createElement('div');
+            card.className = 'preset-card' + (selectedPreset === name ? ' selected' : '');
+            card.innerHTML = `
+                <div class="preset-name">${name}</div>
+                <div class="preset-bpm">🎵 ${data.bpm} BPM</div>
+            `;
+            card.onclick = () => selectPreset(name, data);
+            return card;
+        }
+
+        function selectPreset(name, data) {
+            selectedPreset = name;
+            document.getElementById('caption').value = data.style + `, ${data.bpm} BPM`;
+            document.querySelectorAll('.preset-card').forEach(c => {
+                c.classList.toggle('selected', c.querySelector('.preset-name').textContent === name);
+            });
+        }
+
+        // Navigation
+        function initNavigation() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.onclick = () => {
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    item.classList.add('active');
+                    document.getElementById('page-' + item.dataset.page).classList.add('active');
+                };
+            });
+        }
+
+        // Sliders
+        function initSliders() {
+            document.getElementById('duration').oninput = (e) => {
+                document.getElementById('duration-value').textContent = e.target.value + 's';
+            };
+            document.getElementById('batch').oninput = (e) => {
+                document.getElementById('batch-value').textContent = e.target.value;
+            };
+            document.getElementById('infer-steps').oninput = (e) => {
+                document.getElementById('infer-steps-value').textContent = e.target.value;
+            };
+            document.getElementById('guidance-scale').oninput = (e) => {
+                document.getElementById('guidance-scale-value').textContent = e.target.value;
+            };
+        }
+
+        // Lyrics helper
+        function insertLyricTag(tag) {
+            const textarea = document.getElementById('lyrics');
+            const pos = textarea.selectionStart;
+            const text = textarea.value;
+            textarea.value = text.slice(0, pos) + tag + '\n' + text.slice(pos);
+            textarea.focus();
+        }
+
+        // Generate Music - with progress bar and cancel
+        let generationAbortController = null;
+        let isGenerating = false;
+
+        async function generateMusic() {
+            const btn = document.getElementById('generate-btn');
+            const status = document.getElementById('status');
+            const resultsSection = document.getElementById('results-section');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            // Get all form values
+            const title = document.getElementById('title').value;
+            const tags = document.getElementById('tags').value;
+            const caption = document.getElementById('caption').value;
+            const lyrics = document.getElementById('lyrics').value;
+            const instrumental = document.getElementById('instrumental').checked;
+            const duration = parseInt(document.getElementById('duration').value);
+            const batch = parseInt(document.getElementById('batch').value);
+            const bpm = parseInt(document.getElementById('bpm').value) || null;
+            const keyScale = document.getElementById('key-scale').value;
+            const timeSig = document.getElementById('time-signature').value;
+            const language = document.getElementById('language').value;
+            const inferSteps = parseInt(document.getElementById('infer-steps').value);
+            const guidanceScale = parseFloat(document.getElementById('guidance-scale').value);
+            const seed = parseInt(document.getElementById('seed').value);
+
+            // Setup UI for generation
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating...';
+            status.textContent = 'Starting generation...';
+            status.className = 'status generating';
+            resultsSection.classList.add('hidden');
+            progressContainer.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            progressText.textContent = 'Initializing...';
+
+            // Setup cancel controller
+            generationAbortController = new AbortController();
+            isGenerating = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/release_task`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        title: title,
+                        tags: tags,
+                        prompt: caption,
+                        lyrics: instrumental ? '[Instrumental]' : lyrics,
+                        duration: duration,
+                        batch_size: batch,
+                        bpm: bpm,
+                        keyscale: keyScale,
+                        timesignature: timeSig,
+                        vocal_language: language,
+                        infer_step: inferSteps,
+                        guidance_scale: guidanceScale,
+                        seed: seed,
+                        manual_seeds: seed === -1 ? Array.from({ length: batch }, () => Math.floor(Math.random() * 1000000)) : [seed],
+                        // Admin settings integration
+                        shift: adminSettings.dit?.shift || 3.0,
+                        thinking: adminSettings.llm?.thinking !== false,
+                        lm_cfg_scale: adminSettings.llm?.lm_cfg_scale || 3.5,
+                        lm_temperature: adminSettings.llm?.lm_temperature || 0.85,
+                        infer_method: adminSettings.dit?.infer_method || 'ode',
+                        use_adg: adminSettings.dit?.use_adg || false,
+                    }),
+                    signal: generationAbortController.signal,
+                });
+
+                const data = await response.json();
+                if (data.code !== 200) throw new Error(data.error || 'Generation failed');
+
+                const taskId = data.data?.taskId || data.data?.task_id;
+
+                // Estimate progress based on duration and inference steps
+                const estimatedTime = Math.max(duration * 0.5, 30); // Rough estimate
+                const startTime = Date.now();
+
+                progressText.textContent = 'Processing audio...';
+
+                // Poll for results with progress updates
+                let attempts = 0;
+                const maxAttempts = Math.ceil((duration * 2 + 120) / 2); // Longer timeout for longer tracks
+
+                while (attempts < maxAttempts && isGenerating) {
+                    await new Promise(r => setTimeout(r, 2000));
+
+                    if (!isGenerating) break; // Check if cancelled
+
+                    const resultRes = await fetch(`${API_BASE}/api/query_result`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ task_id_list: [taskId] }),
+                        signal: generationAbortController.signal,
+                    });
+                    const resultData = await resultRes.json();
+
+                    // Handle array response format
+                    const results = resultData.data || [];
+                    const taskResult = Array.isArray(results)
+                        ? results.find(r => r.task_id === taskId)
+                        : results[taskId];
+
+                    if (taskResult?.status === 1) {
+                        // Parse result - it's a JSON string
+                        let audioPaths = [];
+                        try {
+                            audioPaths = JSON.parse(taskResult.result);
+                        } catch (e) {
+                            audioPaths = taskResult.result;
+                        }
+                        displayResults(audioPaths);
+                        status.textContent = '✓ Complete!';
+                        status.className = 'status';
+                        progressBar.style.width = '100%';
+                        progressText.textContent = 'Done!';
+                        break;
+                    }
+
+                    attempts++;
+
+                    // Update progress bar (estimate)
+                    const elapsed = (Date.now() - startTime) / 1000;
+                    const estimatedProgress = Math.min(95, (elapsed / estimatedTime) * 100);
+                    progressBar.style.width = estimatedProgress + '%';
+                    progressText.textContent = `Generating... ${Math.floor(elapsed)}s`;
+                    status.textContent = `Processing... (${attempts * 2}s)`;
+                }
+
+                if (attempts >= maxAttempts) throw new Error('Timeout - generation took too long');
+
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    status.textContent = 'Cancelled';
+                    status.className = 'status';
+                } else {
+                    status.textContent = `Error: ${error.message}`;
+                    status.className = 'status error';
+                }
+            }
+
+            // Reset UI
+            btn.disabled = false;
+            btn.textContent = '⚡ Generate Music';
+            isGenerating = false;
+            setTimeout(() => progressContainer.classList.add('hidden'), 2000);
+        }
+
+        function cancelGeneration() {
+            if (generationAbortController) {
+                generationAbortController.abort();
+                isGenerating = false;
+            }
+        }
+
+        function displayResults(audioItems) {
+            const section = document.getElementById('results-section');
+            const grid = document.getElementById('results');
+            grid.innerHTML = '';
+
+            audioItems.forEach((item, i) => {
+                // Handle both {file, url} objects and plain path strings
+                const path = typeof item === 'string' ? item : (item.file || item.path || item.url);
+                const url = `${API_BASE}/api/v1/audio?path=${encodeURIComponent(path)}`;
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="result-header">
+                        <span class="result-title">Variation ${i + 1}</span>
+                        <span class="result-badge">READY</span>
+                    </div>
+                    <audio controls src="${url}"></audio>
+                    <div class="result-actions">
+                        <button onclick="window.open('${url}', '_blank')">⬇️ Download</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            section.classList.remove('hidden');
+        }
+
+        // =====================================================================
+        // Library Functions
+        // =====================================================================
+
+        let libraryData = [];
+        let currentlyPlayingAudio = null;
+
+        // Global audio management - only one audio plays at a time
+        document.addEventListener('play', function (e) {
+            if (e.target.tagName === 'AUDIO') {
+                // Pause all other audio elements
+                document.querySelectorAll('audio').forEach(audio => {
+                    if (audio !== e.target && !audio.paused) {
+                        audio.pause();
+                    }
+                });
+                currentlyPlayingAudio = e.target;
+            }
+        }, true);
+
+        async function loadLibrary() {
+            const loading = document.getElementById('library-loading');
+            const empty = document.getElementById('library-empty');
+            const grid = document.getElementById('library-grid');
+
+            loading.style.display = 'block';
+            empty.style.display = 'none';
+            grid.innerHTML = '';
+
+            try {
+                const res = await fetch(`${API_BASE}/api/library`);
+                const data = await res.json();
+                libraryData = data.data?.tracks || [];
+
+                loading.style.display = 'none';
+
+                if (libraryData.length === 0) {
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                libraryData.forEach(track => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.cursor = 'pointer';
+                    const date = new Date(track.created_at).toLocaleDateString();
+                    const tags = (track.tags || []).slice(0, 3).join(', ');
+                    card.innerHTML = `
+                        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>${track.title || 'Untitled'}</span>
+                            ${track.pinned ? '<span style="color: gold;">📌</span>' : ''}
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            ${track.bpm || '?'} BPM • ${track.duration || '?'}s • ${date}
+                        </div>
+                        ${tags ? `<div style="font-size: 0.75rem; color: var(--accent-primary);">${tags}</div>` : ''}
+                        <div style="margin-top: 0.75rem;">
+                            <audio controls style="width: 100%;" src="${API_BASE}${track.audio_urls?.[0] || ''}"></audio>
+                        </div>
+                    `;
+                    card.onclick = (e) => {
+                        if (e.target.tagName !== 'AUDIO') openTrackModal(track);
+                    };
+                    grid.appendChild(card);
+                });
+
+            } catch (error) {
+                loading.style.display = 'none';
+                empty.innerHTML = `<div class="empty-state-icon">❌</div><p>Error loading library: ${error.message}</p>`;
+                empty.style.display = 'block';
+            }
+        }
+
+        function openTrackModal(track) {
+            const modal = document.getElementById('track-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            title.textContent = track.title || 'Untitled Track';
+
+            const audioList = (track.audio_urls || []).map((url, i) => `
+                <div style="margin-bottom: 1rem;">
+                    <div style="font-size: 0.9rem; margin-bottom: 0.25rem;">Variation ${i + 1}</div>
+                    <audio controls style="width: 100%;" src="${API_BASE}${url}"></audio>
+                </div>
+            `).join('');
+
+            body.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="edit-title" value="${track.title || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <input type="text" id="edit-tags" value="${(track.tags || []).join(', ')}">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem;">
+                    <div><strong>BPM:</strong> ${track.bpm || 'Auto'}</div>
+                    <div><strong>Duration:</strong> ${track.duration || '?'}s</div>
+                    <div><strong>Key:</strong> ${track.key_scale || 'Auto'}</div>
+                    <div><strong>Language:</strong> ${track.language || 'Auto'}</div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="edit-pinned" ${track.pinned ? 'checked' : ''}>
+                        Pin this track
+                    </label>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Style:</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">${track.caption || 'No description'}</div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Variations:</strong>
+                    ${audioList}
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="generate-btn" style="flex: 1; padding: 0.75rem;" onclick="updateTrack('${track.folder}')">💾 Save Changes</button>
+                    <button style="background: #e74c3c; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;" onclick="deleteTrack('${track.folder}')">🗑️ Delete</button>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeTrackModal() {
+            document.getElementById('track-modal').style.display = 'none';
+        }
+
+        async function updateTrack(folder) {
+            const title = document.getElementById('edit-title').value;
+            const tags = document.getElementById('edit-tags').value;
+            const pinned = document.getElementById('edit-pinned').checked;
+
+            try {
+                await fetch(`${API_BASE}/api/library/${folder}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, tags, pinned })
+                });
+                closeTrackModal();
+                loadLibrary();
+            } catch (error) {
+                alert('Error saving: ' + error.message);
+            }
+        }
+
+        async function deleteTrack(folder) {
+            if (!confirm('Delete this track? This cannot be undone.')) return;
+
+            try {
+                await fetch(`${API_BASE}/api/library/${folder}`, { method: 'DELETE' });
+                closeTrackModal();
+                loadLibrary();
+            } catch (error) {
+                alert('Error deleting: ' + error.message);
+            }
+        }
+
+        // Load library when navigating to Library page
+        document.querySelector('[data-page="library"]').addEventListener('click', loadLibrary);
+    </script>
+</body>
+
+</html>

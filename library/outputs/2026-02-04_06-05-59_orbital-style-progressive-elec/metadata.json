@@ -1,0 +1,30 @@
+{
+  "id": "f40baa1a-2cd4-4e23-9107-8f05e1c6ada4",
+  "title": "Orbital-style progressive elec",
+  "slug": "orbital-style-progressive-elec",
+  "folder": "2026-02-04_06-05-59_orbital-style-progressive-elec",
+  "created_at": "2026-02-04T06:06:05.183780",
+  "caption": "Orbital-style progressive electronic, 303 acid bassline with sawtooth resonance sweep, Roland TR-909 kick with tight low-end compression, hi-hats with 16th note shuffle pattern, Juno-60 poly pad with slow LFO filter modulation, arpeggiated Moog lead with portamento glide, subtle Oberheim strings, four-on-the-floor beat structure, side-chain pumping on pads, reverb sends on synths, 8-bar intro build, drop at bar 16",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 15.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "140818de-9ca7-25e2-a2fa-04d85981835f.mp3",
+      "seed": 3166556113
+    },
+    {
+      "file": "61d5c388-e89b-fd0b-1eb4-db8b20e77238.mp3",
+      "seed": 364284057
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

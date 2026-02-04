@@ -1,0 +1,30 @@
+{
+  "id": "4d98898f-9394-48cb-9d81-d20271e7191a",
+  "title": "orbital style progressive elec",
+  "slug": "orbital-style-progressive-elec",
+  "folder": "2026-02-04_06-10-47_orbital-style-progressive-elec",
+  "created_at": "2026-02-04T06:10:53.526657",
+  "caption": "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave, 135 BPM",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 1.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "fd14b718-f393-08c7-d20d-1bcba190bc62.mp3",
+      "seed": 2267622375
+    },
+    {
+      "file": "37e9c79b-2d73-154d-ccd9-0085ae329933.mp3",
+      "seed": 677326863
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

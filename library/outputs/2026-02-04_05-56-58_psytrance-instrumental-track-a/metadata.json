@@ -1,0 +1,30 @@
+{
+  "id": "c7f8adcf-7e17-4d90-88d1-e09b9f267061",
+  "title": "Psytrance instrumental track a",
+  "slug": "psytrance-instrumental-track-a",
+  "folder": "2026-02-04_05-56-58_psytrance-instrumental-track-a",
+  "created_at": "2026-02-04T05:57:04.078136",
+  "caption": "Psytrance instrumental track at 140 BPM with a locked kick–bass system, harmonically static minor tonality, continuous rolling off-beat bass, looping percussive and psychedelic elements that evolve through micro-modulation and density rather than melody or drops, maintaining constant forward pressure and ending abruptly without resolution.",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 15.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "410c4a7e-eb03-87b5-3172-563dc89c25ec.mp3",
+      "seed": 2681038747
+    },
+    {
+      "file": "58d6c6b5-4966-ef6a-c3a6-30dd12ba1406.mp3",
+      "seed": 1167345846
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "9293d3af-b6ab-47f7-893c-2437e400851f",
+  "title": "Deadmau5",
+  "slug": "deadmau5",
+  "folder": "2026-02-04_06-17-20_deadmau5",
+  "created_at": "2026-02-04T06:17:37.856323",
+  "caption": "Progressive house, melancholic minor key melody, long evolving synth pad with slow filter sweep, plucky synth lead with sidechain compression, four-on-the-floor kick with tight sub bass, soft clap on 2 and 4, layered arpeggiated synths building tension, minimalist arrangement with gradual build, atmospheric reverb tails, 8-bar phrases, hypnotic repetition, emotional electronic, mau5trap style",
+  "lyrics": "[Instrumental]",
+  "bpm": 124,
+  "key_scale": "F minor",
+  "time_signature": "",
+  "duration": 182,
+  "language": "en",
+  "inference_steps": 85,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "996a09f3-ff70-037f-9d50-5396cfa31ac5.mp3",
+      "seed": 1313033306
+    },
+    {
+      "file": "745e0937-1f6b-b9f1-afff-5b5a92252944.mp3",
+      "seed": 2675223784
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

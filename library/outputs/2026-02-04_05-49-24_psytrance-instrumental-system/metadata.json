@@ -1,0 +1,30 @@
+{
+  "id": "c725e818-2b08-4ce6-b929-f3618d1d0e19",
+  "title": "Psytrance instrumental system",
+  "slug": "psytrance-instrumental-system",
+  "folder": "2026-02-04_05-49-24_psytrance-instrumental-system",
+  "created_at": "2026-02-04T05:49:50.817343",
+  "caption": "Psytrance instrumental system\nTEMPO: 138–145 BPM (locked, unwavering)\nMODE: minor or modal, harmonically static\nMOOD: focused, hypnotic, non-emotive\nINSTRUMENTS: tight kick, rolling off-beat bass, percussive transients, short FM stabs, filtered noise, evolving psychedelic effects",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 267,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 15.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "2844e7e2-e9c9-bf7a-0e7f-179e6bd73170.mp3",
+      "seed": 4006304011
+    },
+    {
+      "file": "a023db31-bfda-cf2c-a000-371dcee85072.mp3",
+      "seed": 1596393833
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

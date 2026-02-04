@@ -1,0 +1,30 @@
+{
+  "id": "e3ddec3e-bf7a-400c-99f5-a769e7278c0d",
+  "title": "Generation Settings",
+  "slug": "generation-settings",
+  "folder": "2026-02-04_05-55-59_generation-settings",
+  "created_at": "2026-02-04T05:56:05.154594",
+  "caption": "Generation Settings",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 15.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "4f6354db-376a-12fd-fd77-084a30019fa3.mp3",
+      "seed": 2213608169
+    },
+    {
+      "file": "38c12d91-ddc3-ad0c-ddf2-a6badbd6649d.mp3",
+      "seed": 1961685422
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

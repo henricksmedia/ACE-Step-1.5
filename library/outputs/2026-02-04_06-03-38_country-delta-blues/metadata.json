@@ -1,0 +1,30 @@
+{
+  "id": "e1e74122-b45e-4846-babf-e1f064fb77ee",
+  "title": "country delta blues",
+  "slug": "country-delta-blues",
+  "folder": "2026-02-04_06-03-38_country-delta-blues",
+  "created_at": "2026-02-04T06:04:03.269655",
+  "caption": "country delta blues",
+  "lyrics": "[Instrumental]",
+  "bpm": 120,
+  "key_scale": "",
+  "time_signature": "4",
+  "duration": 253,
+  "language": "en",
+  "inference_steps": 16,
+  "guidance_scale": 3.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "69d19e9f-f8be-16ce-3703-4c6f764f47ae.mp3",
+      "seed": 1961154125
+    },
+    {
+      "file": "7f4a2f29-bb6e-af5e-5e50-1c847dd351a9.mp3",
+      "seed": 3734933210
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

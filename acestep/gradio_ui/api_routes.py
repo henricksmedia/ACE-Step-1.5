@@ -210,6 +210,141 @@ async def get_audio(path: str, _: None = Depends(verify_api_key)):
     return FileResponse(path, media_type=media_type)
 
 
+# =============================================================================
+# Library API Endpoints
+# =============================================================================
+
+@router.get("/library")
+async def list_library(_: None = Depends(verify_api_key)):
+    """List all tracks in the library"""
+    project_root = _get_project_root()
+    library_dir = os.path.join(project_root, "library", "outputs")
+    
+    if not os.path.exists(library_dir):
+        return _wrap_response({"tracks": []})
+    
+    tracks = []
+    for folder in sorted(os.listdir(library_dir), reverse=True):
+        folder_path = os.path.join(library_dir, folder)
+        if not os.path.isdir(folder_path):
+            continue
+        
+        metadata_path = os.path.join(folder_path, "metadata.json")
+        if os.path.exists(metadata_path):
+            try:
+                with open(metadata_path, "r", encoding="utf-8") as f:
+                    metadata = json.load(f)
+                    # Add audio file URLs
+                    audio_files = [f for f in os.listdir(folder_path) 
+                                   if f.endswith(('.mp3', '.wav', '.flac'))]
+                    metadata["audio_files"] = audio_files
+                    metadata["audio_urls"] = [
+                        f"/api/library/{folder}/audio/{f}" for f in audio_files
+                    ]
+                    tracks.append(metadata)
+            except Exception:
+                pass
+    
+    return _wrap_response({"tracks": tracks})
+
+
+@router.get("/library/{folder}")
+async def get_library_track(folder: str, _: None = Depends(verify_api_key)):
+    """Get details for a specific track"""
+    project_root = _get_project_root()
+    folder_path = os.path.join(project_root, "library", "outputs", folder)
+    
+    if not os.path.isdir(folder_path):
+        raise HTTPException(status_code=404, detail="Track not found")
+    
+    metadata_path = os.path.join(folder_path, "metadata.json")
+    if not os.path.exists(metadata_path):
+        raise HTTPException(status_code=404, detail="Metadata not found")
+    
+    with open(metadata_path, "r", encoding="utf-8") as f:
+        metadata = json.load(f)
+    
+    # Add audio file info
+    audio_files = [f for f in os.listdir(folder_path) 
+                   if f.endswith(('.mp3', '.wav', '.flac'))]
+    metadata["audio_files"] = audio_files
+    metadata["audio_urls"] = [f"/api/library/{folder}/audio/{f}" for f in audio_files]
+    
+    return _wrap_response(metadata)
+
+
+@router.get("/library/{folder}/audio/{filename}")
+async def get_library_audio(folder: str, filename: str, _: None = Depends(verify_api_key)):
+    """Serve audio file from library"""
+    project_root = _get_project_root()
+    file_path = os.path.join(project_root, "library", "outputs", folder, filename)
+    
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="Audio file not found")
+    
+    ext = os.path.splitext(filename)[1].lower()
+    media_types = {
+        ".mp3": "audio/mpeg",
+        ".wav": "audio/wav",
+        ".flac": "audio/flac",
+    }
+    return FileResponse(file_path, media_type=media_types.get(ext, "audio/mpeg"))
+
+
+@router.patch("/library/{folder}")
+async def update_library_track(folder: str, request: Request, authorization: Optional[str] = Header(None)):
+    """Update track metadata (title, tags, pinned)"""
+    content_type = (request.headers.get("content-type") or "").lower()
+    if "json" in content_type:
+        body = await request.json()
+    else:
+        form = await request.form()
+        body = {k: v for k, v in form.items()}
+    
+    verify_token_from_request(body, authorization)
+    
+    project_root = _get_project_root()
+    folder_path = os.path.join(project_root, "library", "outputs", folder)
+    metadata_path = os.path.join(folder_path, "metadata.json")
+    
+    if not os.path.exists(metadata_path):
+        raise HTTPException(status_code=404, detail="Track not found")
+    
+    with open(metadata_path, "r", encoding="utf-8") as f:
+        metadata = json.load(f)
+    
+    # Update allowed fields
+    if "title" in body:
+        metadata["title"] = body["title"]
+    if "tags" in body:
+        tags = body["tags"]
+        if isinstance(tags, str):
+            tags = [t.strip() for t in tags.split(",") if t.strip()]
+        metadata["tags"] = tags
+    if "pinned" in body:
+        metadata["pinned"] = body["pinned"] in (True, "true", "1")
+    
+    with open(metadata_path, "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=2, ensure_ascii=False)
+    
+    return _wrap_response({"status": "updated", "metadata": metadata})
+
+
+@router.delete("/library/{folder}")
+async def delete_library_track(folder: str, _: None = Depends(verify_api_key)):
+    """Delete a track from the library"""
+    import shutil
+    
+    project_root = _get_project_root()
+    folder_path = os.path.join(project_root, "library", "outputs", folder)
+    
+    if not os.path.isdir(folder_path):
+        raise HTTPException(status_code=404, detail="Track not found")
+    
+    shutil.rmtree(folder_path)
+    return _wrap_response({"status": "deleted", "folder": folder})
+
+
 @router.post("/create_random_sample")
 async def create_random_sample(request: Request, authorization: Optional[str] = Header(None)):
     """Get random sample parameters from pre-loaded example data"""
@@ -448,10 +583,13 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
             timesignature=sample_timesignature or get_param("time_signature", "timesignature", default=""),
             duration=sample_duration or get_param("audio_duration", "duration", default=-1),
             vocal_language=sample_language,
-            inference_steps=get_param("inference_steps", default=8),
+            inference_steps=get_param("inference_steps", "infer_step", default=8),
             guidance_scale=float(get_param("guidance_scale", default=7.0) or 7.0),
             seed=int(get_param("seed", default=-1) or -1),
             thinking=to_bool(get_param("thinking"), False),
+            use_cot_metas=to_bool(get_param("use_cot_metas"), False),
+            use_cot_caption=to_bool(get_param("use_cot_caption"), False),
+            use_cot_language=to_bool(get_param("use_cot_language"), False),
             lm_temperature=lm_temperature,
             lm_cfg_scale=float(get_param("lm_cfg_scale", default=2.0) or 2.0),
             lm_negative_prompt=get_param("lm_negative_prompt", default="NO USER INPUT") or "NO USER INPUT",
@@ -463,9 +601,23 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
             audio_format=get_param("audio_format", default="mp3"),
         )
 
-        # Get temp directory
-        import tempfile
-        save_dir = tempfile.gettempdir()
+        # Get title and create library folder
+        title = get_param("title", default="") or ""
+        if not title:
+            # Generate title from caption (first 30 chars, cleaned)
+            title = (caption[:30] if caption else "untitled").strip()
+        
+        # Create slug from title
+        import re
+        from datetime import datetime
+        slug = re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')[:30] or "track"
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        folder_name = f"{timestamp}_{slug}"
+        
+        # Save to library/outputs/ instead of temp
+        project_root = _get_project_root()
+        save_dir = os.path.join(project_root, "library", "outputs", folder_name)
+        os.makedirs(save_dir, exist_ok=True)
 
         # Call generation function
         result = generate_music(
@@ -482,6 +634,36 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
         # Extract audio paths
         audio_paths = [a["path"] for a in result.audios if a.get("path")]
 
+        # Save metadata.json for library tracking
+        metadata = {
+            "id": task_id,
+            "title": title,
+            "slug": slug,
+            "folder": folder_name,
+            "created_at": datetime.now().isoformat(),
+            "caption": caption,
+            "lyrics": lyrics,
+            "bpm": params.bpm,
+            "key_scale": params.keyscale,
+            "time_signature": params.timesignature,
+            "duration": params.duration,
+            "language": params.vocal_language,
+            "inference_steps": params.inference_steps,
+            "guidance_scale": params.guidance_scale,
+            "seed": params.seed,
+            "batch_size": config.batch_size,
+            "variations": [
+                {"file": os.path.basename(p), "seed": result.audios[i].get("params", {}).get("seed")}
+                for i, p in enumerate(audio_paths)
+            ],
+            "pinned": False,
+            "tags": [t.strip() for t in get_param("tags", default="").split(",") if t.strip()],
+        }
+        
+        metadata_path = os.path.join(save_dir, "metadata.json")
+        with open(metadata_path, "w", encoding="utf-8") as f:
+            json.dump(metadata, f, indent=2, ensure_ascii=False)
+
         # Build result data with download URLs
         from urllib.parse import urlencode
         result_data = [{
@@ -494,7 +676,7 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
         # Store result
         store_result(task_id, result_data)
 
-        return _wrap_response({"task_id": task_id, "status": "succeeded"})
+        return _wrap_response({"task_id": task_id, "status": "succeeded", "folder": folder_name})
 
     except HTTPException:
         raise
