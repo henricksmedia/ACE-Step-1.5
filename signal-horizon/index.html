@@ -1650,10 +1650,10 @@
 
         // Default settings (used if nothing in localStorage)
         const DEFAULT_SETTINGS = {
-            version: 1,
+            version: 2,  // Bumped version for audio stability update
             presets: {
-                fast: { steps: 16, guidance: 5, shift: 1.0, thinking: false },
-                balanced: { steps: 60, guidance: 8, shift: 3.0, thinking: true },
+                fast: { steps: 32, guidance: 5, shift: 3.0, thinking: false },      // 16→32 for stability
+                balanced: { steps: 80, guidance: 8, shift: 3.0, thinking: true },   // 60→80 for stability
                 pro: { steps: 100, guidance: 9, shift: 3.0, thinking: true },
                 ultra: { steps: 150, guidance: 8, shift: 3.0, thinking: true }
             },
@@ -1667,8 +1667,14 @@
                 lm_cfg_scale: 3.5,
                 lm_temperature: 0.85
             },
+            audio: {
+                normalize_loudness: true,
+                target_lufs: -14.0,
+                peak_limiter: true
+            },
             currentPreset: 'balanced'
         };
+
 
         // Load settings from localStorage (or defaults)
         function loadSettings() {

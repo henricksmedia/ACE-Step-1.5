@@ -91,3 +91,54 @@ taskkill /PID <pid> /F
 1. Make sure you saved the file
 2. Check the terminal for reload messages
 3. Hard refresh browser: `Ctrl+Shift+R`
+
+---
+
+## Git Workflow: Syncing with ACE-Step Upstream
+
+Signal Horizon is built as an overlay on your **fork** of ACE-Step. To get updates from the original ACE-Step repo:
+
+### One-Time Setup
+
+```bash
+# Add the original ACE-Step as "upstream" remote
+git remote add upstream https://github.com/ACE-Step/ACE-Step-1.5
+
+# Verify remotes
+git remote -v
+# Should show:
+#   origin    https://github.com/henricksmedia/ACE-Step-1.5 (your fork)
+#   upstream  https://github.com/ACE-Step/ACE-Step-1.5 (original)
+```
+
+### When ACE-Step Releases Updates
+
+```bash
+# Fetch latest from upstream
+git fetch upstream
+
+# Merge upstream changes into your branch
+git merge upstream/main
+
+# Resolve any conflicts (usually in files you've modified)
+# Then push to your fork
+git push origin main
+```
+
+### Files That May Conflict
+
+These Signal Horizon files modify ACE-Step core:
+
+| File | What We Changed |
+|------|-----------------|
+| `acestep/audio_utils.py` | Added loudness normalization |
+| `launcher_full.py` | Added Signal Horizon API routes |
+
+### Files That Won't Conflict
+
+These are Signal Horizon additions (ACE-Step doesn't have them):
+
+- `signal-horizon/` folder (entire UI)
+- `Signal Horizon*.bat` launchers
+- `docs/` Signal Horizon docs
+
