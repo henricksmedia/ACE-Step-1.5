@@ -759,7 +759,81 @@
             border-color: var(--accent);
             color: var(--accent);
         }
+
+        /* Quick Style Genre Tabs */
+        .quickstyle-tabs {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .quickstyle-tab {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .quickstyle-tab:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .quickstyle-tab.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .quickstyle-tab.featured {
+            background: linear-gradient(135deg, #9b59b6, #e91e63);
+            border-color: #9b59b6;
+            color: #fff;
+        }
+
+        .quickstyle-tab.featured.active {
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+        }
+
+        /* Scrollable Preset Container */
+        .quickstyle-presets-scroll {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .quickstyle-presets-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .quickstyle-presets-scroll::-webkit-scrollbar-track {
+            background: var(--bg-surface);
+            border-radius: 3px;
+        }
+
+        .quickstyle-presets-scroll::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .quickstyle-presets-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .quickstyle-presets-scroll .preset-card {
+            min-width: 160px;
+            flex-shrink: 0;
+        }
     </style>
+
 </head>
 
 <body>
@@ -815,10 +889,11 @@
                     </div>
                 </div>
 
-                <!-- Quick Presets -->
+                <!-- Quick Presets with Genre Tabs -->
                 <div class="card">
                     <div class="card-title">Quick Style</div>
-                    <div class="preset-grid" id="quick-presets"></div>
+                    <div class="quickstyle-tabs" id="quickstyle-tabs"></div>
+                    <div class="quickstyle-presets-scroll" id="quick-presets"></div>
                 </div>
 
                 <!-- Style & Lyrics -->
@@ -841,6 +916,9 @@
                         <div class="checkbox-row" style="margin-top: 0.75rem;">
                             <input type="checkbox" id="instrumental" checked>
                             <label for="instrumental" style="margin: 0;">Instrumental</label>
+                        </div>
+                        <div id="lyrics-warning"
+                            style="display: none; font-size: 0.8rem; margin-top: 0.5rem; padding: 0.5rem; border-radius: 6px; background: rgba(243, 156, 18, 0.1);">
                         </div>
                     </div>
                 </div>
@@ -1466,44 +1544,101 @@
     <script>
         const API_BASE = '';  // Same origin - served by Signal Horizon server
 
-        // Genre Presets Data
+        // Genre Presets Data - 9 Genres with Complete Settings
         const PRESETS = {
+            "The Treq": {
+                "Delta Electro Fusion": { style: "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Psytrance Cinematic": { style: "psytrance, driving bassline, cinematic orchestral stabs, hypnotic arpeggios, tribal percussion, epic build-ups, Juno Reactor inspired", bpm: 145, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Tribal Electronica": { style: "tribal drums meets electronic production, ethnic percussion, deep bass pulses, atmospheric textures, world fusion, Hybrid inspired", bpm: 125, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Progressive Breaks": { style: "progressive breaks, breakbeat rhythms, soaring synth melodies, film score influence, epic crescendos, hybrid orchestral electronic", bpm: 130, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Dark Melodic Tech": { style: "dark melodic techno, rolling basslines, haunting vocal chops, industrial textures, deadmau5 influenced progressive house", bpm: 126, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Blues Psybient": { style: "delta blues slide guitar over psybient textures, ambient dub, slow groove, dusty and ethereal, lo-fi warmth", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Orchestral Trance": { style: "orchestral trance, symphonic strings, powerful brass, trance arpeggios, cinematic EDM, epic anthem", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Industrial Blues": { style: "industrial rock meets blues, distorted guitars, heavy electronic drums, gritty synths, dark and aggressive", bpm: 110, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Acid House Revival": { style: "acid house, classic 303 squelch, 909 drums, warehouse vibes, hypnotic loops, late night energy", bpm: 125, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Electro Swing Noir": { style: "electro swing, vintage jazz samples, electronic beats, dark cabaret vibes, bass drops, playful yet moody", bpm: 128, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+            },
             "EDM": {
-                "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135 },
-                "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks", bpm: 128 },
-                "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords", bpm: 122 },
-                "Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown", bpm: 138 },
+                "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks, crowd energy", bpm: 128, key: "F major", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords, late night", bpm: 122, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Progressive Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown, hands in the air", bpm: 138, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Melodic Techno": { style: "melodic techno, driving rhythm, atmospheric pads, hypnotic loops, berlin club sound", bpm: 125, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Dubstep Heavy": { style: "heavy dubstep, massive wobble bass, aggressive drops, distorted synths, headbanger", bpm: 140, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Future Bass": { style: "future bass, bright supersaws, pitched vocal chops, colorful chords, uplifting drops", bpm: 150, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Drum & Bass": { style: "liquid drum and bass, rolling breakbeats, deep sub bass, atmospheric pads, smooth and energetic", bpm: 174, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "House Classic": { style: "classic house, piano chords, funky bassline, soulful vocal samples, chicago vibes", bpm: 124, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Hardstyle": { style: "hardstyle, hard kicks, euphoric melodies, reverse bass, intense energy, festival power", bpm: 150, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
             },
             "Pop": {
-                "Summer Hit": { style: "upbeat pop, catchy hooks, bright synths, dance rhythm, radio-friendly", bpm: 120 },
-                "Synth Pop": { style: "80s inspired synth pop, analog synthesizers, retro vibes, nostalgic", bpm: 118 },
-                "Dance Pop": { style: "dance pop, synth hooks, four-on-the-floor, euphoric chorus", bpm: 124 },
+                "Summer Hit": { style: "upbeat pop, catchy hooks, bright synths, dance rhythm, radio-friendly, feel-good", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Synth Pop 80s": { style: "80s inspired synth pop, analog synthesizers, gated reverb drums, retro vibes, nostalgic", bpm: 118, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Dance Pop": { style: "dance pop, synth hooks, four-on-the-floor, euphoric chorus, club-ready", bpm: 124, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Indie Pop": { style: "indie pop, jangly guitars, dreamy vocals, lo-fi textures, bittersweet melodies", bpm: 110, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Power Ballad": { style: "power ballad, emotional crescendo, piano driven, soaring vocals, epic chorus", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Tropical Pop": { style: "tropical pop, marimba, steel drums, island vibes, sunny and uplifting, beach party", bpm: 100, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Dark Pop": { style: "dark pop, moody synths, trap-influenced beats, introspective lyrics, atmospheric", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "K-Pop Energy": { style: "k-pop, high energy, synchronized dance beat, colorful synths, hook-heavy, polished production", bpm: 128, key: "B major", timeSig: "4", inferSteps: 80, guidance: 14 },
             },
             "Hip-Hop": {
-                "Trap Soul": { style: "trap soul, smooth 808s, atmospheric pads, melodic, emotional", bpm: 140 },
-                "Boom Bap": { style: "classic hip-hop, vinyl samples, hard drums, old school, jazzy", bpm: 90 },
-                "Drill": { style: "UK drill, sliding 808s, dark atmosphere, aggressive, menacing", bpm: 140 },
+                "Trap Soul": { style: "trap soul, smooth 808s, atmospheric pads, melodic, emotional, late night vibes", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Boom Bap Classic": { style: "classic hip-hop, vinyl samples, hard drums, old school, jazzy chops, golden era", bpm: 90, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "UK Drill": { style: "UK drill, sliding 808s, dark atmosphere, aggressive, menacing, grime influenced", bpm: 140, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Lo-Fi Hip-Hop": { style: "lo-fi hip-hop, vinyl crackle, chill beats, jazz samples, study music, relaxing", bpm: 75, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Trap Banger": { style: "trap, hard 808s, hi-hat rolls, aggressive synths, club anthem, heavy bass", bpm: 145, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Phonk": { style: "phonk, memphis rap samples, distorted 808s, cowbell, dark and aggressive, drift vibes", bpm: 130, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Cloud Rap": { style: "cloud rap, dreamy pads, spaced out, ethereal synths, reverb heavy, introspective", bpm: 70, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Afrobeat Rap": { style: "afrobeat hip-hop fusion, african percussion, melodic flow, tropical vibes, danceable", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
             },
             "Rock": {
-                "Classic Rock": { style: "classic rock, guitar riffs, powerful drums, stadium anthem", bpm: 120 },
-                "Indie Rock": { style: "indie rock, jangly guitars, raw production, alternative vibes", bpm: 128 },
-                "Metal": { style: "heavy metal, distorted guitars, double bass drums, aggressive", bpm: 160 },
+                "Classic Rock": { style: "classic rock, guitar riffs, powerful drums, stadium anthem, 70s vibes", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Indie Rock": { style: "indie rock, jangly guitars, raw production, alternative vibes, lo-fi warmth", bpm: 128, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Heavy Metal": { style: "heavy metal, distorted guitars, double bass drums, aggressive, headbanging, powerful", bpm: 160, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Progressive Rock": { style: "progressive rock, complex time signatures, synth layers, epic compositions, concept album", bpm: 110, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Punk Rock": { style: "punk rock, fast tempo, raw energy, power chords, rebellious, DIY aesthetic", bpm: 180, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Grunge": { style: "grunge, heavy distortion, melancholic, raw vocals, 90s seattle sound, angsty", bpm: 115, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Post-Rock": { style: "post-rock, ambient textures, crescendo builds, instrumental, cinematic, atmospheric", bpm: 100, key: "C major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Blues Rock": { style: "blues rock, expressive guitar solos, shuffle rhythm, vintage amps, soulful", bpm: 125, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
             },
-            "R&B": {
-                "Smooth R&B": { style: "smooth r&b, silky vocals, jazz chords, sensual groove", bpm: 85 },
-                "Neo-Soul": { style: "neo-soul, organic instruments, warm production, soulful", bpm: 95 },
+            "Ambient/Chill": {
+                "Chillwave": { style: "chillwave, hazy synths, nostalgic vibes, lo-fi textures, dreamy, summer sunset", bpm: 95, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11 },
+                "Downtempo": { style: "downtempo, deep bass, trip-hop influenced, moody, late night, atmospheric", bpm: 85, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Ambient Drone": { style: "ambient drone, evolving textures, meditative, vast soundscapes, minimal, hypnotic", bpm: 60, key: "F major", timeSig: "4", inferSteps: 80, guidance: 10 },
+                "Lo-Fi Beats": { style: "lo-fi beats, vinyl crackle, warm piano, relaxing, study music, cozy", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 11 },
+                "Synthwave": { style: "synthwave, 80s retrofuture, neon vibes, analog synths, driving arpeggios, outrun", bpm: 105, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "New Age": { style: "new age, peaceful piano, nature sounds, spiritual, healing, meditation music", bpm: 65, key: "D major", timeSig: "4", inferSteps: 80, guidance: 10 },
+                "Space Ambient": { style: "space ambient, cosmic textures, vast emptiness, science fiction, deep space, ethereal", bpm: 70, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 10 },
+                "Vaporwave": { style: "vaporwave, slowed samples, 80s corporate music, nostalgic, aesthetic, surreal", bpm: 85, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11 },
             },
-            "Country": {
-                "Nashville": { style: "country ballad, acoustic guitar, pedal steel, heartfelt lyrics", bpm: 96 },
-                "Country Rock": { style: "southern rock, driving guitars, country twang, energetic", bpm: 130 },
+            "Jazz/Fusion": {
+                "Smooth Jazz": { style: "smooth jazz, saxophone lead, electric piano, relaxing, soft groove, evening vibes", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Bebop": { style: "bebop jazz, fast tempos, complex harmonies, virtuoso improvisation, swing rhythm", bpm: 180, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Jazz Fusion": { style: "jazz fusion, electric guitar, funky bass, complex rhythms, 70s miles davis influence", bpm: 115, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Neo-Soul": { style: "neo-soul, organic instruments, warm production, soulful, erykah badu vibes, smooth", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Lo-Fi Jazz": { style: "lo-fi jazz, vinyl crackle, mellow piano, chill vibes, coffee shop, relaxed", bpm: 75, key: "D major", timeSig: "4", inferSteps: 80, guidance: 11 },
+                "Big Band Swing": { style: "big band swing, brass section, energetic, dance hall, 1940s, jazzy", bpm: 140, key: "B major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Acid Jazz": { style: "acid jazz, funky grooves, electronic elements, dancefloor jazz, urban", bpm: 110, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Latin Jazz": { style: "latin jazz, afro-cuban rhythms, congas, vibrant, salsa influenced, tropical", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
             },
-            "Jazz": {
-                "Smooth Jazz": { style: "smooth jazz, saxophone lead, electric piano, relaxing", bpm: 100 },
-                "Lo-Fi Jazz": { style: "lo-fi jazz, vinyl crackle, mellow piano, chill vibes", bpm: 75 },
+            "Country/Blues": {
+                "Delta Blues": { style: "delta blues, raw slide guitar, acoustic, mississippi roots, emotional, authentic, robert johnson inspired", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Nashville Modern": { style: "modern country, polished production, acoustic guitar, storytelling, radio-friendly, americana", bpm: 96, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Southern Rock": { style: "southern rock, driving guitars, country twang, energetic, lynyrd skynyrd vibes, roadhouse", bpm: 130, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Bluegrass": { style: "bluegrass, fast banjo picking, fiddle, acoustic, appalachian, high energy, folk", bpm: 140, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Country Ballad": { style: "country ballad, heartfelt, pedal steel guitar, emotional vocals, slow and tender", bpm: 72, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Chicago Blues": { style: "chicago blues, electric guitar, harmonica, urban blues, bb king style, soulful", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Outlaw Country": { style: "outlaw country, gritty, rebellious, willie nelson vibes, raw, acoustic and electric mix", bpm: 105, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Texas Blues": { style: "texas blues, stevie ray vaughan inspired, electric guitar hero, shuffle rhythm, powerful", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14 },
             },
-            "Latin": {
-                "Reggaeton": { style: "reggaeton, dembow rhythm, urban latin, party vibes", bpm: 95 },
-                "Latin Pop": { style: "latin pop, tropical influences, romantic, danceable", bpm: 110 },
+            "World": {
+                "Reggaeton": { style: "reggaeton, dembow rhythm, urban latin, party vibes, club banger, spanish", bpm: 95, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Latin Pop": { style: "latin pop, tropical influences, romantic, danceable, summer hit, spanish", bpm: 110, key: "A major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Afrobeat": { style: "afrobeat, fela kuti inspired, polyrhythmic drums, horns, groovy, african funk", bpm: 110, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Bollywood": { style: "bollywood, indian classical fusion, dramatic, filmi music, strings, tabla", bpm: 120, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Middle Eastern": { style: "middle eastern, arabic scales, oud, darbuka drums, exotic, mystical, desert vibes", bpm: 100, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Celtic": { style: "celtic, irish fiddle, acoustic guitar, folk, pub music, jig, lively", bpm: 130, key: "D major", timeSig: "6", inferSteps: 80, guidance: 12 },
+                "Japanese": { style: "japanese traditional fusion, koto, shakuhachi flute, zen, peaceful, minimalist", bpm: 75, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Bossa Nova": { style: "bossa nova, brazilian jazz, acoustic guitar, smooth, rio de janeiro, sophisticated", bpm: 120, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12 },
             },
         };
 
@@ -1775,19 +1910,52 @@
             }
         });
 
-        // Quick Presets (EDM focused)
-        function initQuickPresets() {
-            const container = document.getElementById('quick-presets');
-            const quickPresets = Object.entries(PRESETS['EDM']).slice(0, 4);
+        // Quick Presets with Genre Tabs
+        let currentQuickGenre = 'The Treq';
 
-            quickPresets.forEach(([name, data]) => {
-                const card = createPresetCard(name, data, true);
+        function initQuickPresets() {
+            const tabsContainer = document.getElementById('quickstyle-tabs');
+            const presetsContainer = document.getElementById('quick-presets');
+
+            // Create genre tabs
+            Object.keys(PRESETS).forEach((genre, i) => {
+                const tab = document.createElement('button');
+                tab.className = 'quickstyle-tab' + (genre === 'The Treq' ? ' featured active' : '');
+                tab.textContent = genre;
+                tab.onclick = () => selectQuickGenre(genre);
+                tabsContainer.appendChild(tab);
+            });
+
+            // Load default genre
+            selectQuickGenre('The Treq');
+        }
+
+        function selectQuickGenre(genre) {
+            currentQuickGenre = genre;
+
+            // Update tab states
+            document.querySelectorAll('.quickstyle-tab').forEach(t => {
+                const isActive = t.textContent === genre;
+                t.classList.toggle('active', isActive);
+                // Featured styling for The Treq
+                if (t.textContent === 'The Treq') {
+                    t.classList.toggle('featured', true);
+                }
+            });
+
+            // Render presets for this genre
+            const container = document.getElementById('quick-presets');
+            container.innerHTML = '';
+
+            Object.entries(PRESETS[genre] || {}).forEach(([name, data]) => {
+                const card = createPresetCard(name, data);
                 container.appendChild(card);
             });
 
-            // Select first by default
-            if (quickPresets.length > 0) {
-                selectPreset(quickPresets[0][0], quickPresets[0][1]);
+            // Select first preset by default
+            const firstPreset = Object.entries(PRESETS[genre])[0];
+            if (firstPreset) {
+                selectPreset(firstPreset[0], firstPreset[1]);
             }
         }
 
@@ -1819,9 +1987,10 @@
         function createPresetCard(name, data, isQuick = false) {
             const card = document.createElement('div');
             card.className = 'preset-card' + (selectedPreset === name ? ' selected' : '');
+            const keyDisplay = data.key ? ` • ${data.key}` : '';
             card.innerHTML = `
                 <div class="preset-name">${name}</div>
-                <div class="preset-bpm">🎵 ${data.bpm} BPM</div>
+                <div class="preset-bpm">🎵 ${data.bpm} BPM${keyDisplay}</div>
             `;
             card.onclick = () => selectPreset(name, data);
             return card;
@@ -1829,7 +1998,33 @@
 
         function selectPreset(name, data) {
             selectedPreset = name;
-            document.getElementById('caption').value = data.style + `, ${data.bpm} BPM`;
+
+            // Update style description
+            document.getElementById('caption').value = data.style;
+
+            // Apply Music Settings
+            document.getElementById('bpm').value = data.bpm;
+            if (data.key) {
+                document.getElementById('key-scale').value = data.key;
+            }
+            if (data.timeSig) {
+                document.getElementById('time-signature').value = data.timeSig;
+            }
+
+            // Apply Generation Settings
+            if (data.inferSteps) {
+                document.getElementById('infer-steps').value = data.inferSteps;
+                document.getElementById('infer-steps-value').textContent = data.inferSteps;
+            }
+            if (data.guidance) {
+                document.getElementById('guidance-scale').value = data.guidance;
+                document.getElementById('guidance-scale-value').textContent = data.guidance;
+            }
+
+            // Update quality indicators
+            updateQualityIndicators('custom', data.inferSteps || 80);
+
+            // Update visual selection
             document.querySelectorAll('.preset-card').forEach(c => {
                 c.classList.toggle('selected', c.querySelector('.preset-name').textContent === name);
             });
@@ -1870,7 +2065,60 @@
             const text = textarea.value;
             textarea.value = text.slice(0, pos) + tag + '\n' + text.slice(pos);
             textarea.focus();
+            checkLyricsContent(); // Check after inserting tag
         }
+
+        // Lyrics content detection - auto-uncheck Instrumental when real lyrics are entered
+        function checkLyricsContent() {
+            const lyrics = document.getElementById('lyrics').value.trim();
+            const instrumental = document.getElementById('instrumental');
+            const warning = document.getElementById('lyrics-warning');
+
+            // Check if lyrics contain actual content (not just [Instrumental] or empty)
+            const hasRealLyrics = lyrics.length > 0 &&
+                lyrics.toLowerCase() !== '[instrumental]' &&
+                !lyrics.match(/^\[instrumental\]$/i);
+
+            if (hasRealLyrics && instrumental.checked) {
+                // Auto-uncheck instrumental when real lyrics are detected
+                instrumental.checked = false;
+                if (warning) {
+                    warning.style.display = 'block';
+                    warning.textContent = '✓ Instrumental unchecked - your lyrics will be used';
+                    warning.style.color = 'var(--success)';
+                    setTimeout(() => { warning.style.display = 'none'; }, 3000);
+                }
+            }
+        }
+
+        // Validate before generation - warn if lyrics exist but instrumental is checked
+        function validateLyricsSettings() {
+            const lyrics = document.getElementById('lyrics').value.trim();
+            const instrumental = document.getElementById('instrumental').checked;
+            const warning = document.getElementById('lyrics-warning');
+
+            const hasRealLyrics = lyrics.length > 0 &&
+                lyrics.toLowerCase() !== '[instrumental]' &&
+                !lyrics.match(/^\[instrumental\]$/i);
+
+            if (hasRealLyrics && instrumental) {
+                if (warning) {
+                    warning.style.display = 'block';
+                    warning.textContent = '⚠️ You have lyrics but "Instrumental" is checked - lyrics will be ignored!';
+                    warning.style.color = '#f39c12';
+                }
+                return false;
+            }
+            return true;
+        }
+
+        // Initialize lyrics listener
+        document.addEventListener('DOMContentLoaded', () => {
+            const lyricsTextarea = document.getElementById('lyrics');
+            if (lyricsTextarea) {
+                lyricsTextarea.addEventListener('input', checkLyricsContent);
+            }
+        });
 
         // Generate Music - with progress bar and cancel
         let generationAbortController = null;
