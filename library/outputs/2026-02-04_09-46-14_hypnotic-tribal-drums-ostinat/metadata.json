@@ -1,0 +1,30 @@
+{
+  "id": "ead04e7c-8397-4963-b24b-fb9040499662",
+  "title": "hypnotic tribal drums, ostinat",
+  "slug": "hypnotic-tribal-drums-ostinat",
+  "folder": "2026-02-04_09-46-14_hypnotic-tribal-drums-ostinat",
+  "created_at": "2026-02-04T09:46:39.963137",
+  "caption": "hypnotic tribal drums, ostinato rhythm, repetitive percussion, trance-inducing beat, shamanic, world fusion, juno reactor",
+  "lyrics": "[Verse 1]  \nGrab your gear, sky's on fire,  \nBlast through madness, fuel the desire.  \nHues explode, barriers shatter,  \nGate crashes wide, no time to chatter.  \n\n[Build]  \nRhythm ramps, slots click tight,  \nOff-kilter thumps, ignite the fight.  \nSurge hits deep, subs rumble fierce,  \nTurn it loud, pierce the pierce.  \n\n[Chorus]  \nTrip around the world,  \nTrip around the world,  \nTrip around the world,  \nWorld, world, world!  \n\n[Drop]  \nBass pounds raw, groove gets warped,  \nHead-spinning surge, get absorbed.  \nRealms collide, plot twists wild,  \nEndless haul, style undefiled.  \n\n[Verse 2]  \nScale the highs, plunge the deeps,  \nFlames ignite, the craving creeps.  \nVintage pounds, bolts from above,  \nRouse the squad, shove comes to shove.  \n\n[Build]  \nTemp spikes, blasts break free,  \nRagged pulses, crank the spree.  \nRush builds strong, primed to explode,  \nBust the roof, reload the mode.  \n\n[Chorus]  \nTrip around the world,  \nTrip around the world,  \nTrip around the world,  \nWorld, world, world!  \n\n[Outro]  \nEase off gradual, path blurs away,  \nVibe hangs tough, here to stay.  \nWorld, world, world...  \nPush on forever, own the fray.",
+  "bpm": 115,
+  "key_scale": "E minor",
+  "time_signature": "4",
+  "duration": 240,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 13.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "39d1275a-9233-f2f1-430f-bacf9749ab58.mp3",
+      "seed": 1293034317
+    },
+    {
+      "file": "66c414ff-9471-635d-3bab-3f9b4ce748d5.mp3",
+      "seed": 1031647158
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "d088c01d-63c6-4676-ac9c-ebe9b8e195a4",
+  "title": "metal cover, heavy distorted g",
+  "slug": "metal-cover-heavy-distorted-g",
+  "folder": "2026-02-04_09-10-08_metal-cover-heavy-distorted-g",
+  "created_at": "2026-02-04T09:10:27.200222",
+  "caption": "metal cover, heavy distorted guitars, double bass drums, aggressive",
+  "lyrics": "[Instrumental]",
+  "bpm": null,
+  "key_scale": "",
+  "time_signature": "",
+  "duration": -1,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 7.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "ac581b67-e3b7-505b-228c-47f7b242dfb8.mp3",
+      "seed": 3943002205
+    },
+    {
+      "file": "c39467a7-9cf4-c423-4da4-555b5a0437a9.mp3",
+      "seed": 2340561363
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

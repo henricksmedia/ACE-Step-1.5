@@ -2,11 +2,12 @@
 
 ## Quick Start
 
-| Launcher | Startup | Best For |
-|----------|---------|----------|
-| **Signal Horizon.bat** | ~2 min | Normal use, fast generation |
-| **Signal Horizon (Dev).bat** | ~1 min | UI development, quick testing |
-| **Signal Horizon (Full).bat** | ~3 min | Gradio UI, all ACE-Step features |
+| Launcher | Model | Startup | Best For |
+|----------|-------|---------|----------|
+| **Signal Horizon.bat** | Turbo | ~2 min | Normal use, fast generation |
+| **Signal Horizon (Pro).bat** | Base | ~3 min | Stem Ripper, Layer Builder, Mastering |
+| **Signal Horizon (Dev).bat** | Turbo | ~1 min | UI development, quick testing |
+| **Signal Horizon (Full).bat** | Base | ~3 min | Gradio UI, all ACE-Step features |
 
 ---
 

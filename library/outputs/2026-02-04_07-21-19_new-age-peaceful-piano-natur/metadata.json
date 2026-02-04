@@ -1,0 +1,30 @@
+{
+  "id": "149c3803-b9c0-45ae-813e-1e2497a5580d",
+  "title": "new age, peaceful piano, natur",
+  "slug": "new-age-peaceful-piano-natur",
+  "folder": "2026-02-04_07-21-19_new-age-peaceful-piano-natur",
+  "created_at": "2026-02-04T07:21:44.330674",
+  "caption": "new age, peaceful piano, nature sounds, spiritual, healing, meditation music",
+  "lyrics": "[Instrumental]",
+  "bpm": 65,
+  "key_scale": "D major",
+  "time_signature": "4",
+  "duration": 300,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 10.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "7e0da149-a011-cf98-c1f1-043cfc702e1f.mp3",
+      "seed": 2744985520
+    },
+    {
+      "file": "9be53866-bbf7-9641-7d2d-ce8661d0d62f.mp3",
+      "seed": 2983513477
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

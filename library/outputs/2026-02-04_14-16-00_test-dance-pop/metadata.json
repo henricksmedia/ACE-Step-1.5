@@ -1,0 +1,32 @@
+{
+  "id": "5c2f3c0a-0074-4fef-8d05-c622b474f01f",
+  "title": "[TEST] Dance Pop",
+  "slug": "test-dance-pop",
+  "folder": "2026-02-04_14-16-00_test-dance-pop",
+  "created_at": "2026-02-04T14:18:53.585091",
+  "caption": "dance pop, synth hooks, four-on-the-floor, euphoric chorus, club-ready, bright female pop vocals, clear and energetic",
+  "lyrics": "[INTRO]\nWait—\nhold on—\nno, like this—\n\n[VERSE 1]\nI keep moving before I’m ready\nlike my feet know something I don’t\nEvery thought skips\nhalfway through itself\n\nI meant to stop\nI swear I did\nbut the ground keeps rewinding\nunder me\n\n[PRE-CHORUS]\nMy head runs faster\nthan my mouth can keep up\n\n[CHORUS]\nI’m racing the edge\nnot the fall\nnot the ending\n\nJust the moment\nright before\neverything stutters\n\nI don’t want to disappear\nI want to feel the glitch\n\n[VERSE 2]\nThere’s noise in my chest\nthat won’t sit still\nmemories buffering\nout of order\n\nI say your—\nno—\nI don’t say it\n\nI leave it hanging\nlike a dropped signal\n\n[BREAK / DECONSTRUCTION]\nstep—\ncut—\nrepeat—\n\nHands shaking\nframe skipping\nstill not stopping\n\n[CHORUS – FRACTURED]\nI’m at the edge\nedge\nedge\n\nNot jumping\nnot staying\n\nJust late\nagain\n\n[BRIDGE]\nIf I slow down\neverything catches me\n\nIf I keep going\nI might outrun\nmy own weight\n\n[FINAL CHORUS]\nI’m racing the edge of the planet\nto see what breaks first\nthe ground\nor me\n\nI’m not looking for answers\nI’m looking for impact\n\n[OUTRO]\nStill moving\nStill here\n\n—don’t cut it yet—",
+  "bpm": 124,
+  "key_scale": "G major",
+  "time_signature": "4",
+  "duration": 180,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 13.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "a56330fe-cc84-3624-fd0c-2d07775cb3fe.mp3",
+      "seed": 2824394827
+    },
+    {
+      "file": "0dd3aa70-0185-f4f4-6d35-c19727c675a4.mp3",
+      "seed": 107384713
+    }
+  ],
+  "pinned": false,
+  "tags": [
+    "dance pop"
+  ]
+}

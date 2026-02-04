@@ -1,0 +1,30 @@
+{
+  "id": "386ae61b-1863-4f83-b478-1837c5c04a45",
+  "title": "tribal drums meets electronic",
+  "slug": "tribal-drums-meets-electronic",
+  "folder": "2026-02-04_07-15-21_tribal-drums-meets-electronic",
+  "created_at": "2026-02-04T07:15:33.604357",
+  "caption": "tribal drums meets electronic production, ethnic percussion, deep bass pulses, atmospheric textures, world fusion, Hybrid inspired",
+  "lyrics": "I didn’t mean to drift away\nI just didn’t know what to say\n\nI stayed quiet longer than I planned\nSome things slipped right through my hands\n\nI’m still standing where I was\nTrying to remember who I am\n\nI’m not broken, I’m just tired\nFrom carrying this for too long",
+  "bpm": 125,
+  "key_scale": "E minor",
+  "time_signature": "4",
+  "duration": 176,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "2e46a749-9916-8767-6e04-ed8abdd79e7f.mp3",
+      "seed": 2784003689
+    },
+    {
+      "file": "42ea3dad-4c65-0b18-4dd9-302928030c4f.mp3",
+      "seed": 1867351478
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

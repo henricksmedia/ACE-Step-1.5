@@ -472,7 +472,37 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
         body = await request.json()
     else:
         form = await request.form()
-        body = {k: v for k, v in form.items()}
+        body = {}
+        # Handle file uploads separately from regular form fields
+        import tempfile
+        temp_files = []  # Track temp files for cleanup on error
+        
+        for k, v in form.items():
+            # Check if this is a file upload (UploadFile object)
+            if hasattr(v, 'file') and hasattr(v, 'filename'):
+                # Save uploaded file to temp directory
+                try:
+                    suffix = os.path.splitext(v.filename)[1] if v.filename else '.wav'
+                    temp_fd, temp_path = tempfile.mkstemp(suffix=suffix, prefix=f"acestep_{k}_")
+                    os.close(temp_fd)
+                    
+                    # Write file content
+                    content = await v.read()
+                    with open(temp_path, 'wb') as f:
+                        f.write(content)
+                    
+                    body[k] = temp_path
+                    temp_files.append(temp_path)
+                except Exception as e:
+                    # Clean up any temp files on error
+                    for tf in temp_files:
+                        try:
+                            os.remove(tf)
+                        except:
+                            pass
+                    raise HTTPException(status_code=500, detail=f"Failed to process uploaded file: {e}")
+            else:
+                body[k] = v
 
     verify_token_from_request(body, authorization)
     task_id = str(uuid4())
@@ -583,7 +613,7 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
             timesignature=sample_timesignature or get_param("time_signature", "timesignature", default=""),
             duration=sample_duration or get_param("audio_duration", "duration", default=-1),
             vocal_language=sample_language,
-            inference_steps=get_param("inference_steps", "infer_step", default=8),
+            inference_steps=int(get_param("inference_steps", "infer_step", default=8) or 8),
             guidance_scale=float(get_param("guidance_scale", default=7.0) or 7.0),
             seed=int(get_param("seed", default=-1) or -1),
             thinking=to_bool(get_param("thinking"), False),
@@ -593,11 +623,18 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
             lm_temperature=lm_temperature,
             lm_cfg_scale=float(get_param("lm_cfg_scale", default=2.0) or 2.0),
             lm_negative_prompt=get_param("lm_negative_prompt", default="NO USER INPUT") or "NO USER INPUT",
+            # Audio-to-audio task parameters (cover, repaint, lego, etc.)
+            src_audio=get_param("src_audio", default=None),
+            reference_audio=get_param("reference_audio", default=None),
+            audio_cover_strength=float(get_param("audio_cover_strength", "cover_strength", default=1.0) or 1.0),
+            repainting_start=float(get_param("repainting_start", default=0.0) or 0.0),
+            repainting_end=float(get_param("repainting_end", default=-1) or -1),
+            instruction=get_param("instruction", default=""),
         )
 
         config = GenerationConfig(
-            batch_size=get_param("batch_size", default=2),
-            use_random_seed=get_param("use_random_seed", default=True),
+            batch_size=int(get_param("batch_size", default=2) or 2),
+            use_random_seed=to_bool(get_param("use_random_seed"), True),
             audio_format=get_param("audio_format", default="mp3"),
         )
 
@@ -676,7 +713,12 @@ async def release_task(request: Request, authorization: Optional[str] = Header(N
         # Store result
         store_result(task_id, result_data)
 
-        return _wrap_response({"task_id": task_id, "status": "succeeded", "folder": folder_name})
+        return _wrap_response({
+            "task_id": task_id,
+            "status": "succeeded",
+            "folder": folder_name,
+            "audio_paths": [f"/api/library/{folder_name}/audio/{os.path.basename(p)}" for p in audio_paths],
+        }, code=1)
 
     except HTTPException:
         raise

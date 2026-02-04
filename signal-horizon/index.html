@@ -104,8 +104,107 @@
             border-left-color: var(--accent);
         }
 
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            margin-top: 0.5rem;
+        }
+
         .nav-icon {
             font-size: 1.25rem;
+        }
+
+        /* File Upload Dropzone */
+        .dropzone {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg-surface);
+        }
+
+        .dropzone:hover,
+        .dropzone.dragover {
+            border-color: var(--accent);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .dropzone-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dropzone-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .dropzone-file {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .dropzone-file.has-file {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dropzone-filename {
+            flex: 1;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dropzone-clear {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .dropzone-clear:hover {
+            color: #e74c3c;
+        }
+
+        /* Style Preset Chips */
+        .style-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .style-chip {
+            padding: 0.5rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .style-chip:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .style-chip.selected {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
         }
 
         /* Main Content */
@@ -616,6 +715,28 @@
             width: 100%;
         }
 
+        select option,
+        select optgroup {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        select optgroup {
+            font-weight: bold;
+            padding: 0.5rem 0;
+        }
+
+        /* Thinking mode shimmer animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
         select:focus {
             outline: none;
             border-color: var(--accent);
@@ -828,6 +949,96 @@
             background: var(--accent);
         }
 
+        /* Rhythm Modifiers Panel */
+        .rhythm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .rhythm-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.8rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .rhythm-toggle:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+        }
+
+        .rhythm-toggle.active {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.1), rgba(0, 163, 255, 0.1));
+            box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
+        }
+
+        .rhythm-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .rhythm-toggle-icon {
+            font-size: 1.1rem;
+        }
+
+        .rhythm-toggle-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .rhythm-toggle.active .rhythm-toggle-label {
+            color: var(--text);
+        }
+
+        .rhythm-intensity {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 10px;
+        }
+
+        .rhythm-intensity-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-width: 60px;
+        }
+
+        .rhythm-intensity input[type="range"] {
+            flex: 1;
+        }
+
+        .rhythm-intensity-value {
+            font-size: 0.8rem;
+            color: var(--accent);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .rhythm-preview {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            display: none;
+        }
+
+        .rhythm-preview.visible {
+            display: block;
+        }
+
         .quickstyle-presets-scroll .preset-card {
             min-width: 160px;
             flex-shrink: 0;
@@ -848,20 +1059,31 @@
     <div class="app">
         <!-- Sidebar -->
         <nav class="sidebar">
+            <div class="nav-section">WORKSPACES</div>
             <div class="nav-item active" data-page="create">
                 <span class="nav-icon">🎵</span>
-                <span>Create</span>
+                <span>Studio</span>
+            </div>
+            <div class="nav-item" data-page="remix">
+                <span class="nav-icon">🔧</span>
+                <span>Remix Lab</span>
+            </div>
+            <div class="nav-item" data-page="stems">
+                <span class="nav-icon">✂️</span>
+                <span>Stem Ripper</span>
             </div>
             <div class="nav-item" data-page="presets">
                 <span class="nav-icon">🎨</span>
                 <span>Presets</span>
             </div>
+            <div class="nav-section" style="margin-top: 1.5rem;">LIBRARY</div>
             <div class="nav-item" data-page="library">
                 <span class="nav-icon">📁</span>
-                <span>Library</span>
+                <span>Tracks</span>
             </div>
+            <div class="nav-section" style="margin-top: 1.5rem;">SETTINGS</div>
             <div class="nav-item" data-page="admin">
-                <span class="nav-icon">🔧</span>
+                <span class="nav-icon">⚙️</span>
                 <span>Admin</span>
             </div>
             <div class="nav-item" data-page="help" style="margin-top: auto;">
@@ -920,6 +1142,146 @@
                         <div id="lyrics-warning"
                             style="display: none; font-size: 0.8rem; margin-top: 0.5rem; padding: 0.5rem; border-radius: 6px; background: rgba(243, 156, 18, 0.1);">
                         </div>
+                    </div>
+                </div>
+
+                <!-- Vocal Persona -->
+                <div class="card">
+                    <div class="card-title">🎤 Vocal Persona
+                        <span class="help-icon">?
+                            <span class="tooltip" style="width: 280px;">
+                                <span class="tooltip-title">Vocal Style</span>
+                                Select a vocal style to add to your generation. This appends vocal characteristics to
+                                your prompt.
+                                <span class="tooltip-example">💡 Choose "None" for instrumental or to describe vocals
+                                    yourself</span>
+                            </span>
+                        </span>
+                    </div>
+                    <select id="vocal-persona"
+                        style="padding: 0.75rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); width: 100%;">
+                        <optgroup label="General">
+                            <option value="" selected>None (no vocal modifier)</option>
+                            <option value="operatic vocals, classical trained, powerful">🎤 Operatic</option>
+                            <option value="children's choir, innocent and pure">🎤 Child Choir</option>
+                            <option value="gospel choir, powerful harmonies, spiritual">🎤 Gospel Choir</option>
+                            <option value="ambient whispered vocals, ethereal, atmospheric">🎤 Ambient Whisper</option>
+                            <option value="spoken word vocals, poetic, narrative">🎤 Spoken Word</option>
+                            <option value="robotic processed vocals, vocoder, synthetic">🎤 Robotic</option>
+                            <option value="male and female duet, harmonizing together">🎤 Duet</option>
+                            <option value="acapella vocals, layered harmonies, no instruments">🎤 Acapella</option>
+                        </optgroup>
+                        <optgroup label="Pop">
+                            <option value="bright female pop vocals, clear and energetic">🎤 Pop Female</option>
+                            <option value="smooth male pop vocals, radio-ready tone">🎤 Pop Male</option>
+                            <option value="breathy intimate vocals, soft and close">🎤 Breathy</option>
+                            <option value="powerful diva vocals, big range, belting">🎤 Power Diva</option>
+                            <option value="indie pop vocals, soft and dreamy, lo-fi">🎤 Indie Soft</option>
+                            <option value="k-pop vocals, bright, youthful, polished">🎤 K-Pop</option>
+                            <option value="teen pop vocals, young and fresh, bubbly">🎤 Teen Pop</option>
+                            <option value="dark pop vocals, moody, atmospheric, haunting">🎤 Dark Pop</option>
+                            <option value="whispered breathy pop vocals, intimate, ASMR-like, dark and moody">🎤 Whisper
+                                Pop</option>
+                            <option value="confessional pop vocals, clear diction, narrative storytelling, emotional">🎤
+                                Storyteller</option>
+                        </optgroup>
+                        <optgroup label="Rock">
+                            <option value="raspy rock vocals, gritty and powerful">🎤 Rock Raspy</option>
+                            <option value="powerful male rock vocals, arena-ready">🎤 Power Male</option>
+                            <option value="punk shouting vocals, raw and aggressive">🎤 Punk Shout</option>
+                            <option value="grunge vocals, angsty and raw, 90s seattle">🎤 Grunge</option>
+                            <option value="metal screaming vocals, harsh, intense">🎤 Metal Scream</option>
+                            <option value="classic rock vocals, 70s style, bluesy power">🎤 Classic Rock</option>
+                            <option value="indie rock vocals, understated, authentic">🎤 Indie Rock</option>
+                            <option value="female rock vocals, powerful and edgy">🎤 Female Rock</option>
+                            <option value="progressive rock vocals, theatrical, dramatic range">🎤 Prog Epic</option>
+                        </optgroup>
+                        <optgroup label="Hip-Hop">
+                            <option value="trap style vocals, autotune, melodic rap">🎤 Trap Flow</option>
+                            <option value="old school hip-hop vocals, classic flow, golden era">🎤 Boom Bap</option>
+                            <option value="aggressive rap vocals, hard delivery, intense">🎤 Aggressive</option>
+                            <option value="drill rap vocals, menacing, UK/Chicago style">🎤 Drill</option>
+                            <option value="melodic rap vocals, singing and rapping blend">🎤 Melodic Rap</option>
+                            <option value="chill rap vocals, laid back, relaxed flow">🎤 Lo-Fi Chill</option>
+                            <option value="conscious rap vocals, lyrical, thoughtful delivery">🎤 Conscious</option>
+                            <option value="female rapper vocals, confident, sharp flow">🎤 Female MC</option>
+                        </optgroup>
+                        <optgroup label="EDM">
+                            <option value="dance music female vocals, euphoric and bright">🎤 Dance Female</option>
+                            <option value="ethereal trance vocals, angelic, soaring">🎤 Trance Ethereal</option>
+                            <option value="deep house vocals, soulful, filtered, sensual">🎤 Deep House</option>
+                            <option value="pitched vocal chops, electronic processing">🎤 Pitched Chops</option>
+                            <option value="whispered vocals, intimate electronic">🎤 Whisper</option>
+                            <option value="rave MC vocals, hyped, energetic shouts">🎤 Rave MC</option>
+                            <option value="vocoder processed vocals, robotic, synth-like">🎤 Vocoder</option>
+                        </optgroup>
+                        <optgroup label="R&B / Soul">
+                            <option value="smooth R&B female vocals, soulful runs, sensual">🎤 R&B Female</option>
+                            <option value="smooth R&B male vocals, silky, romantic">🎤 R&B Male</option>
+                            <option value="neo-soul vocals, warm and organic">🎤 Neo-Soul</option>
+                            <option value="motown vocals, classic soul, 60s style">🎤 Motown</option>
+                            <option value="modern R&B vocals, trap-influenced, atmospheric">🎤 Modern R&B</option>
+                            <option value="falsetto R&B vocals, high and airy, prince style">🎤 Falsetto</option>
+                            <option value="gospel-powered R&B vocals, belting, spiritual intensity">🎤 Gospel Power
+                            </option>
+                        </optgroup>
+                        <optgroup label="Jazz / Fusion">
+                            <option value="soulful female jazz vocals, smooth and warm">🎤 Soulful Female</option>
+                            <option value="male crooner vocals, smooth jazz, frank sinatra style">🎤 Crooner</option>
+                            <option value="jazz scat vocals, improvised vocal melodies">🎤 Scatting</option>
+                            <option value="torch singer vocals, emotional, intimate, cabaret">🎤 Torch Singer</option>
+                            <option value="bebop vocals, fast and agile, virtuosic">🎤 Bebop</option>
+                            <option value="lounge singer vocals, sultry, sophisticated, cocktail jazz">🎤 Lounge
+                            </option>
+                            <option value="gospel-influenced soul vocals, powerful, spiritual">🎤 Gospel Soul</option>
+                        </optgroup>
+                        <optgroup label="Country / Blues">
+                            <option value="country male vocals, warm twang, storytelling">🎤 Country Male</option>
+                            <option value="country female vocals, clear and heartfelt">🎤 Country Female</option>
+                            <option value="outlaw country vocals, gritty, rebellious, willie nelson style">🎤 Outlaw
+                                Grit</option>
+                            <option value="polished nashville vocals, radio-ready, modern country">🎤 Nashville Polish
+                            </option>
+                            <option value="bluegrass vocal harmonies, appalachian, tight harmonies">🎤 Bluegrass Harmony
+                            </option>
+                            <option value="blues vocals, gritty and soulful, raw emotion">🎤 Blues Grit</option>
+                            <option value="delta blues vocals, raw, field recording style, mournful">🎤 Delta Moan
+                            </option>
+                        </optgroup>
+                        <optgroup label="World">
+                            <option value="latin vocals, passionate and rhythmic, spanish influence">🎤 Latin</option>
+                            <option value="african vocals, call and response, world music">🎤 African</option>
+                            <option value="bollywood vocals, dramatic, indian classical ornaments">🎤 Bollywood</option>
+                            <option value="middle eastern vocals, arabic melisma, exotic">🎤 Middle Eastern</option>
+                            <option value="celtic vocals, irish folk, pure and clear">🎤 Celtic</option>
+                            <option value="reggae vocals, jamaican patois, laid back">🎤 Reggae</option>
+                            <option value="flamenco vocals, spanish, raw emotion, passionate">🎤 Flamenco</option>
+                            <option value="throat singing, overtone vocals, mongolian style">🎤 Throat Singing</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Rhythm Modifiers Panel -->
+                <div class="card">
+                    <div class="card-title">🐝 Rhythm Modifiers
+                        <span class="help-icon">?
+                            <span class="tooltip" style="width: 280px;">
+                                <span class="tooltip-title">Advanced Beat Timing</span>
+                                Control the rhythmic feel of your track. Select modifiers to inject rhythm descriptors
+                                into your caption.
+                                <span class="tooltip-example">💡 These are injected into your prompt for the AI to
+                                    interpret</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="rhythm-grid" id="rhythm-grid"></div>
+                    <div class="rhythm-intensity">
+                        <span class="rhythm-intensity-label">Intensity</span>
+                        <input type="range" id="rhythm-intensity" min="0" max="2" value="1">
+                        <span class="rhythm-intensity-value" id="rhythm-intensity-value">Moderate</span>
+                    </div>
+                    <div class="rhythm-preview" id="rhythm-preview">
+                        <strong>Rhythm injection:</strong> <span id="rhythm-preview-text"></span>
                     </div>
                 </div>
 
@@ -1141,6 +1503,45 @@
                         <p class="setting-hint">💡 Use -1 for random results, or enter a specific number to reproduce a
                             result</p>
                     </div>
+                    <div class="form-group">
+                        <label class="label-with-help">
+                            Audio Format
+                            <span class="help-icon">?
+                                <span class="tooltip">
+                                    <span class="tooltip-title">Output File Format</span>
+                                    Choose the audio format for generated files.
+                                    <span class="tooltip-example">💡 MP3: Smallest, good quality<br>WAV: Uncompressed,
+                                        largest<br>FLAC: Lossless, smaller than WAV</span>
+                                </span>
+                            </span>
+                        </label>
+                        <select id="audio-format"
+                            style="padding: 0.75rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); width: 100%;">
+                            <option value="mp3" selected style="background: #1a1a2e; color: #fff;">MP3 (Compressed)
+                            </option>
+                            <option value="wav" style="background: #1a1a2e; color: #fff;">WAV (Uncompressed)</option>
+                            <option value="flac" style="background: #1a1a2e; color: #fff;">FLAC (Lossless)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Final Prompt Preview -->
+                <div class="card" id="final-prompt-card"
+                    style="background: linear-gradient(135deg, rgba(0, 245, 212, 0.05), rgba(0, 163, 255, 0.05)); border-color: var(--accent);">
+                    <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                        📝 Final Prompt Preview
+                        <button class="structure-btn" onclick="toggleFinalPrompt()"
+                            style="font-size: 0.7rem; padding: 0.25rem 0.5rem;">Toggle</button>
+                    </div>
+                    <div id="final-prompt-content" style="display: block;">
+                        <p class="setting-hint" style="margin-bottom: 0.5rem;">This is the complete prompt sent to
+                            ACE-Step (style + rhythm modifiers)</p>
+                        <div id="final-prompt-text"
+                            style="background: var(--bg-base); padding: 1rem; border-radius: 8px; font-size: 0.85rem; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 150px; overflow-y: auto;">
+                            <em style="color: var(--text-muted);">Enter a style description to see the final
+                                prompt...</em>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Generate -->
@@ -1178,6 +1579,311 @@
                 <h2 style="margin-bottom: 1.5rem;">Preset Library</h2>
                 <div class="preset-tabs" id="preset-tabs"></div>
                 <div class="preset-grid" id="preset-grid"></div>
+            </div>
+
+            <!-- Remix Lab Page -->
+            <div class="page" id="page-remix">
+                <h2 style="margin-bottom: 1rem;">🔧 Remix Lab</h2>
+                <p class="setting-hint" style="margin-bottom: 0.5rem;">
+                    Transform any song into a different style using ACE-Step's <strong>cover</strong> task.
+                </p>
+
+                <!-- How It Works Section -->
+                <div class="card"
+                    style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(0, 206, 201, 0.1));">
+                    <div class="card-title">💡 How It Works</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                        <p style="margin-bottom: 0.75rem;">
+                            <strong>Cover Strength</strong> = how much the <em>original audio</em> influences the
+                            output.
+                            <br><strong>Lower strength → More style change. Higher strength → Stays closer to
+                                original.</strong>
+                        </p>
+                        <table
+                            style="width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-bottom: 0.75rem;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--accent-primary); text-align: left;">
+                                    <th style="padding: 0.5rem 0; width: 20%;">Strength</th>
+                                    <th style="padding: 0.5rem 0;">Effect</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.4rem 0;"><strong>0.2–0.4</strong></td>
+                                    <td style="padding: 0.4rem 0;">🎨 <strong>Style wins</strong> — dramatic genre
+                                        change,
+                                        original structure loosely followed</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.4rem 0;"><strong>0.5–0.7</strong></td>
+                                    <td style="padding: 0.4rem 0;">⚖️ <strong>Balanced</strong> — melody preserved,
+                                        style
+                                        applied moderately</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.4rem 0;"><strong>0.8–1.0</strong></td>
+                                    <td style="padding: 0.4rem 0;">🎵 <strong>Original wins</strong> — subtle style
+                                        touches
+                                        only, structure intact</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-bottom: 0;">
+                            <strong>Want more metal?</strong> Use <strong>0.3–0.5</strong> to let the target style
+                            dominate.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Source Audio Upload -->
+                <div class="card">
+                    <div class="card-title">📂 Source Audio</div>
+                    <div class="dropzone" id="remix-dropzone"
+                        onclick="document.getElementById('remix-audio-input').click()">
+                        <div class="dropzone-icon">🎵</div>
+                        <div class="dropzone-text">Drop audio file here or click to browse</div>
+                        <div class="dropzone-text" style="font-size: 0.75rem; margin-top: 0.5rem;">Supports MP3, WAV,
+                            FLAC</div>
+                        <input type="file" id="remix-audio-input" accept="audio/*" style="display: none;"
+                            onchange="handleRemixFileSelect(event)">
+                    </div>
+                    <div class="dropzone-file" id="remix-file-info">
+                        <span class="dropzone-filename" id="remix-filename"></span>
+                        <button class="dropzone-clear" onclick="clearRemixFile(event)">✕</button>
+                    </div>
+                </div>
+
+                <!-- Target Style -->
+                <div class="card">
+                    <div class="card-title">🎨 Target Style</div>
+                    <p class="setting-hint">Select a genre transformation or describe your own style</p>
+
+                    <div class="style-chips" style="margin-top: 1rem;" id="remix-style-chips">
+                        <button class="style-chip"
+                            data-style="jazz piano trio, smooth jazz, walking bass, brush drums">🎹 Jazz</button>
+                        <button class="style-chip"
+                            data-style="lo-fi hip hop, vinyl crackle, mellow beats, warm Rhodes">🎧 Lo-fi</button>
+                        <button class="style-chip"
+                            data-style="acoustic folk, fingerpicked guitar, warm vocals, intimate">🪕 Acoustic</button>
+                        <button class="style-chip"
+                            data-style="orchestral arrangement, full symphony, cinematic strings">🎻 Orchestral</button>
+                        <button class="style-chip"
+                            data-style="electronic dance, thumping kick, synth arpeggios, side-chain compression">⚡
+                            Electronic</button>
+                        <button class="style-chip"
+                            data-style="80s synthwave, analog synths, gated reverb drums, retro vibes">🌆
+                            Synthwave</button>
+                        <button class="style-chip"
+                            data-style="metal cover, heavy distorted guitars, double bass drums, aggressive">🤘
+                            Metal</button>
+                        <button class="style-chip"
+                            data-style="bossa nova, nylon guitar, soft percussion, Brazilian jazz">🌴 Bossa
+                            Nova</button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label>Custom Style Description</label>
+                        <textarea id="remix-caption" rows="3"
+                            placeholder="Describe the target style in detail... (e.g., 'Acoustic country version with steel guitar and fiddle')"></textarea>
+                    </div>
+                </div>
+
+                <!-- Cover Strength -->
+                <div class="card">
+                    <div class="card-title">🎚️ Cover Strength</div>
+                    <p class="setting-hint">How closely to follow the original structure</p>
+
+                    <div class="slider-row" style="margin-top: 1rem;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Loose</span>
+                        <input type="range" id="remix-strength" min="0.1" max="1.0" step="0.1" value="0.7"
+                            style="flex: 1; margin: 0 1rem;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Tight</span>
+                    </div>
+                    <div style="text-align: center; margin-top: 0.5rem;">
+                        <span class="slider-value" id="remix-strength-value" style="font-size: 1.25rem;">0.7</span>
+                    </div>
+                    <p class="setting-hint" style="text-align: center;">
+                        <span id="remix-strength-hint">Balanced - keeps melody while allowing style changes</span>
+                    </p>
+                </div>
+
+                <!-- Optional New Lyrics -->
+                <div class="card">
+                    <div class="card-title">📝 New Lyrics (Optional)</div>
+                    <p class="setting-hint">Leave empty to keep instrumental or original melody</p>
+                    <textarea id="remix-lyrics" rows="4"
+                        placeholder="[Verse 1]&#10;New lyrics here...&#10;&#10;[Chorus]&#10;..."></textarea>
+                </div>
+
+                <!-- Generation Settings -->
+                <div class="card">
+                    <div class="card-title">⚙️ Generation Settings</div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Quality Steps</label>
+                            <div class="slider-row">
+                                <input type="range" id="remix-steps" min="20" max="100" value="60">
+                                <span class="slider-value" id="remix-steps-value">60</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Variations</label>
+                            <div class="slider-row">
+                                <input type="range" id="remix-batch" min="1" max="4" value="2">
+                                <span class="slider-value" id="remix-batch-value">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button class="generate-btn" id="remix-generate-btn" onclick="generateRemix()">
+                    🔧 Generate Remix
+                </button>
+
+                <div class="status" id="remix-status"></div>
+
+                <!-- Progress Bar -->
+                <div id="remix-progress-container" class="card hidden" style="margin-top: 1rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span id="remix-progress-text">Generating remix...</span>
+                        <button id="remix-cancel-btn" onclick="cancelRemixGeneration()"
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            Cancel</button>
+                    </div>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
+                        <div id="remix-progress-bar"
+                            style="background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); height: 100%; width: 0%; transition: width 0.3s;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="card hidden" id="remix-results-section" style="margin-top: 1rem;">
+                    <div class="card-title">Generated Remixes</div>
+                    <div class="results-grid" id="remix-results"></div>
+                </div>
+            </div>
+
+            <!-- Stem Ripper Page -->
+            <div class="page" id="page-stems">
+                <h2 style="margin-bottom: 1rem;">✂️ Stem Ripper</h2>
+                <p class="setting-hint" style="margin-bottom: 0.5rem;">
+                    Extract individual tracks from mixed audio using ACE-Step's <strong>extract</strong> task.
+                </p>
+
+                <!-- How It Works Section -->
+                <div class="card"
+                    style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(241, 196, 15, 0.1));">
+                    <div class="card-title">💡 How It Works</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                        <p style="margin-bottom: 0.75rem;">
+                            Upload a mixed track and select which instrument to extract. The AI will generate that stem
+                            in isolation.
+                        </p>
+                        <p style="margin-bottom: 0;">
+                            <strong>Note:</strong> This uses diffusion-based extraction (different from traditional
+                            splitters like Demucs).
+                            Results are AI-generated interpretations of what the selected instrument sounds like.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Source Audio Upload -->
+                <div class="card">
+                    <div class="card-title">📂 Mixed Audio</div>
+                    <div class="dropzone" id="stems-dropzone"
+                        onclick="document.getElementById('stems-audio-input').click()">
+                        <div class="dropzone-icon">🎵</div>
+                        <div class="dropzone-text">Drop mixed audio here or click to browse</div>
+                        <div class="dropzone-text" style="font-size: 0.75rem; margin-top: 0.5rem;">Supports MP3, WAV,
+                            FLAC</div>
+                        <input type="file" id="stems-audio-input" accept="audio/*" style="display: none;"
+                            onchange="handleStemsFileSelect(event)">
+                    </div>
+                    <div class="dropzone-file" id="stems-file-info">
+                        <span class="dropzone-filename" id="stems-filename"></span>
+                        <button class="dropzone-clear" onclick="clearStemsFile(event)">✕</button>
+                    </div>
+                </div>
+
+                <!-- Track Selector -->
+                <div class="card">
+                    <div class="card-title">🎯 Select Track to Extract</div>
+                    <p class="setting-hint">Choose which instrument or part to isolate</p>
+
+                    <div class="style-chips" style="margin-top: 1rem;" id="stems-track-chips">
+                        <button class="style-chip active" data-track="vocals">🎤 Vocals</button>
+                        <button class="style-chip" data-track="backing_vocals">🎙️ Backing Vocals</button>
+                        <button class="style-chip" data-track="drums">🥁 Drums</button>
+                        <button class="style-chip" data-track="bass">🎸 Bass</button>
+                        <button class="style-chip" data-track="guitar">🎸 Guitar</button>
+                        <button class="style-chip" data-track="keyboard">🎹 Keyboard</button>
+                        <button class="style-chip" data-track="strings">🎻 Strings</button>
+                        <button class="style-chip" data-track="synth">🔊 Synth</button>
+                        <button class="style-chip" data-track="percussion">🪘 Percussion</button>
+                        <button class="style-chip" data-track="brass">🎺 Brass</button>
+                        <button class="style-chip" data-track="woodwinds">🪈 Woodwinds</button>
+                        <button class="style-chip" data-track="fx">✨ FX</button>
+                    </div>
+
+                    <div
+                        style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 8px;">
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">Selected: </span>
+                        <span id="stems-selected-track"
+                            style="font-weight: 600; color: var(--accent-primary);">vocals</span>
+                    </div>
+                </div>
+
+                <!-- Generation Settings -->
+                <div class="card">
+                    <div class="card-title">⚙️ Generation Settings</div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Quality Steps</label>
+                            <div class="slider-row">
+                                <input type="range" id="stems-steps" min="20" max="100" value="60">
+                                <span class="slider-value" id="stems-steps-value">60</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Variations</label>
+                            <div class="slider-row">
+                                <input type="range" id="stems-batch" min="1" max="4" value="2">
+                                <span class="slider-value" id="stems-batch-value">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <button class="generate-btn" id="stems-generate-btn" onclick="generateStems()">✂️ Extract Stem</button>
+
+                <!-- Status -->
+                <p id="stems-status" class="status" style="margin-top: 1rem;"></p>
+
+                <!-- Progress -->
+                <div class="card hidden" id="stems-progress" style="margin-top: 1rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span id="stems-progress-text">Extracting stem...</span>
+                        <button onclick="cancelStemsGeneration()"
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            Cancel</button>
+                    </div>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
+                        <div id="stems-progress-bar"
+                            style="background: linear-gradient(90deg, #e74c3c, #f39c12); height: 100%; width: 0%; transition: width 0.3s;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="card hidden" id="stems-results-section" style="margin-top: 1rem;">
+                    <div class="card-title">Extracted Stems</div>
+                    <div class="results-grid" id="stems-results"></div>
+                </div>
             </div>
 
             <!-- Library Page -->
@@ -1577,99 +2283,143 @@
         // Genre Presets Data - 9 Genres with Complete Settings
         const PRESETS = {
             "The Treq": {
-                "Delta Electro Fusion": { style: "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Psytrance Cinematic": { style: "psytrance, driving bassline, cinematic orchestral stabs, hypnotic arpeggios, tribal percussion, epic build-ups, Juno Reactor inspired", bpm: 145, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Tribal Electronica": { style: "tribal drums meets electronic production, ethnic percussion, deep bass pulses, atmospheric textures, world fusion, Hybrid inspired", bpm: 125, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Progressive Breaks": { style: "progressive breaks, breakbeat rhythms, soaring synth melodies, film score influence, epic crescendos, hybrid orchestral electronic", bpm: 130, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Dark Melodic Tech": { style: "dark melodic techno, rolling basslines, haunting vocal chops, industrial textures, deadmau5 influenced progressive house", bpm: 126, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Blues Psybient": { style: "delta blues slide guitar over psybient textures, ambient dub, slow groove, dusty and ethereal, lo-fi warmth", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Orchestral Trance": { style: "orchestral trance, symphonic strings, powerful brass, trance arpeggios, cinematic EDM, epic anthem", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Industrial Blues": { style: "industrial rock meets blues, distorted guitars, heavy electronic drums, gritty synths, dark and aggressive", bpm: 110, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Acid House Revival": { style: "acid house, classic 303 squelch, 909 drums, warehouse vibes, hypnotic loops, late night energy", bpm: 125, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Electro Swing Noir": { style: "electro swing, vintage jazz samples, electronic beats, dark cabaret vibes, bass drops, playful yet moody", bpm: 128, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Delta Electro Fusion": { style: "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 120 },
+                "Psytrance Cinematic": { style: "psytrance, driving bassline, cinematic orchestral stabs, hypnotic arpeggios, tribal percussion, epic build-ups, Juno Reactor inspired", bpm: 145, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Tribal Electronica": { style: "tribal drums meets electronic production, ethnic percussion, deep bass pulses, atmospheric textures, world fusion, Hybrid inspired", bpm: 125, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 150 },
+                "Progressive Breaks": { style: "progressive breaks, breakbeat rhythms, soaring synth melodies, film score influence, epic crescendos, hybrid orchestral electronic", bpm: 130, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 150 },
+                "Dark Melodic Tech": { style: "dark melodic techno, rolling basslines, haunting vocal chops, industrial textures, deadmau5 influenced progressive house", bpm: 126, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Blues Psybient": { style: "delta blues slide guitar over psybient textures, ambient dub, slow groove, dusty and ethereal, lo-fi warmth", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Orchestral Trance": { style: "orchestral trance, symphonic strings, powerful brass, trance arpeggios, cinematic EDM, epic anthem", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Industrial Blues": { style: "industrial rock meets blues, distorted guitars, heavy electronic drums, gritty synths, dark and aggressive", bpm: 110, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 120 },
+                "Acid House Revival": { style: "acid house, classic 303 squelch, 909 drums, warehouse vibes, hypnotic loops, late night energy", bpm: 125, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 150 },
+                "Electro Swing Noir": { style: "electro swing, vintage jazz samples, electronic beats, dark cabaret vibes, bass drops, playful yet moody", bpm: 128, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 120 },
             },
             "EDM": {
-                "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks, crowd energy", bpm: 128, key: "F major", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords, late night", bpm: 122, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Progressive Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown, hands in the air", bpm: 138, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Melodic Techno": { style: "melodic techno, driving rhythm, atmospheric pads, hypnotic loops, berlin club sound", bpm: 125, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Dubstep Heavy": { style: "heavy dubstep, massive wobble bass, aggressive drops, distorted synths, headbanger", bpm: 140, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Future Bass": { style: "future bass, bright supersaws, pitched vocal chops, colorful chords, uplifting drops", bpm: 150, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Drum & Bass": { style: "liquid drum and bass, rolling breakbeats, deep sub bass, atmospheric pads, smooth and energetic", bpm: 174, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "House Classic": { style: "classic house, piano chords, funky bassline, soulful vocal samples, chicago vibes", bpm: 124, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Hardstyle": { style: "hardstyle, hard kicks, euphoric melodies, reverse bass, intense energy, festival power", bpm: 150, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks, crowd energy", bpm: 128, key: "F major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords, late night", bpm: 122, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Progressive Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown, hands in the air", bpm: 138, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Melodic Techno": { style: "melodic techno, driving rhythm, atmospheric pads, hypnotic loops, berlin club sound", bpm: 125, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Dubstep Heavy": { style: "heavy dubstep, massive wobble bass, aggressive drops, distorted synths, headbanger", bpm: 140, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Future Bass": { style: "future bass, bright supersaws, pitched vocal chops, colorful chords, uplifting drops", bpm: 150, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 90 },
+                "Drum & Bass": { style: "liquid drum and bass, rolling breakbeats, deep sub bass, atmospheric pads, smooth and energetic", bpm: 174, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 150 },
+                "House Classic": { style: "classic house, piano chords, funky bassline, soulful vocal samples, chicago vibes", bpm: 124, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
+                "Hardstyle": { style: "hardstyle, hard kicks, euphoric melodies, reverse bass, intense energy, festival power", bpm: 150, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
             },
             "Pop": {
-                "Summer Hit": { style: "upbeat pop, catchy hooks, bright synths, dance rhythm, radio-friendly, feel-good", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Synth Pop 80s": { style: "80s inspired synth pop, analog synthesizers, gated reverb drums, retro vibes, nostalgic", bpm: 118, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Dance Pop": { style: "dance pop, synth hooks, four-on-the-floor, euphoric chorus, club-ready", bpm: 124, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Indie Pop": { style: "indie pop, jangly guitars, dreamy vocals, lo-fi textures, bittersweet melodies", bpm: 110, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Power Ballad": { style: "power ballad, emotional crescendo, piano driven, soaring vocals, epic chorus", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Tropical Pop": { style: "tropical pop, marimba, steel drums, island vibes, sunny and uplifting, beach party", bpm: 100, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Dark Pop": { style: "dark pop, moody synths, trap-influenced beats, introspective lyrics, atmospheric", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "K-Pop Energy": { style: "k-pop, high energy, synchronized dance beat, colorful synths, hook-heavy, polished production", bpm: 128, key: "B major", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Summer Hit": { style: "upbeat pop, catchy hooks, bright synths, dance rhythm, radio-friendly, feel-good", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Synth Pop 80s": { style: "80s inspired synth pop, analog synthesizers, gated reverb drums, retro vibes, nostalgic", bpm: 118, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Dance Pop": { style: "dance pop, synth hooks, four-on-the-floor, euphoric chorus, club-ready", bpm: 124, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Indie Pop": { style: "indie pop, jangly guitars, dreamy vocals, lo-fi textures, bittersweet melodies", bpm: 110, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Power Ballad": { style: "power ballad, emotional crescendo, piano driven, soaring vocals, epic chorus", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 240 },
+                "Tropical Pop": { style: "tropical pop, marimba, steel drums, island vibes, sunny and uplifting, beach party", bpm: 100, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Dark Pop": { style: "dark pop, moody synths, trap-influenced beats, introspective lyrics, atmospheric", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "K-Pop Energy": { style: "k-pop, high energy, synchronized dance beat, colorful synths, hook-heavy, polished production", bpm: 128, key: "B major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
             },
             "Hip-Hop": {
-                "Trap Soul": { style: "trap soul, smooth 808s, atmospheric pads, melodic, emotional, late night vibes", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Boom Bap Classic": { style: "classic hip-hop, vinyl samples, hard drums, old school, jazzy chops, golden era", bpm: 90, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "UK Drill": { style: "UK drill, sliding 808s, dark atmosphere, aggressive, menacing, grime influenced", bpm: 140, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Lo-Fi Hip-Hop": { style: "lo-fi hip-hop, vinyl crackle, chill beats, jazz samples, study music, relaxing", bpm: 75, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Trap Banger": { style: "trap, hard 808s, hi-hat rolls, aggressive synths, club anthem, heavy bass", bpm: 145, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Phonk": { style: "phonk, memphis rap samples, distorted 808s, cowbell, dark and aggressive, drift vibes", bpm: 130, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Cloud Rap": { style: "cloud rap, dreamy pads, spaced out, ethereal synths, reverb heavy, introspective", bpm: 70, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Afrobeat Rap": { style: "afrobeat hip-hop fusion, african percussion, melodic flow, tropical vibes, danceable", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Trap Soul": { style: "trap soul, smooth 808s, atmospheric pads, melodic, emotional, late night vibes", bpm: 140, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 120 },
+                "Boom Bap Classic": { style: "classic hip-hop, vinyl samples, hard drums, old school, jazzy chops, golden era", bpm: 90, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 120 },
+                "UK Drill": { style: "UK drill, sliding 808s, dark atmosphere, aggressive, menacing, grime influenced", bpm: 140, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Lo-Fi Hip-Hop": { style: "lo-fi hip-hop, vinyl crackle, chill beats, jazz samples, study music, relaxing", bpm: 75, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Trap Banger": { style: "trap, hard 808s, hi-hat rolls, aggressive synths, club anthem, heavy bass", bpm: 145, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Phonk": { style: "phonk, memphis rap samples, distorted 808s, cowbell, dark and aggressive, drift vibes", bpm: 130, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 90 },
+                "Cloud Rap": { style: "cloud rap, dreamy pads, spaced out, ethereal synths, reverb heavy, introspective", bpm: 70, key: "B minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 150 },
+                "Afrobeat Rap": { style: "afrobeat hip-hop fusion, african percussion, melodic flow, tropical vibes, danceable", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
             },
             "Rock": {
-                "Classic Rock": { style: "classic rock, guitar riffs, powerful drums, stadium anthem, 70s vibes", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Indie Rock": { style: "indie rock, jangly guitars, raw production, alternative vibes, lo-fi warmth", bpm: 128, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Heavy Metal": { style: "heavy metal, distorted guitars, double bass drums, aggressive, headbanging, powerful", bpm: 160, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14 },
-                "Progressive Rock": { style: "progressive rock, complex time signatures, synth layers, epic compositions, concept album", bpm: 110, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Punk Rock": { style: "punk rock, fast tempo, raw energy, power chords, rebellious, DIY aesthetic", bpm: 180, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Grunge": { style: "grunge, heavy distortion, melancholic, raw vocals, 90s seattle sound, angsty", bpm: 115, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Post-Rock": { style: "post-rock, ambient textures, crescendo builds, instrumental, cinematic, atmospheric", bpm: 100, key: "C major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Blues Rock": { style: "blues rock, expressive guitar solos, shuffle rhythm, vintage amps, soulful", bpm: 125, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Classic Rock": { style: "classic rock, guitar riffs, powerful drums, stadium anthem, 70s vibes", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Indie Rock": { style: "indie rock, jangly guitars, raw production, alternative vibes, lo-fi warmth", bpm: 128, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Heavy Metal": { style: "heavy metal, distorted guitars, double bass drums, aggressive, headbanging, powerful", bpm: 160, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Progressive Rock": { style: "progressive rock, complex time signatures, synth layers, epic compositions, concept album", bpm: 110, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 300 },
+                "Punk Rock": { style: "punk rock, fast tempo, raw energy, power chords, rebellious, DIY aesthetic", bpm: 180, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 90 },
+                "Grunge": { style: "grunge, heavy distortion, melancholic, raw vocals, 90s seattle sound, angsty", bpm: 115, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Post-Rock": { style: "post-rock, ambient textures, crescendo builds, instrumental, cinematic, atmospheric", bpm: 100, key: "C major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 300 },
+                "Blues Rock": { style: "blues rock, expressive guitar solos, shuffle rhythm, vintage amps, soulful", bpm: 125, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
             },
             "Ambient/Chill": {
-                "Chillwave": { style: "chillwave, hazy synths, nostalgic vibes, lo-fi textures, dreamy, summer sunset", bpm: 95, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11 },
-                "Downtempo": { style: "downtempo, deep bass, trip-hop influenced, moody, late night, atmospheric", bpm: 85, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Ambient Drone": { style: "ambient drone, evolving textures, meditative, vast soundscapes, minimal, hypnotic", bpm: 60, key: "F major", timeSig: "4", inferSteps: 80, guidance: 10 },
-                "Lo-Fi Beats": { style: "lo-fi beats, vinyl crackle, warm piano, relaxing, study music, cozy", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 11 },
-                "Synthwave": { style: "synthwave, 80s retrofuture, neon vibes, analog synths, driving arpeggios, outrun", bpm: 105, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "New Age": { style: "new age, peaceful piano, nature sounds, spiritual, healing, meditation music", bpm: 65, key: "D major", timeSig: "4", inferSteps: 80, guidance: 10 },
-                "Space Ambient": { style: "space ambient, cosmic textures, vast emptiness, science fiction, deep space, ethereal", bpm: 70, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 10 },
-                "Vaporwave": { style: "vaporwave, slowed samples, 80s corporate music, nostalgic, aesthetic, surreal", bpm: 85, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11 },
+                "Chillwave": { style: "chillwave, hazy synths, nostalgic vibes, lo-fi textures, dreamy, summer sunset", bpm: 95, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11, duration: 180 },
+                "Downtempo": { style: "downtempo, deep bass, trip-hop influenced, moody, late night, atmospheric", bpm: 85, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Ambient Drone": { style: "ambient drone, evolving textures, meditative, vast soundscapes, minimal, hypnotic", bpm: 60, key: "F major", timeSig: "4", inferSteps: 80, guidance: 10, duration: 300 },
+                "Lo-Fi Beats": { style: "lo-fi beats, vinyl crackle, warm piano, relaxing, study music, cozy", bpm: 72, key: "G major", timeSig: "4", inferSteps: 80, guidance: 11, duration: 180 },
+                "Synthwave": { style: "synthwave, 80s retrofuture, neon vibes, analog synths, driving arpeggios, outrun", bpm: 105, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "New Age": { style: "new age, peaceful piano, nature sounds, spiritual, healing, meditation music", bpm: 65, key: "D major", timeSig: "4", inferSteps: 80, guidance: 10, duration: 300 },
+                "Space Ambient": { style: "space ambient, cosmic textures, vast emptiness, science fiction, deep space, ethereal", bpm: 70, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 10, duration: 300 },
+                "Vaporwave": { style: "vaporwave, slowed samples, 80s corporate music, nostalgic, aesthetic, surreal", bpm: 85, key: "C major", timeSig: "4", inferSteps: 80, guidance: 11, duration: 180 },
             },
             "Jazz/Fusion": {
-                "Smooth Jazz": { style: "smooth jazz, saxophone lead, electric piano, relaxing, soft groove, evening vibes", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Bebop": { style: "bebop jazz, fast tempos, complex harmonies, virtuoso improvisation, swing rhythm", bpm: 180, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Jazz Fusion": { style: "jazz fusion, electric guitar, funky bass, complex rhythms, 70s miles davis influence", bpm: 115, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Neo-Soul": { style: "neo-soul, organic instruments, warm production, soulful, erykah badu vibes, smooth", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Lo-Fi Jazz": { style: "lo-fi jazz, vinyl crackle, mellow piano, chill vibes, coffee shop, relaxed", bpm: 75, key: "D major", timeSig: "4", inferSteps: 80, guidance: 11 },
-                "Big Band Swing": { style: "big band swing, brass section, energetic, dance hall, 1940s, jazzy", bpm: 140, key: "B major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Acid Jazz": { style: "acid jazz, funky grooves, electronic elements, dancefloor jazz, urban", bpm: 110, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Latin Jazz": { style: "latin jazz, afro-cuban rhythms, congas, vibrant, salsa influenced, tropical", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13 },
+                "Smooth Jazz": { style: "smooth jazz, saxophone lead, electric piano, relaxing, soft groove, evening vibes", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Bebop": { style: "bebop jazz, fast tempos, complex harmonies, virtuoso improvisation, swing rhythm", bpm: 180, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Jazz Fusion": { style: "jazz fusion, electric guitar, funky bass, complex rhythms, 70s miles davis influence", bpm: 115, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 240 },
+                "Neo-Soul": { style: "neo-soul, organic instruments, warm production, soulful, erykah badu vibes, smooth", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Lo-Fi Jazz": { style: "lo-fi jazz, vinyl crackle, mellow piano, chill vibes, coffee shop, relaxed", bpm: 75, key: "D major", timeSig: "4", inferSteps: 80, guidance: 11, duration: 180 },
+                "Big Band Swing": { style: "big band swing, brass section, energetic, dance hall, 1940s, jazzy", bpm: 140, key: "B major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
+                "Acid Jazz": { style: "acid jazz, funky grooves, electronic elements, dancefloor jazz, urban", bpm: 110, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Latin Jazz": { style: "latin jazz, afro-cuban rhythms, congas, vibrant, salsa influenced, tropical", bpm: 120, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
             },
             "Country/Blues": {
-                "Delta Blues": { style: "delta blues, raw slide guitar, acoustic, mississippi roots, emotional, authentic, robert johnson inspired", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Nashville Modern": { style: "modern country, polished production, acoustic guitar, storytelling, radio-friendly, americana", bpm: 96, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Southern Rock": { style: "southern rock, driving guitars, country twang, energetic, lynyrd skynyrd vibes, roadhouse", bpm: 130, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Bluegrass": { style: "bluegrass, fast banjo picking, fiddle, acoustic, appalachian, high energy, folk", bpm: 140, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Country Ballad": { style: "country ballad, heartfelt, pedal steel guitar, emotional vocals, slow and tender", bpm: 72, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Chicago Blues": { style: "chicago blues, electric guitar, harmonica, urban blues, bb king style, soulful", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Outlaw Country": { style: "outlaw country, gritty, rebellious, willie nelson vibes, raw, acoustic and electric mix", bpm: 105, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Texas Blues": { style: "texas blues, stevie ray vaughan inspired, electric guitar hero, shuffle rhythm, powerful", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14 },
+                "Delta Blues": { style: "delta blues, raw slide guitar, acoustic, mississippi roots, emotional, authentic, robert johnson inspired", bpm: 80, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Nashville Modern": { style: "modern country, polished production, acoustic guitar, storytelling, radio-friendly, americana", bpm: 96, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Southern Rock": { style: "southern rock, driving guitars, country twang, energetic, lynyrd skynyrd vibes, roadhouse", bpm: 130, key: "A major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Bluegrass": { style: "bluegrass, fast banjo picking, fiddle, acoustic, appalachian, high energy, folk", bpm: 140, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 150 },
+                "Country Ballad": { style: "country ballad, heartfelt, pedal steel guitar, emotional vocals, slow and tender", bpm: 72, key: "D major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 240 },
+                "Chicago Blues": { style: "chicago blues, electric guitar, harmonica, urban blues, bb king style, soulful", bpm: 95, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Outlaw Country": { style: "outlaw country, gritty, rebellious, willie nelson vibes, raw, acoustic and electric mix", bpm: 105, key: "E major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Texas Blues": { style: "texas blues, stevie ray vaughan inspired, electric guitar hero, shuffle rhythm, powerful", bpm: 120, key: "E major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
             },
             "World": {
-                "Reggaeton": { style: "reggaeton, dembow rhythm, urban latin, party vibes, club banger, spanish", bpm: 95, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Latin Pop": { style: "latin pop, tropical influences, romantic, danceable, summer hit, spanish", bpm: 110, key: "A major", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Afrobeat": { style: "afrobeat, fela kuti inspired, polyrhythmic drums, horns, groovy, african funk", bpm: 110, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Bollywood": { style: "bollywood, indian classical fusion, dramatic, filmi music, strings, tabla", bpm: 120, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Middle Eastern": { style: "middle eastern, arabic scales, oud, darbuka drums, exotic, mystical, desert vibes", bpm: 100, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13 },
-                "Celtic": { style: "celtic, irish fiddle, acoustic guitar, folk, pub music, jig, lively", bpm: 130, key: "D major", timeSig: "6", inferSteps: 80, guidance: 12 },
-                "Japanese": { style: "japanese traditional fusion, koto, shakuhachi flute, zen, peaceful, minimalist", bpm: 75, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 12 },
-                "Bossa Nova": { style: "bossa nova, brazilian jazz, acoustic guitar, smooth, rio de janeiro, sophisticated", bpm: 120, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12 },
+                "Reggaeton": { style: "reggaeton, dembow rhythm, urban latin, party vibes, club banger, spanish", bpm: 95, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Latin Pop": { style: "latin pop, tropical influences, romantic, danceable, summer hit, spanish", bpm: 110, key: "A major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Afrobeat": { style: "afrobeat, fela kuti inspired, polyrhythmic drums, horns, groovy, african funk", bpm: 110, key: "G major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 240 },
+                "Bollywood": { style: "bollywood, indian classical fusion, dramatic, filmi music, strings, tabla", bpm: 120, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Middle Eastern": { style: "middle eastern, arabic scales, oud, darbuka drums, exotic, mystical, desert vibes", bpm: 100, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Celtic": { style: "celtic, irish fiddle, acoustic guitar, folk, pub music, jig, lively", bpm: 130, key: "D major", timeSig: "6", inferSteps: 80, guidance: 12, duration: 150 },
+                "Japanese": { style: "japanese traditional fusion, koto, shakuhachi flute, zen, peaceful, minimalist", bpm: 75, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Bossa Nova": { style: "bossa nova, brazilian jazz, acoustic guitar, smooth, rio de janeiro, sophisticated", bpm: 120, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
             },
+            "Rhythm Lab": {
+                "Swing Bounce": { style: "swinging rhythm, shuffled grooves, walking bass feel, jazzy timing, hip-hop bounce, syncopated hi-hats", bpm: 95, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 120 },
+                "Polyrhythm Fusion": { style: "polyrhythmic drums, afrobeat influenced, layered percussion, interlocking cross-rhythms, african funk, hypnotic grooves", bpm: 110, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
+                "Glitch Storm": { style: "chaotic glitch beats, stuttering textures, fragmented rhythms, IDM-style beat deconstruction, digital artifacts, experimental electronic", bpm: 135, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Tribal Hypnotic": { style: "hypnotic tribal drums, ostinato rhythm, repetitive percussion, trance-inducing beat, shamanic, world fusion", bpm: 115, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 240 },
+                "Broken Beat": { style: "broken beat, syncopated rhythms, off-beat accents, nu-jazz influenced, shuffled grooves, underground club", bpm: 130, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
+                "Odd Time Groove": { style: "progressive rhythms, complex time signature transitions, math rock influenced, asymmetrical beats, technical precision", bpm: 120, key: "B minor", timeSig: "3", inferSteps: 80, guidance: 14, duration: 180 },
+                "Humanized Pocket": { style: "organic groove, humanized timing, live performance feel, expressive dynamics, imperfect timing, soulful pocket", bpm: 88, key: "F major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Syncopated Chaos": { style: "heavy syncopation, unexpected rhythmic hits, off-beat emphasis, experimental groove, avant-garde percussion", bpm: 128, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 120 },
+            },
+        };
+
+        // Rhythm Modifiers - prompt injection for advanced beat timing control
+        const RHYTHM_MODIFIERS = {
+            swing: {
+                label: "Swing/Shuffle",
+                icon: "🎷",
+                levels: ["subtle swing feel", "swinging rhythm, shuffled grooves", "heavy swing groove, jazzy timing"]
+            },
+            polyrhythm: {
+                label: "Polyrhythm",
+                icon: "🥁",
+                levels: ["hint of polyrhythmic layering", "polyrhythmic drums, layered percussion", "complex polyrhythms, interlocking cross-rhythms, african percussion"]
+            },
+            syncopation: {
+                label: "Syncopation",
+                icon: "⚡",
+                levels: ["subtle syncopation", "syncopated rhythms, off-beat accents", "heavy syncopated accents, unexpected rhythmic hits"]
+            },
+            glitch: {
+                label: "Glitch/Stutter",
+                icon: "💥",
+                levels: ["subtle digital artifacts", "glitchy beats, stuttering textures", "chaotic glitch, fragmented rhythms, IDM-style beat deconstruction"]
+            },
+            humanize: {
+                label: "Humanize",
+                icon: "🎹",
+                levels: ["natural feel", "humanized groove, organic timing", "live performance feel, expressive dynamics, imperfect timing"]
+            },
+            straight: {
+                label: "Straight/Locked",
+                icon: "🔒",
+                levels: ["steady pulse", "locked groove, straight time", "metronomic precision, mechanical beat, quantized"]
+            }
         };
 
         // =====================================================================
@@ -1940,13 +2690,131 @@
         let selectedPreset = null;
 
 
+        // Rhythm Modifiers Functions
+        function initRhythmModifiers() {
+            const grid = document.getElementById('rhythm-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            Object.entries(RHYTHM_MODIFIERS).forEach(([key, mod]) => {
+                const toggle = document.createElement('label');
+                toggle.className = 'rhythm-toggle';
+                toggle.innerHTML = `
+                    <input type="checkbox" id="rhythm-${key}" onchange="updateRhythmPreview()">
+                    <span class="rhythm-toggle-icon">${mod.icon}</span>
+                    <span class="rhythm-toggle-label">${mod.label}</span>
+                `;
+                toggle.onclick = (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const cb = toggle.querySelector('input');
+                        cb.checked = !cb.checked;
+                        updateRhythmPreview();
+                    }
+                    toggle.classList.toggle('active', toggle.querySelector('input').checked);
+                };
+                grid.appendChild(toggle);
+            });
+
+            // Intensity slider
+            const intensitySlider = document.getElementById('rhythm-intensity');
+            if (intensitySlider) {
+                intensitySlider.oninput = () => {
+                    const labels = ['Subtle', 'Moderate', 'Heavy'];
+                    document.getElementById('rhythm-intensity-value').textContent = labels[intensitySlider.value];
+                    updateRhythmPreview();
+                };
+            }
+        }
+
+        function updateRhythmPreview() {
+            const preview = document.getElementById('rhythm-preview');
+            const previewText = document.getElementById('rhythm-preview-text');
+            const modifiers = buildRhythmModifiers();
+
+            if (modifiers) {
+                previewText.textContent = modifiers;
+                preview.classList.add('visible');
+            } else {
+                preview.classList.remove('visible');
+            }
+
+            // Also update the final prompt preview
+            updateFinalPrompt();
+        }
+
+        function updateFinalPrompt() {
+            const caption = document.getElementById('caption')?.value || '';
+            const vocalPersonaEl = document.getElementById('vocal-persona');
+            const vocalPersona = vocalPersonaEl ? vocalPersonaEl.value : '';
+            const rhythmModifiers = buildRhythmModifiers();
+            const finalPromptEl = document.getElementById('final-prompt-text');
+
+            if (!finalPromptEl) return;
+
+            // Show placeholder only if nothing is set
+            if (!caption && !vocalPersona && !rhythmModifiers) {
+                finalPromptEl.innerHTML = '<em style="color: var(--text-muted);">Enter a style description to see the final prompt...</em>';
+                return;
+            }
+
+            // Build display - start with caption
+            let display = '';
+            if (caption) {
+                display = caption;
+            }
+            if (vocalPersona) {
+                if (display) display += ', ';
+                display += `<span style="color: #ff9f43; font-weight: 500;">${vocalPersona}</span>`;
+            }
+            if (rhythmModifiers) {
+                if (display) display += ', ';
+                display += `<span style="color: var(--accent); font-weight: 500;">${rhythmModifiers}</span>`;
+            }
+
+            finalPromptEl.innerHTML = display;
+        }
+
+        function toggleFinalPrompt() {
+            const content = document.getElementById('final-prompt-content');
+            if (content) {
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
+        function buildRhythmModifiers() {
+            const intensity = parseInt(document.getElementById('rhythm-intensity')?.value || 1);
+            const selected = [];
+
+            Object.entries(RHYTHM_MODIFIERS).forEach(([key, mod]) => {
+                const cb = document.getElementById(`rhythm-${key}`);
+                if (cb?.checked) {
+                    selected.push(mod.levels[intensity]);
+                }
+            });
+
+            return selected.join(', ');
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             initQuickPresets();
             initPresetTabs();
             initSliders();
             initNavigation();
+            initRhythmModifiers(); // Initialize rhythm modifiers panel
             loadAdminPageFields(); // Load saved admin settings
+
+            // Caption textarea listener for final prompt preview
+            const captionTextarea = document.getElementById('caption');
+            if (captionTextarea) {
+                captionTextarea.addEventListener('input', updateFinalPrompt);
+            }
+
+            // Vocal persona dropdown listener for final prompt preview
+            const vocalPersonaSelect = document.getElementById('vocal-persona');
+            if (vocalPersonaSelect) {
+                vocalPersonaSelect.addEventListener('change', updateFinalPrompt);
+            }
 
             // Apply saved preset on Create page
             const currentPreset = adminSettings.currentPreset || 'balanced';
@@ -2038,9 +2906,10 @@
             const card = document.createElement('div');
             card.className = 'preset-card' + (selectedPreset === name ? ' selected' : '');
             const keyDisplay = data.key ? ` • ${data.key}` : '';
+            const durationDisplay = data.duration ? ` • ${data.duration}s` : '';
             card.innerHTML = `
                 <div class="preset-name">${name}</div>
-                <div class="preset-bpm">🎵 ${data.bpm} BPM${keyDisplay}</div>
+                <div class="preset-bpm">🎵 ${data.bpm} BPM${keyDisplay}${durationDisplay}</div>
             `;
             card.onclick = () => selectPreset(name, data);
             return card;
@@ -2059,6 +2928,12 @@
             }
             if (data.timeSig) {
                 document.getElementById('time-signature').value = data.timeSig;
+            }
+
+            // Apply Duration (if preset has one)
+            if (data.duration) {
+                document.getElementById('duration').value = data.duration;
+                document.getElementById('duration-value').textContent = data.duration + 's';
             }
 
             // Apply Generation Settings
@@ -2186,6 +3061,8 @@
             const title = document.getElementById('title').value;
             const tags = document.getElementById('tags').value;
             const caption = document.getElementById('caption').value;
+            const vocalPersona = document.getElementById('vocal-persona')?.value || '';
+            const rhythmModifiers = buildRhythmModifiers();
             const lyrics = document.getElementById('lyrics').value;
             const instrumental = document.getElementById('instrumental').checked;
             const duration = parseInt(document.getElementById('duration').value);
@@ -2198,7 +3075,13 @@
             const guidanceScale = parseFloat(document.getElementById('guidance-scale').value);
             const seed = parseInt(document.getElementById('seed').value);
 
+            // Build the final prompt with modifiers
+            let finalPrompt = caption;
+            if (vocalPersona) finalPrompt += `, ${vocalPersona}`;
+            if (rhythmModifiers) finalPrompt += `, ${rhythmModifiers}`;
+
             // Setup UI for generation
+            const isThinkingEnabled = adminSettings.llm?.thinking === true;
             btn.disabled = true;
             btn.textContent = '⏳ Generating...';
             status.textContent = 'Starting generation...';
@@ -2206,7 +3089,17 @@
             resultsSection.classList.add('hidden');
             progressContainer.classList.remove('hidden');
             progressBar.style.width = '0%';
-            progressText.textContent = 'Initializing...';
+
+            // Show clear thinking indicator if enabled
+            if (isThinkingEnabled) {
+                progressText.innerHTML = '🧠 <strong>AI Thinking...</strong> Planning your track (usually 2-5 minutes)';
+                progressBar.style.background = 'linear-gradient(90deg, #9b59b6, #8e44ad, #9b59b6)';
+                progressBar.style.backgroundSize = '200% 100%';
+                progressBar.style.animation = 'shimmer 1.5s infinite';
+                progressBar.style.width = '100%';
+            } else {
+                progressText.textContent = 'Initializing...';
+            }
 
             // Setup cancel controller
             generationAbortController = new AbortController();
@@ -2219,7 +3112,7 @@
                     body: JSON.stringify({
                         title: title,
                         tags: tags,
-                        prompt: caption,
+                        prompt: finalPrompt,
                         lyrics: instrumental ? '[Instrumental]' : lyrics,
                         duration: duration,
                         batch_size: batch,
@@ -2233,17 +3126,38 @@
                         manual_seeds: seed === -1 ? Array.from({ length: batch }, () => Math.floor(Math.random() * 1000000)) : [seed],
                         // Admin settings integration
                         shift: adminSettings.dit?.shift || 3.0,
-                        thinking: adminSettings.llm?.thinking !== false,
+                        thinking: false, // Disabled - causes crash when LLM not loaded
                         lm_cfg_scale: adminSettings.llm?.lm_cfg_scale || 3.5,
                         lm_temperature: adminSettings.llm?.lm_temperature || 0.85,
                         infer_method: adminSettings.dit?.infer_method || 'ode',
                         use_adg: adminSettings.dit?.use_adg || false,
+                        audio_format: document.getElementById('audio-format').value,
                     }),
                     signal: generationAbortController.signal,
                 });
 
                 const data = await response.json();
-                if (data.code !== 200) throw new Error(data.error || 'Generation failed');
+
+                // Handle immediate success (code=1 with audio_paths) - no polling needed
+                if (data.code === 1 && data.data?.audio_paths) {
+                    // Reset progress bar style (in case thinking mode was enabled)
+                    progressBar.style.background = 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))';
+                    progressBar.style.animation = 'none';
+                    progressBar.style.width = '100%';
+                    progressText.textContent = 'Generation complete!';
+                    displayResults(data.data.audio_paths);
+                    status.textContent = '✅ Music generated successfully!';
+                    status.className = 'status';
+                    // Reset UI state
+                    btn.disabled = false;
+                    btn.textContent = '🎵 Generate';
+                    isGenerating = false;
+                    setTimeout(() => progressContainer.classList.add('hidden'), 1000);
+                    return;
+                }
+
+                // Legacy polling flow (code=200 means task queued)
+                if (data.code !== 200 && data.code !== 0) throw new Error(data.error || 'Generation failed');
 
                 const taskId = data.data?.taskId || data.data?.task_id;
 
@@ -2336,7 +3250,9 @@
             audioItems.forEach((item, i) => {
                 // Handle both {file, url} objects and plain path strings
                 const path = typeof item === 'string' ? item : (item.file || item.path || item.url);
-                const url = `${API_BASE}/api/v1/audio?path=${encodeURIComponent(path)}`;
+                // audio_paths from API are already complete URLs like /api/library/.../audio/file.mp3
+                // So we just need to prepend the base URL
+                const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
                 const card = document.createElement('div');
                 card.className = 'result-card';
                 card.innerHTML = `
@@ -2435,9 +3351,15 @@
 
             title.textContent = track.title || 'Untitled Track';
 
+            // Create safe filename from track title
+            const safeTitle = (track.title || 'track').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+
             const audioList = (track.audio_urls || []).map((url, i) => `
                 <div style="margin-bottom: 1rem;">
-                    <div style="font-size: 0.9rem; margin-bottom: 0.25rem;">Variation ${i + 1}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                        <span style="font-size: 0.9rem;">Variation ${i + 1}</span>
+                        <a href="${API_BASE}${url}" download="${safeTitle}-v${i + 1}.mp3" style="font-size: 0.8rem; color: var(--accent-primary); text-decoration: none;">⬇️ Download</a>
+                    </div>
                     <audio controls style="width: 100%;" src="${API_BASE}${url}"></audio>
                 </div>
             `).join('');
@@ -2514,6 +3436,474 @@
             } catch (error) {
                 alert('Error deleting: ' + error.message);
             }
+        }
+
+        // ============================================
+        // REMIX LAB FUNCTIONALITY
+        // ============================================
+
+        let remixAudioFile = null;
+        let remixGenerationAbortController = null;
+        let isRemixGenerating = false;
+
+        // File upload handlers
+        function handleRemixFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                setRemixFile(file);
+            }
+        }
+
+        function setRemixFile(file) {
+            remixAudioFile = file;
+            document.getElementById('remix-filename').textContent = file.name;
+            document.getElementById('remix-file-info').classList.add('has-file');
+        }
+
+        function clearRemixFile(event) {
+            event.stopPropagation();
+            remixAudioFile = null;
+            document.getElementById('remix-audio-input').value = '';
+            document.getElementById('remix-file-info').classList.remove('has-file');
+        }
+
+        // Drag and drop for Remix Lab
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropzone = document.getElementById('remix-dropzone');
+            if (dropzone) {
+                dropzone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    dropzone.classList.add('dragover');
+                });
+                dropzone.addEventListener('dragleave', () => {
+                    dropzone.classList.remove('dragover');
+                });
+                dropzone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropzone.classList.remove('dragover');
+                    const file = e.dataTransfer.files[0];
+                    if (file && file.type.startsWith('audio/')) {
+                        setRemixFile(file);
+                    }
+                });
+            }
+
+            // Style chips click handlers
+            const styleChips = document.getElementById('remix-style-chips');
+            if (styleChips) {
+                styleChips.querySelectorAll('.style-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        // Toggle selection
+                        styleChips.querySelectorAll('.style-chip').forEach(c => c.classList.remove('selected'));
+                        chip.classList.add('selected');
+                        // Set caption
+                        document.getElementById('remix-caption').value = chip.dataset.style;
+                    });
+                });
+            }
+
+            // Remix sliders
+            const remixSteps = document.getElementById('remix-steps');
+            const remixBatch = document.getElementById('remix-batch');
+            const remixStrength = document.getElementById('remix-strength');
+
+            if (remixSteps) {
+                remixSteps.oninput = (e) => {
+                    document.getElementById('remix-steps-value').textContent = e.target.value;
+                };
+            }
+            if (remixBatch) {
+                remixBatch.oninput = (e) => {
+                    document.getElementById('remix-batch-value').textContent = e.target.value;
+                };
+            }
+            if (remixStrength) {
+                remixStrength.oninput = (e) => {
+                    const val = parseFloat(e.target.value);
+                    document.getElementById('remix-strength-value').textContent = val.toFixed(1);
+                    // Update hint text
+                    const hint = document.getElementById('remix-strength-hint');
+                    if (val <= 0.3) {
+                        hint.textContent = 'Loose - creative reinterpretation, may diverge from original';
+                    } else if (val <= 0.6) {
+                        hint.textContent = 'Moderate - keeps core melody with style flexibility';
+                    } else if (val <= 0.8) {
+                        hint.textContent = 'Balanced - keeps melody while allowing style changes';
+                    } else {
+                        hint.textContent = 'Tight - closely follows original structure and timing';
+                    }
+                };
+            }
+        });
+
+        // Generate Remix
+        async function generateRemix() {
+            if (!remixAudioFile) {
+                const status = document.getElementById('remix-status');
+                status.textContent = '❌ Please upload an audio file first';
+                status.className = 'status error';
+                return;
+            }
+
+            const caption = document.getElementById('remix-caption').value;
+            if (!caption.trim()) {
+                const status = document.getElementById('remix-status');
+                status.textContent = '❌ Please select a style or enter a description';
+                status.className = 'status error';
+                return;
+            }
+
+            const btn = document.getElementById('remix-generate-btn');
+            const status = document.getElementById('remix-status');
+            const progressContainer = document.getElementById('remix-progress-container');
+            const progressBar = document.getElementById('remix-progress-bar');
+            const progressText = document.getElementById('remix-progress-text');
+            const resultsSection = document.getElementById('remix-results-section');
+
+            const strength = parseFloat(document.getElementById('remix-strength').value);
+            const steps = parseInt(document.getElementById('remix-steps').value);
+            const batch = parseInt(document.getElementById('remix-batch').value);
+            const lyrics = document.getElementById('remix-lyrics').value;
+
+            // UI setup
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating Remix...';
+            status.textContent = 'Uploading audio file...';
+            status.className = 'status generating';
+            resultsSection.classList.add('hidden');
+            progressContainer.classList.remove('hidden');
+            progressBar.style.width = '0%';
+
+            remixGenerationAbortController = new AbortController();
+            isRemixGenerating = true;
+
+            try {
+                // Create FormData for file upload
+                const formData = new FormData();
+                formData.append('src_audio', remixAudioFile);
+                formData.append('caption', caption);
+                formData.append('lyrics', lyrics || '[Instrumental]');
+                formData.append('task_type', 'cover');
+                formData.append('audio_cover_strength', strength);
+                formData.append('inference_steps', steps);
+                formData.append('batch_size', batch);
+                formData.append('thinking', 'true');
+
+                progressText.textContent = 'Starting remix generation...';
+                progressBar.style.width = '10%';
+
+                const response = await fetch(`${API_BASE}/api/release_task`, {
+                    method: 'POST',
+                    body: formData,
+                    signal: remixGenerationAbortController.signal
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.code !== 0 && data.code !== 1) {
+                    throw new Error(data.error || 'Generation failed');
+                }
+
+                // API now returns results synchronously with code=1
+                if (data.code === 1 && data.data?.audio_paths) {
+                    progressBar.style.width = '100%';
+                    progressText.textContent = 'Remix complete!';
+                    displayRemixResults(data.data);
+                    status.textContent = '✅ Remix generated successfully!';
+                    status.className = 'status';
+                } else {
+                    // Fallback: poll if still processing (code=0)
+                    const taskId = data.data?.task_id;
+                    if (!taskId) {
+                        throw new Error('No task ID returned');
+                    }
+
+                    progressText.textContent = 'Processing remix...';
+                    progressBar.style.width = '30%';
+
+                    // Poll for results
+                    let attempts = 0;
+                    const maxAttempts = 300;
+
+                    while (attempts < maxAttempts && isRemixGenerating) {
+                        await new Promise(r => setTimeout(r, 1000));
+                        attempts++;
+
+                        const progress = Math.min(30 + (attempts / maxAttempts) * 60, 90);
+                        progressBar.style.width = progress + '%';
+                        progressText.textContent = `Processing remix... (${attempts}s)`;
+
+                        const pollResponse = await fetch(`${API_BASE}/api/query_result?task_id=${taskId}`, {
+                            signal: remixGenerationAbortController.signal
+                        });
+                        const pollData = await pollResponse.json();
+
+                        if (pollData.code === 1) {
+                            progressBar.style.width = '100%';
+                            progressText.textContent = 'Remix complete!';
+                            displayRemixResults(pollData.data);
+                            status.textContent = '✅ Remix generated successfully!';
+                            status.className = 'status';
+                            break;
+                        } else if (pollData.code === 2) {
+                            throw new Error(pollData.error || 'Generation failed');
+                        }
+                    }
+
+                    if (attempts >= maxAttempts) {
+                        throw new Error('Generation timed out');
+                    }
+                }
+
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    status.textContent = '⚠️ Generation cancelled';
+                } else {
+                    status.textContent = `❌ Error: ${error.message}`;
+                }
+                status.className = 'status error';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔧 Generate Remix';
+                progressContainer.classList.add('hidden');
+                isRemixGenerating = false;
+            }
+        }
+
+        function displayRemixResults(data) {
+            const resultsSection = document.getElementById('remix-results-section');
+            const resultsGrid = document.getElementById('remix-results');
+
+            resultsSection.classList.remove('hidden');
+            resultsGrid.innerHTML = '';
+
+            const audioPaths = data.audio_paths || [];
+
+            audioPaths.forEach((path, i) => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="result-header">
+                        <span class="result-title">Remix ${i + 1}</span>
+                        <span class="result-badge">NEW</span>
+                    </div>
+                    <audio controls src="${API_BASE}${path}" style="width: 100%;"></audio>
+                    <div class="result-actions">
+                        <button onclick="window.open('${API_BASE}${path}', '_blank')">📥 Download</button>
+                    </div>
+                `;
+                resultsGrid.appendChild(card);
+            });
+
+            // Exclusive playback
+            resultsGrid.querySelectorAll('audio').forEach(audio => {
+                audio.addEventListener('play', () => {
+                    resultsGrid.querySelectorAll('audio').forEach(a => {
+                        if (a !== audio) a.pause();
+                    });
+                });
+            });
+        }
+
+        function cancelRemixGeneration() {
+            if (remixGenerationAbortController) {
+                remixGenerationAbortController.abort();
+            }
+            isRemixGenerating = false;
+        }
+
+        // =====================================================================
+        // Stem Ripper Functions
+        // =====================================================================
+
+        let stemsAudioFile = null;
+        let stemsSelectedTrack = 'vocals';
+        let isStemsGenerating = false;
+        let stemsGenerationAbortController = null;
+
+        function handleStemsFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                stemsAudioFile = file;
+                document.getElementById('stems-filename').textContent = file.name;
+                document.getElementById('stems-file-info').classList.add('visible');
+            }
+        }
+
+        function clearStemsFile(event) {
+            event.stopPropagation();
+            stemsAudioFile = null;
+            document.getElementById('stems-audio-input').value = '';
+            document.getElementById('stems-file-info').classList.remove('visible');
+        }
+
+        // Track chip selection
+        document.getElementById('stems-track-chips')?.querySelectorAll('.style-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.getElementById('stems-track-chips').querySelectorAll('.style-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                stemsSelectedTrack = chip.dataset.track;
+                document.getElementById('stems-selected-track').textContent = stemsSelectedTrack;
+            });
+        });
+
+        // Sliders
+        document.getElementById('stems-steps')?.addEventListener('input', (e) => {
+            document.getElementById('stems-steps-value').textContent = e.target.value;
+        });
+        document.getElementById('stems-batch')?.addEventListener('input', (e) => {
+            document.getElementById('stems-batch-value').textContent = e.target.value;
+        });
+
+        // Drag and drop for Stem Ripper
+        const stemsDropzone = document.getElementById('stems-dropzone');
+        if (stemsDropzone) {
+            stemsDropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                stemsDropzone.style.borderColor = 'var(--accent-primary)';
+            });
+            stemsDropzone.addEventListener('dragleave', () => {
+                stemsDropzone.style.borderColor = '';
+            });
+            stemsDropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                stemsDropzone.style.borderColor = '';
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('audio/')) {
+                    stemsAudioFile = file;
+                    document.getElementById('stems-filename').textContent = file.name;
+                    document.getElementById('stems-file-info').classList.add('visible');
+                }
+            });
+        }
+
+        async function generateStems() {
+            if (!stemsAudioFile) {
+                document.getElementById('stems-status').textContent = '❌ Please upload an audio file first';
+                document.getElementById('stems-status').className = 'status error';
+                return;
+            }
+
+            const btn = document.getElementById('stems-generate-btn');
+            const status = document.getElementById('stems-status');
+            const progressContainer = document.getElementById('stems-progress');
+            const progressBar = document.getElementById('stems-progress-bar');
+            const progressText = document.getElementById('stems-progress-text');
+            const resultsSection = document.getElementById('stems-results-section');
+
+            const steps = parseInt(document.getElementById('stems-steps').value);
+            const batch = parseInt(document.getElementById('stems-batch').value);
+
+            // UI setup
+            btn.disabled = true;
+            btn.textContent = '⏳ Extracting...';
+            status.textContent = 'Uploading audio file...';
+            status.className = 'status generating';
+            resultsSection.classList.add('hidden');
+            progressContainer.classList.remove('hidden');
+            progressBar.style.width = '0%';
+
+            stemsGenerationAbortController = new AbortController();
+            isStemsGenerating = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('src_audio', stemsAudioFile);
+                formData.append('task_type', 'extract');
+                // Build instruction in exact format expected by backend
+                formData.append('instruction', `Extract the ${stemsSelectedTrack.toUpperCase()} track from the audio:`);
+                formData.append('inference_steps', steps);
+                formData.append('batch_size', batch);
+                formData.append('caption', `Isolated ${stemsSelectedTrack} stem`);
+                formData.append('lyrics', '[Instrumental]');
+
+                progressText.textContent = `Extracting ${stemsSelectedTrack}...`;
+                progressBar.style.width = '10%';
+
+                const response = await fetch(`${API_BASE}/api/release_task`, {
+                    method: 'POST',
+                    body: formData,
+                    signal: stemsGenerationAbortController.signal
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.code !== 0 && data.code !== 1) {
+                    throw new Error(data.error || 'Extraction failed');
+                }
+
+                if (data.code === 1 && data.data?.audio_paths) {
+                    progressBar.style.width = '100%';
+                    progressText.textContent = 'Extraction complete!';
+                    displayStemsResults(data.data);
+                    status.textContent = '✅ Stem extracted successfully!';
+                    status.className = 'status';
+                } else {
+                    throw new Error('Unexpected response format');
+                }
+
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    status.textContent = '⚠️ Extraction cancelled';
+                } else {
+                    status.textContent = `❌ Error: ${error.message}`;
+                }
+                status.className = 'status error';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '✂️ Extract Stem';
+                isStemsGenerating = false;
+            }
+        }
+
+        function displayStemsResults(data) {
+            const resultsSection = document.getElementById('stems-results-section');
+            const resultsGrid = document.getElementById('stems-results');
+
+            resultsSection.classList.remove('hidden');
+            resultsGrid.innerHTML = '';
+
+            const audioPaths = data.audio_paths || [];
+
+            audioPaths.forEach((path, i) => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="result-header">
+                        <span class="result-title">${stemsSelectedTrack.charAt(0).toUpperCase() + stemsSelectedTrack.slice(1)} ${i + 1}</span>
+                        <span class="result-badge">EXTRACTED</span>
+                    </div>
+                    <audio controls src="${API_BASE}${path}" style="width: 100%;"></audio>
+                    <div class="result-actions">
+                        <button onclick="window.open('${API_BASE}${path}', '_blank')">📥 Download</button>
+                    </div>
+                `;
+                resultsGrid.appendChild(card);
+            });
+
+            // Exclusive playback
+            resultsGrid.querySelectorAll('audio').forEach(audio => {
+                audio.addEventListener('play', () => {
+                    resultsGrid.querySelectorAll('audio').forEach(a => {
+                        if (a !== audio) a.pause();
+                    });
+                });
+            });
+        }
+
+        function cancelStemsGeneration() {
+            if (stemsGenerationAbortController) {
+                stemsGenerationAbortController.abort();
+            }
+            isStemsGenerating = false;
         }
 
         // Load library when navigating to Library page

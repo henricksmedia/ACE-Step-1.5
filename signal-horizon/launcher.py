@@ -32,14 +32,21 @@ def main():
     parser.add_argument("--port", type=int, default=8372)  # SH in ASCII = 83+72
     parser.add_argument("--init_service", type=str, default="false")
     parser.add_argument("--skip_llm", type=str, default="false", help="Skip LLM loading for fast dev mode")
+    parser.add_argument("--model", type=str, default="turbo", choices=["turbo", "base"],
+                        help="Model to load: turbo (fast) or base (extract/lego/complete)")
     args = parser.parse_args()
     
     init_service = args.init_service.lower() == "true"
     skip_llm = args.skip_llm.lower() == "true"
     
+    # Determine model config path
+    model_config = "acestep-v15-base" if args.model == "base" else "acestep-v15-turbo"
+    model_display = "Base (full features)" if args.model == "base" else "Turbo (fast)"
+    
     print("\n" + "="*60)
     print("  ✧ SIGNAL HORIZON ✧")
     print("  AI-Powered Music Generation")
+    print(f"  Model: {model_display}")
     print("="*60)
     
     # Import ACE-Step components
@@ -68,10 +75,10 @@ def main():
     
     # Initialize models if requested
     if init_service:
-        print("\nLoading AI models...")
+        print(f"\nLoading {model_display} model...")
         dit_handler.initialize_service(
             project_root=str(PROJECT_ROOT),
-            config_path="acestep-v15-turbo",
+            config_path=model_config,
             device="auto",
             use_flash_attention=False,
             offload_to_cpu=gpu_cfg.gpu_memory_gb < 16,
@@ -128,15 +135,19 @@ def main():
             return FileResponse(html_path)
         return HTMLResponse("<h1>Signal Horizon</h1><p>index.html not found</p>")
     
-    # Create Gradio interface for advanced features
-    init_params = {'init_llm': False, 'device': 'auto'} if init_service else None
-    demo = create_gradio_interface(
-        dit_handler, llm_handler, dataset_handler,
-        init_params=init_params, language='en'
-    )
-    
-    # Mount Gradio at /gradio
-    app = gr.mount_gradio_app(app, demo, path="/gradio")
+    # Try to create Gradio interface for advanced features (optional)
+    try:
+        init_params = {'init_llm': False, 'device': 'auto'} if init_service else None
+        demo = create_gradio_interface(
+            dit_handler, llm_handler, dataset_handler,
+            init_params=init_params, language='en'
+        )
+        # Mount Gradio at /gradio
+        app = gr.mount_gradio_app(app, demo, path="/gradio")
+        gradio_available = True
+    except Exception as e:
+        print(f"⚠️  Gradio interface disabled: {e}")
+        gradio_available = False
     
     # Open browser after short delay
     def open_browser():
@@ -148,7 +159,8 @@ def main():
     
     print(f"\n✧ Signal Horizon ready!")
     print(f"  Clean UI:    http://127.0.0.1:{args.port}/")
-    print(f"  Full UI:     http://127.0.0.1:{args.port}/gradio")
+    if gradio_available:
+        print(f"  Full UI:     http://127.0.0.1:{args.port}/gradio")
     print(f"  API:         http://127.0.0.1:{args.port}/api/")
     print()
     

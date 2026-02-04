@@ -1,0 +1,30 @@
+{
+  "id": "6542605a-e5c0-4572-8d26-8f215369cd62",
+  "title": "new age, peaceful piano, spiri",
+  "slug": "new-age-peaceful-piano-spiri",
+  "folder": "2026-02-04_07-24-27_new-age-peaceful-piano-spiri",
+  "created_at": "2026-02-04T07:24:53.725544",
+  "caption": "new age, peaceful piano, spiritual, healing, meditation music",
+  "lyrics": "[Instrumental]",
+  "bpm": 65,
+  "key_scale": "D major",
+  "time_signature": "4",
+  "duration": 300,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 10.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "ce581d35-fb91-cb6b-70a9-d06854e69a1a.mp3",
+      "seed": 3903991345
+    },
+    {
+      "file": "2691a26f-6dd2-f2b0-b6c2-993bcdef06a0.mp3",
+      "seed": 4054443577
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

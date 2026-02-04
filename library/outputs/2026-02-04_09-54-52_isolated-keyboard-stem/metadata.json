@@ -1,0 +1,30 @@
+{
+  "id": "da1065f3-fc58-466b-ba99-55e28bd14fbe",
+  "title": "Isolated keyboard stem",
+  "slug": "isolated-keyboard-stem",
+  "folder": "2026-02-04_09-54-52_isolated-keyboard-stem",
+  "created_at": "2026-02-04T09:58:18.612833",
+  "caption": "Isolated keyboard stem",
+  "lyrics": "[Instrumental]",
+  "bpm": null,
+  "key_scale": "",
+  "time_signature": "",
+  "duration": -1,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 7.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "4177a459-9a6a-21c9-c2ce-9e9e474e3367.mp3",
+      "seed": 2316545898
+    },
+    {
+      "file": "e43e6812-fc51-4825-9b6c-6266e1d2fbb8.mp3",
+      "seed": 3168715018
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

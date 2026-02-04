@@ -1,0 +1,32 @@
+{
+  "id": "ac240b5c-78cc-4c08-ac45-5da0aec32405",
+  "title": "[TEST] Glitch Storm",
+  "slug": "test-glitch-storm",
+  "folder": "2026-02-04_13-58-54_test-glitch-storm",
+  "created_at": "2026-02-04T14:00:00.414782",
+  "caption": "chaotic glitch beats, stuttering textures, fragmented rhythms, IDM-style beat deconstruction, digital artifacts, experimental electronic, dark pop vocals, moody, atmospheric, haunting",
+  "lyrics": "[INTRO]\nWait—\nhold on—\nno, like this—\n\n[VERSE 1]\nI keep moving before I’m ready\nlike my feet know something I don’t\nEvery thought skips\nhalfway through itself\n\nI meant to stop\nI swear I did\nbut the ground keeps rewinding\nunder me\n\n[PRE-CHORUS]\nMy head runs faster\nthan my mouth can keep up\n\n[CHORUS]\nI’m racing the edge\nnot the fall\nnot the ending\n\nJust the moment\nright before\neverything stutters\n\nI don’t want to disappear\nI want to feel the glitch\n\n[VERSE 2]\nThere’s noise in my chest\nthat won’t sit still\nmemories buffering\nout of order\n\nI say your—\nno—\nI don’t say it\n\nI leave it hanging\nlike a dropped signal\n\n[BREAK / DECONSTRUCTION]\nstep—\ncut—\nrepeat—\n\nHands shaking\nframe skipping\nstill not stopping\n\n[CHORUS – FRACTURED]\nI’m at the edge\nedge\nedge\n\nNot jumping\nnot staying\n\nJust late\nagain\n\n[BRIDGE]\nIf I slow down\neverything catches me\n\nIf I keep going\nI might outrun\nmy own weight\n\n[FINAL CHORUS]\nI’m racing the edge of the planet\nto see what breaks first\nthe ground\nor me\n\nI’m not looking for answers\nI’m looking for impact\n\n[OUTRO]\nStill moving\nStill here\n\n—don’t cut it yet—",
+  "bpm": 135,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 90,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "e728faf7-e2bf-56f4-1e43-771f01583894.mp3",
+      "seed": 2633183134
+    },
+    {
+      "file": "0f5bc32f-8690-ea0e-d78f-528d8816a761.mp3",
+      "seed": 2698338054
+    }
+  ],
+  "pinned": false,
+  "tags": [
+    "glitch"
+  ]
+}

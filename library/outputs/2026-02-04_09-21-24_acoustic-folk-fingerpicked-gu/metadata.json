@@ -1,0 +1,30 @@
+{
+  "id": "cde5370c-c1d0-4690-af87-c7a9e819f079",
+  "title": "acoustic folk, fingerpicked gu",
+  "slug": "acoustic-folk-fingerpicked-gu",
+  "folder": "2026-02-04_09-21-24_acoustic-folk-fingerpicked-gu",
+  "created_at": "2026-02-04T09:21:45.382813",
+  "caption": "acoustic folk, fingerpicked guitar, warm vocals, intimate",
+  "lyrics": "[Instrumental]",
+  "bpm": null,
+  "key_scale": "",
+  "time_signature": "",
+  "duration": -1,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 7.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "9c6412ea-9fd6-bd32-1c87-8b9d60bcd32b.mp3",
+      "seed": 1546167534
+    },
+    {
+      "file": "0767a8f9-af39-4d5d-975a-463e69332a1a.mp3",
+      "seed": 1762783120
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

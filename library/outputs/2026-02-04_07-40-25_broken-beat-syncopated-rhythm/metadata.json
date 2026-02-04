@@ -1,0 +1,30 @@
+{
+  "id": "4d7a42a9-8c24-4e8e-956d-178ac72baa22",
+  "title": "broken beat, syncopated rhythm",
+  "slug": "broken-beat-syncopated-rhythm",
+  "folder": "2026-02-04_07-40-25_broken-beat-syncopated-rhythm",
+  "created_at": "2026-02-04T07:40:39.333321",
+  "caption": "broken beat, syncopated rhythms, off-beat accents, nu-jazz influenced, shuffled grooves, underground club",
+  "lyrics": "I didn’t mean to drift away\nI just didn’t know what to say\n\nI stayed quiet longer than I planned\nSome things slipped right through my hands\n\nI’m still standing where I was\nTrying to remember who I am\n\nI’m not broken, I’m just tired\nFrom carrying this for too long",
+  "bpm": 130,
+  "key_scale": "C minor",
+  "time_signature": "4",
+  "duration": 150,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 13.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "591322ae-c71e-0431-1550-a0d6d9c12b9c.mp3",
+      "seed": 891180827
+    },
+    {
+      "file": "de33970e-8d5a-4746-f4f8-33872fa9b933.mp3",
+      "seed": 2080259985
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

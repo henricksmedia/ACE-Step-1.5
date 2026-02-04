@@ -1,0 +1,32 @@
+{
+  "id": "c6c0b664-7ca0-4864-ac91-dfa1b7c1c413",
+  "title": "[TEST] Syncopated",
+  "slug": "test-syncopated",
+  "folder": "2026-02-04_14-11-07_test-syncopated",
+  "created_at": "2026-02-04T14:12:42.485464",
+  "caption": "heavy syncopation, unexpected rhythmic hits, off-beat emphasis, experimental groove, avant-garde percussion, dance music female vocals, euphoric and bright",
+  "lyrics": "[INTRO]\nWait—\nhold on—\nno, like this—\n\n[VERSE 1]\nI keep moving before I’m ready\nlike my feet know something I don’t\nEvery thought skips\nhalfway through itself\n\nI meant to stop\nI swear I did\nbut the ground keeps rewinding\nunder me\n\n[PRE-CHORUS]\nMy head runs faster\nthan my mouth can keep up\n\n[CHORUS]\nI’m racing the edge\nnot the fall\nnot the ending\n\nJust the moment\nright before\neverything stutters\n\nI don’t want to disappear\nI want to feel the glitch\n\n[VERSE 2]\nThere’s noise in my chest\nthat won’t sit still\nmemories buffering\nout of order\n\nI say your—\nno—\nI don’t say it\n\nI leave it hanging\nlike a dropped signal\n\n[BREAK / DECONSTRUCTION]\nstep—\ncut—\nrepeat—\n\nHands shaking\nframe skipping\nstill not stopping\n\n[CHORUS – FRACTURED]\nI’m at the edge\nedge\nedge\n\nNot jumping\nnot staying\n\nJust late\nagain\n\n[BRIDGE]\nIf I slow down\neverything catches me\n\nIf I keep going\nI might outrun\nmy own weight\n\n[FINAL CHORUS]\nI’m racing the edge of the planet\nto see what breaks first\nthe ground\nor me\n\nI’m not looking for answers\nI’m looking for impact\n\n[OUTRO]\nStill moving\nStill here\n\n—don’t cut it yet—",
+  "bpm": 128,
+  "key_scale": "F minor",
+  "time_signature": "4",
+  "duration": 120,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "151bff12-b37f-bbce-6f83-0cd3e419a39a.mp3",
+      "seed": 1768231082
+    },
+    {
+      "file": "e62e76b5-bdce-d76a-e2cb-6a2a0b4b4d7d.mp3",
+      "seed": 4053292689
+    }
+  ],
+  "pinned": false,
+  "tags": [
+    "syncopated"
+  ]
+}

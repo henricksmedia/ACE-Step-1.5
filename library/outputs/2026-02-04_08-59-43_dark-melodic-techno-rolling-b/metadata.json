@@ -1,0 +1,30 @@
+{
+  "id": "60a88565-486e-46e8-8c2b-23bae7d333a6",
+  "title": "dark melodic techno, rolling b",
+  "slug": "dark-melodic-techno-rolling-b",
+  "folder": "2026-02-04_08-59-43_dark-melodic-techno-rolling-b",
+  "created_at": "2026-02-04T09:00:02.155582",
+  "caption": "dark melodic techno, rolling basslines, haunting vocal chops, industrial textures, deadmau5 influenced progressive house",
+  "lyrics": "[INTRO]\nI can feel it pulling\nbefore I see it\n\n[VERSE 1]\nI’ve been running on a curve of light\nlike the ground might fall away\nEvery step gets louder\nthe closer I get to the edge\n\nI didn’t come for answers\nI just needed room to breathe\nThe sky keeps opening\nlike it’s daring me\n\n[PRE-CHORUS]\nMy heart keeps counting seconds\nthat my mouth won’t say\n\n[CHORUS]\nI’m racing to the edge of the planet\nnot to jump, just to know\nIf I stop at the line or keep going\nwhen there’s nowhere left to go\n\nI want to feel the ground give up\nbefore I do\n\n[VERSE 2]\nI’ve been carrying this gravity\nlike it knows my name\nEvery memory gets heavier\nthe faster I move away\n\nI look back once\nthen I don’t\nbecause I know what I’ll see\n\n[BREAK]\nWind in my chest\nHands shaking\nStill moving\n\n[FINAL CHORUS]\nI’m racing to the edge of the planet\nwith everything I couldn’t say\nIf I disappear over the horizon\nat least I chose the way\n\nI don’t need to be saved\nI just need to arrive\n\n[OUTRO]\nThe edge is closer now\nI don’t slow down",
+  "bpm": 126,
+  "key_scale": "F minor",
+  "time_signature": "4",
+  "duration": 180,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "d2e67eaa-8f6a-597b-0536-dfc20575d010.mp3",
+      "seed": 2399628241
+    },
+    {
+      "file": "bf1036bb-df71-1200-ca89-8a2cad730455.mp3",
+      "seed": 3982123984
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}
