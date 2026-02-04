@@ -378,7 +378,9 @@ def generate_music(
         # 3. use_cot_language=True: detect vocal language via CoT
         # 4. use_cot_metas=True: fill missing metadata via CoT
         need_lm_for_cot = params.use_cot_caption or params.use_cot_language or params.use_cot_metas
-        use_lm = (params.thinking or need_lm_for_cot) and llm_handler.llm_initialized and params.task_type not in skip_lm_tasks
+        # Add null check: llm_handler can be None in dev mode when LLM is not loaded
+        llm_is_initialized = llm_handler is not None and getattr(llm_handler, 'llm_initialized', False)
+        use_lm = (params.thinking or need_lm_for_cot) and llm_is_initialized and params.task_type not in skip_lm_tasks
         lm_status = []
         
         if params.task_type in skip_lm_tasks:
@@ -387,7 +389,7 @@ def generate_music(
         logger.info(f"[generate_music] LLM usage decision: thinking={params.thinking}, "
                    f"use_cot_caption={params.use_cot_caption}, use_cot_language={params.use_cot_language}, "
                    f"use_cot_metas={params.use_cot_metas}, need_lm_for_cot={need_lm_for_cot}, "
-                   f"llm_initialized={llm_handler.llm_initialized if llm_handler else False}, use_lm={use_lm}")
+                   f"llm_initialized={llm_is_initialized}, use_lm={use_lm}")
         
         if use_lm:
             # Convert sampling parameters - handle None values safely
