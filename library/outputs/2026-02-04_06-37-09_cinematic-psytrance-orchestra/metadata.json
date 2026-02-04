@@ -1,0 +1,30 @@
+{
+  "id": "9bba040c-1dea-484b-89c8-88409d5b09d1",
+  "title": "Cinematic psytrance, orchestra",
+  "slug": "cinematic-psytrance-orchestra",
+  "folder": "2026-02-04_06-37-09_cinematic-psytrance-orchestra",
+  "created_at": "2026-02-04T06:37:22.471327",
+  "caption": "Cinematic psytrance, orchestral strings with electronic beats, tribal war drums, driving trance bassline, epic build with ethnic chanting samples, 303 acid lead, dark atmospheric tension, film score meets rave, industrial percussion hits, Middle Eastern scale melodies, intense and ritualistic, Juno Reactor soundtrack style",
+  "lyrics": "I didn’t mean to drift away\nI just didn’t know what to say\n\nI stayed quiet longer than I planned\nSome things slipped right through my hands\n\nI’m still standing where I was\nTrying to remember who I am\n\nI’m not broken, I’m just tired\nFrom carrying this for too long",
+  "bpm": 142,
+  "key_scale": "D minor",
+  "time_signature": "4",
+  "duration": 184,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 13.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "8d440378-543e-eddd-0c6b-eb3fcf7303be.mp3",
+      "seed": 798213979
+    },
+    {
+      "file": "f2cbcb15-ee11-c006-6f3c-9c68d765ebcd.mp3",
+      "seed": 964300757
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

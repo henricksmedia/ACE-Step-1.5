@@ -1503,7 +1503,37 @@
                     </div>
                 </div>
 
+                <!-- Audio Processing Settings -->
+                <div class="card">
+                    <div class="card-title">🔊 Audio Processing (Volume Stabilization)</div>
+                    <p class="setting-hint">Fix volume fluctuation with loudness normalization</p>
+
+                    <div class="admin-grid" style="margin-top: 1rem;">
+                        <div class="admin-field">
+                            <label>Loudness Normalization</label>
+                            <select id="admin-normalize-loudness">
+                                <option value="true" selected>On (Recommended)</option>
+                                <option value="false">Off</option>
+                            </select>
+                            <small style="color: var(--text-muted);">Normalizes to consistent LUFS level</small>
+                        </div>
+                        <div class="admin-field">
+                            <label>Target LUFS</label>
+                            <input type="number" id="admin-target-lufs" value="-14" min="-24" max="-8" step="1">
+                            <small style="color: var(--text-muted);">-14 = Spotify, -16 = Apple, -23 = Broadcast</small>
+                        </div>
+                        <div class="admin-field">
+                            <label>Peak Limiter</label>
+                            <select id="admin-peak-limiter">
+                                <option value="true" selected>On (Prevents clipping)</option>
+                                <option value="false">Off</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Export/Import -->
+
                 <div class="card">
                     <div class="card-title">💾 Backup & Restore</div>
                     <div class="export-import-btns">
@@ -1687,7 +1717,8 @@
                         ...DEFAULT_SETTINGS, ...parsed,
                         presets: { ...DEFAULT_SETTINGS.presets, ...parsed.presets },
                         dit: { ...DEFAULT_SETTINGS.dit, ...parsed.dit },
-                        llm: { ...DEFAULT_SETTINGS.llm, ...parsed.llm }
+                        llm: { ...DEFAULT_SETTINGS.llm, ...parsed.llm },
+                        audio: { ...DEFAULT_SETTINGS.audio, ...parsed.audio }
                     };
                 }
             } catch (e) {
@@ -1816,6 +1847,12 @@
             adminSettings.llm.lm_cfg_scale = parseFloat(document.getElementById('admin-lm-cfg')?.value || 3.5);
             adminSettings.llm.lm_temperature = parseFloat(document.getElementById('admin-lm-temp')?.value || 0.85);
 
+            // Audio processing settings
+            adminSettings.audio = adminSettings.audio || {};
+            adminSettings.audio.normalize_loudness = document.getElementById('admin-normalize-loudness')?.value === 'true';
+            adminSettings.audio.target_lufs = parseFloat(document.getElementById('admin-target-lufs')?.value || -14);
+            adminSettings.audio.peak_limiter = document.getElementById('admin-peak-limiter')?.value === 'true';
+
             if (saveSettings(adminSettings)) {
                 const status = document.getElementById('admin-status');
                 if (status) {
@@ -1847,6 +1884,13 @@
             document.getElementById('admin-thinking').value = adminSettings.llm.thinking.toString();
             document.getElementById('admin-lm-cfg').value = adminSettings.llm.lm_cfg_scale;
             document.getElementById('admin-lm-temp').value = adminSettings.llm.lm_temperature;
+
+            // Audio processing
+            if (adminSettings.audio) {
+                document.getElementById('admin-normalize-loudness').value = (adminSettings.audio.normalize_loudness !== false).toString();
+                document.getElementById('admin-target-lufs').value = adminSettings.audio.target_lufs || -14;
+                document.getElementById('admin-peak-limiter').value = (adminSettings.audio.peak_limiter !== false).toString();
+            }
         }
 
         // Export settings as JSON file

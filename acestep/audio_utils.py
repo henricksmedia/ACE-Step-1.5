@@ -506,3 +506,52 @@ def save_audio(
         audio_data, output_path, sample_rate, format, channels_first
     )
 
+
+def save_audio_with_processing(
+    audio_data: Union[torch.Tensor, np.ndarray],
+    output_path: Union[str, Path],
+    sample_rate: int = 48000,
+    format: Optional[str] = None,
+    channels_first: bool = True,
+    normalize: bool = True,
+    target_lufs: float = -14.0,
+    limit_peaks: bool = True,
+    peak_ceiling_db: float = -1.0,
+) -> str:
+    """
+    Save audio with optional loudness normalization and peak limiting.
+    
+    This is the recommended function for Signal Horizon API calls to ensure
+    consistent audio quality across generated tracks.
+    
+    Args:
+        audio_data: Audio tensor or numpy array
+        output_path: Output file path
+        sample_rate: Audio sample rate (default 48000)
+        format: Output format ('flac', 'wav', 'mp3')
+        channels_first: If True, input is [channels, samples]
+        normalize: Apply LUFS loudness normalization
+        target_lufs: Target loudness in LUFS (default -14.0)
+        limit_peaks: Apply peak limiting
+        peak_ceiling_db: Peak ceiling in dB (default -1.0)
+    
+    Returns:
+        Saved file path
+    """
+    # Apply post-processing if requested
+    if normalize or limit_peaks:
+        processed = post_process_audio(
+            audio_data,
+            sample_rate=sample_rate,
+            normalize=normalize,
+            target_lufs=target_lufs,
+            limit_peaks=limit_peaks,
+            peak_ceiling_db=peak_ceiling_db,
+            channels_first=channels_first,
+        )
+        # Convert back to tensor for saving
+        audio_data = torch.from_numpy(processed).float()
+    
+    return _default_saver.save_audio(
+        audio_data, output_path, sample_rate, format, channels_first=True
+    )

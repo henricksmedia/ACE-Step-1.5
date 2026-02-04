@@ -1,0 +1,30 @@
+{
+  "id": "6adae933-fcd3-4a5d-b555-46ba0495b68d",
+  "title": "delta blues guitar riffs meets",
+  "slug": "delta-blues-guitar-riffs-meets",
+  "folder": "2026-02-04_06-56-52_delta-blues-guitar-riffs-meets",
+  "created_at": "2026-02-04T06:57:05.774930",
+  "caption": "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic",
+  "lyrics": "I didn’t mean to drift away\nI just didn’t know what to say\n\nI stayed quiet longer than I planned\nSome things slipped right through my hands\n\nI’m still standing where I was\nTrying to remember who I am\n\nI’m not broken, I’m just tired\nFrom carrying this for too long",
+  "bpm": 95,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 147,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 20.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "d741a6ff-4dae-0e48-68a9-c8efe48cede5.mp3",
+      "seed": 3339159293
+    },
+    {
+      "file": "357dbe17-3e82-b7a6-9329-0f9fb66159b7.mp3",
+      "seed": 1653406983
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

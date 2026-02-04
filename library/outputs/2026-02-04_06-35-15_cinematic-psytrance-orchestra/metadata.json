@@ -1,0 +1,30 @@
+{
+  "id": "035e5c81-64f7-45bc-a1ec-ee507bc2e630",
+  "title": "Cinematic psytrance, orchestra",
+  "slug": "cinematic-psytrance-orchestra",
+  "folder": "2026-02-04_06-35-15_cinematic-psytrance-orchestra",
+  "created_at": "2026-02-04T06:35:21.643340",
+  "caption": "Cinematic psytrance, orchestral strings with electronic beats, tribal war drums, driving trance bassline, epic build with ethnic chanting samples, 303 acid lead, dark atmospheric tension, film score meets rave, industrial percussion hits, Middle Eastern scale melodies, intense and ritualistic, Juno Reactor soundtrack style",
+  "lyrics": "[Instrumental]",
+  "bpm": 142,
+  "key_scale": "D minor",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 8.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "6393c847-4130-852b-0d3d-fa82131cb360.mp3",
+      "seed": 1063115345
+    },
+    {
+      "file": "d08e9913-65dc-00ad-7832-bcb64792559c.mp3",
+      "seed": 3761655355
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

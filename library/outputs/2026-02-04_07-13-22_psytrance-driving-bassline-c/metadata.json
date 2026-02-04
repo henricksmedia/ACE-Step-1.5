@@ -1,0 +1,30 @@
+{
+  "id": "e6dd29ab-4306-404a-91b0-d0a13f45a56d",
+  "title": "psytrance, driving bassline, c",
+  "slug": "psytrance-driving-bassline-c",
+  "folder": "2026-02-04_07-13-22_psytrance-driving-bassline-c",
+  "created_at": "2026-02-04T07:13:27.719781",
+  "caption": "psytrance, driving bassline, cinematic orchestral stabs, hypnotic arpeggios, tribal percussion, epic build-ups, Juno Reactor inspired",
+  "lyrics": "I didn’t mean to drift away\nI just didn’t know what to say\n\nI stayed quiet longer than I planned\nSome things slipped right through my hands\n\nI’m still standing where I was\nTrying to remember who I am\n\nI’m not broken, I’m just tired\nFrom carrying this for too long",
+  "bpm": 145,
+  "key_scale": "D minor",
+  "time_signature": "4",
+  "duration": 60,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "82b39271-30b2-648e-e409-15204dcb9d40.mp3",
+      "seed": 968242500
+    },
+    {
+      "file": "0f218763-2876-212e-d16c-82b8221e7433.mp3",
+      "seed": 2029960383
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}
