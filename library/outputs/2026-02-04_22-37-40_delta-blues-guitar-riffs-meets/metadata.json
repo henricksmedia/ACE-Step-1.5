@@ -1,0 +1,30 @@
+{
+  "id": "d2005cc6-0dee-445f-a1f5-fab8202750bc",
+  "title": "delta blues guitar riffs meets",
+  "slug": "delta-blues-guitar-riffs-meets",
+  "folder": "2026-02-04_22-37-40_delta-blues-guitar-riffs-meets",
+  "created_at": "2026-02-04T22:38:49.681335",
+  "caption": "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic",
+  "lyrics": "[Instrumental]",
+  "bpm": 95,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 120,
+  "language": "en",
+  "inference_steps": 60,
+  "guidance_scale": 8.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "5c00c81e-7a9f-20d9-edf8-04e0c84e89e3.mp3",
+      "seed": 2920551081
+    },
+    {
+      "file": "674c3e5c-1d7e-14b9-e00c-515266968441.mp3",
+      "seed": 1391461219
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

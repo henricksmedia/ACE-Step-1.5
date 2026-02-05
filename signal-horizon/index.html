@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signal Horizon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>The Treq × Signal Horizon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Climate+Crisis&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,17 +16,97 @@
         }
 
         :root {
-            --bg-base: #0a0a0a;
-            --bg-surface: #141414;
-            --bg-card: #1a1a1a;
-            --bg-elevated: #222222;
-            --accent: #00d4ff;
-            --accent-glow: rgba(0, 212, 255, 0.4);
-            --accent-secondary: #ff00aa;
-            --text: #ffffff;
-            --text-muted: #888888;
-            --border: #2a2a2a;
-            --success: #00ff88;
+            /* Background colors - neutral dark (from black palette) */
+            --bg-base: #02020B;
+            --bg-surface: #0a0a14;
+            --bg-card: #12121c;
+            --bg-elevated: #1a1a24;
+
+            /* Primary accent - spicy paprika (warm orange-red) */
+            --accent: #D36135;
+            --accent-glow: rgba(211, 97, 53, 0.4);
+            --accent-light: #da7d58;
+            --accent-dark: #a74a25;
+
+            /* Secondary accent - sage green */
+            --accent-secondary: #7FB069;
+
+            /* Tertiary - vanilla custard (cream) */
+            --accent-tertiary: #ECE4B7;
+
+            /* Warm neutral - light caramel */
+            --accent-warm: #E6AA68;
+
+            /* Text colors */
+            --text: #f4f0d7;
+            --text-muted: #aaca9b;
+
+            /* Border - neutral with subtle warmth */
+            --border: #2a2a35;
+
+            /* Success state */
+            --success: #71a758;
+
+            /* Full palettes for reference */
+            --color-spicy-paprika-50: #faefea;
+            --color-spicy-paprika-100: #f6ded5;
+            --color-spicy-paprika-200: #edbeab;
+            --color-spicy-paprika-300: #e39d82;
+            --color-spicy-paprika-400: #da7d58;
+            --color-spicy-paprika-500: #d15c2e;
+            --color-spicy-paprika-600: #a74a25;
+            --color-spicy-paprika-700: #7d371c;
+            --color-spicy-paprika-800: #542512;
+            --color-spicy-paprika-900: #2a1209;
+            --color-spicy-paprika-950: #1d0d06;
+
+            --color-sage-green-50: #f1f6ee;
+            --color-sage-green-100: #e3edde;
+            --color-sage-green-200: #c6dcbc;
+            --color-sage-green-300: #aaca9b;
+            --color-sage-green-400: #8db979;
+            --color-sage-green-500: #71a758;
+            --color-sage-green-600: #5a8646;
+            --color-sage-green-700: #446435;
+            --color-sage-green-800: #2d4323;
+            --color-sage-green-900: #172112;
+            --color-sage-green-950: #10170c;
+
+            --color-vanilla-custard-50: #faf7eb;
+            --color-vanilla-custard-100: #f4f0d7;
+            --color-vanilla-custard-200: #eae1ae;
+            --color-vanilla-custard-300: #dfd286;
+            --color-vanilla-custard-400: #d4c25e;
+            --color-vanilla-custard-500: #c9b336;
+            --color-vanilla-custard-600: #a18f2b;
+            --color-vanilla-custard-700: #796c20;
+            --color-vanilla-custard-800: #514815;
+            --color-vanilla-custard-900: #28240b;
+            --color-vanilla-custard-950: #1c1907;
+
+            --color-light-caramel-50: #fbf3e9;
+            --color-light-caramel-100: #f8e6d3;
+            --color-light-caramel-200: #f1cda7;
+            --color-light-caramel-300: #eab47b;
+            --color-light-caramel-400: #e29b50;
+            --color-light-caramel-500: #db8324;
+            --color-light-caramel-600: #af681d;
+            --color-light-caramel-700: #844e15;
+            --color-light-caramel-800: #58340e;
+            --color-light-caramel-900: #2c1a07;
+            --color-light-caramel-950: #1f1205;
+
+            --color-black-50: #e9e9fb;
+            --color-black-100: #d4d4f7;
+            --color-black-200: #a9a9ef;
+            --color-black-300: #7e7ee7;
+            --color-black-400: #5353df;
+            --color-black-500: #2828d7;
+            --color-black-600: #2020ac;
+            --color-black-700: #181881;
+            --color-black-800: #101056;
+            --color-black-900: #08082b;
+            --color-black-950: #06061e;
         }
 
         body {
@@ -44,14 +126,53 @@
             padding: 1rem 2rem;
             border-bottom: 1px solid var(--border);
             background: var(--bg-surface);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            height: 60px;
+            box-sizing: border-box;
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-treq {
+            font-family: 'Climate Crisis', cursive;
+            font-size: 1.5rem;
+            color: var(--accent-warm);
+            text-shadow: 0 0 20px rgba(219, 131, 36, 0.5);
+        }
+
+        .logo-divider {
+            color: var(--accent-secondary);
             font-size: 1.25rem;
+            opacity: 0.6;
+        }
+
+        .logo-horizon {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             font-weight: 300;
             color: var(--accent);
             text-shadow: 0 0 20px var(--accent-glow);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Material Icons styling */
+        .material-icons {
+            font-size: 1.25rem;
+            vertical-align: middle;
+        }
+
+        .card-title .material-icons {
+            font-size: 1rem;
+            margin-right: 0.35rem;
         }
 
         .header-links a {
@@ -70,6 +191,8 @@
             display: flex;
             flex: 1;
             overflow: hidden;
+            margin-top: 60px;
+            /* Account for fixed header */
         }
 
         /* Sidebar */
@@ -80,6 +203,14 @@
             padding: 1rem 0;
             display: flex;
             flex-direction: column;
+            position: fixed;
+            top: 60px;
+            /* Start below fixed header */
+            left: 0;
+            height: calc(100vh - 60px);
+            /* Full height minus header */
+            overflow-y: auto;
+            z-index: 100;
         }
 
         .nav-item {
@@ -212,6 +343,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 2rem;
+            margin-left: 220px;
         }
 
         .page {
@@ -350,10 +482,40 @@
         }
 
         textarea:focus,
-        input:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Dropdowns */
+        select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238A8A8A'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5rem;
+        }
+
+        select:hover {
+            border-color: var(--accent);
+        }
+
+        select option {
+            background: var(--bg-card);
+            color: var(--text);
+            padding: 0.5rem;
         }
 
         /* Lyrics Editor */
@@ -544,6 +706,133 @@
         .library-item-date {
             font-size: 0.75rem;
             color: var(--text-muted);
+        }
+
+        /* Artist System Styles */
+        .artist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .artist-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .artist-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--artist-color, var(--accent));
+        }
+
+        .artist-card:hover {
+            border-color: var(--artist-color, var(--accent));
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .artist-card .artist-icon {
+            font-size: 2.5rem;
+            color: var(--artist-color, var(--accent));
+            margin-bottom: 1rem;
+        }
+
+        .artist-card .artist-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-card .artist-genre {
+            font-size: 0.85rem;
+            color: var(--artist-color, var(--accent));
+            margin-bottom: 0.75rem;
+        }
+
+        .artist-card .artist-subgenres {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .artist-card.collaboration {
+            background: linear-gradient(135deg, var(--bg-card), rgba(180, 83, 9, 0.1));
+        }
+
+        .artist-card.collaboration::after {
+            content: 'COLLAB';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 0.65rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--accent-warm);
+            color: #000;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .artist-selector {
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .artist-info-preview {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-surface);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .artist-info-preview.visible {
+            display: block;
+        }
+
+        .artist-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .duet-lyrics-btns {
+            display: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(180, 83, 9, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(180, 83, 9, 0.3);
+        }
+
+        .duet-lyrics-btns.visible {
+            display: flex;
+        }
+
+        .duet-lyrics-btns .structure-btn {
+            border-color: var(--accent-warm);
+            color: var(--accent-warm);
         }
 
         /* Hidden */
@@ -883,72 +1172,91 @@
             color: var(--accent);
         }
 
-        /* Quick Style Genre Tabs */
-        .quickstyle-tabs {
+        /* Quick Style Accordion */
+        .quickstyle-accordion {
             display: flex;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .quickstyle-tab {
-            padding: 0.4rem 0.8rem;
-            background: var(--bg-surface);
+        .quickstyle-section {
             border: 1px solid var(--border);
-            border-radius: 16px;
-            color: var(--text-muted);
-            font-size: 0.75rem;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-surface);
+        }
+
+        .quickstyle-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface);
             cursor: pointer;
             transition: all 0.2s;
-            white-space: nowrap;
+            user-select: none;
         }
 
-        .quickstyle-tab:hover {
-            border-color: var(--accent);
+        .quickstyle-header:hover {
+            background: var(--bg-card);
+        }
+
+        .quickstyle-header-title {
+            font-size: 0.85rem;
+            font-weight: 500;
             color: var(--text);
-        }
-
-        .quickstyle-tab.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-        }
-
-        .quickstyle-tab.featured {
-            background: linear-gradient(135deg, #9b59b6, #e91e63);
-            border-color: #9b59b6;
-            color: #fff;
-        }
-
-        .quickstyle-tab.featured.active {
-            box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
-        }
-
-        /* Scrollable Preset Container */
-        .quickstyle-presets-scroll {
             display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quickstyle-header-title .material-icons {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+
+        .quickstyle-header-arrow {
+            color: var(--text-muted);
+            transition: transform 0.3s;
+        }
+
+        .quickstyle-section.open .quickstyle-header-arrow {
+            transform: rotate(180deg);
+        }
+
+        .quickstyle-section.featured .quickstyle-header {
+            background: linear-gradient(135deg, rgba(211, 97, 53, 0.15), rgba(230, 170, 104, 0.1));
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .quickstyle-section.featured .quickstyle-header-title {
+            color: var(--accent-warm);
+        }
+
+        .quickstyle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .quickstyle-section.open .quickstyle-content {
+            max-height: 500px;
+        }
+
+        .quickstyle-presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 0.75rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-            scroll-behavior: smooth;
+            padding: 1rem;
         }
 
-        .quickstyle-presets-scroll::-webkit-scrollbar {
-            height: 6px;
+        /* Hide old tabs */
+        .quickstyle-tabs {
+            display: none;
         }
 
-        .quickstyle-presets-scroll::-webkit-scrollbar-track {
-            background: var(--bg-surface);
-            border-radius: 3px;
-        }
-
-        .quickstyle-presets-scroll::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 3px;
-        }
-
-        .quickstyle-presets-scroll::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
+        .quickstyle-presets-scroll {
+            display: none;
         }
 
         /* Rhythm Modifiers Panel */
@@ -1108,7 +1416,7 @@
         .tag-pill {
             padding: 0.2rem 0.5rem;
             font-size: 0.65rem;
-            background: var(--bg-tertiary);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 12px;
             color: var(--text-muted);
@@ -1267,6 +1575,40 @@
                 opacity: 1;
             }
         }
+
+        /* Duration slider warning colors */
+        .duration-warning {
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .duration-warning.warning {
+            color: #f39c12;
+            background: rgba(243, 156, 18, 0.1);
+        }
+
+        .duration-warning.danger {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        #duration.warning-yellow {
+            accent-color: #f39c12;
+        }
+
+        #duration.warning-red {
+            accent-color: #e74c3c;
+        }
+
+        #duration-value.warning {
+            color: #f39c12;
+        }
+
+        #duration-value.danger {
+            color: #e74c3c;
+        }
     </style>
 
 </head>
@@ -1274,9 +1616,14 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo">✧ SIGNAL HORIZON</div>
+        <div class="logo">
+            <span class="logo-treq">The Treq</span>
+            <span class="logo-divider">×</span>
+            <span class="logo-horizon">Signal Horizon</span>
+        </div>
         <div class="header-links">
-            <a href="http://127.0.0.1:7860" target="_blank">⚙️ Full UI</a>
+            <a href="http://127.0.0.1:7860" target="_blank"><span class="material-icons"
+                    style="font-size: 0.9rem; vertical-align: middle;">settings</span> Full UI</a>
         </div>
     </header>
 
@@ -1285,35 +1632,44 @@
         <nav class="sidebar">
             <div class="nav-section">WORKSPACES</div>
             <div class="nav-item active" data-page="create">
-                <span class="nav-icon">🎵</span>
+                <span class="nav-icon material-icons">music_note</span>
                 <span>Studio</span>
             </div>
             <div class="nav-item" data-page="remix">
-                <span class="nav-icon">🔧</span>
+                <span class="nav-icon material-icons">tune</span>
                 <span>Remix Lab</span>
             </div>
             <div class="nav-item" data-page="stems">
-                <span class="nav-icon">✂️</span>
+                <span class="nav-icon material-icons">content_cut</span>
                 <span>Stem Ripper</span>
             </div>
             <div class="nav-item" data-page="presets">
-                <span class="nav-icon">🎨</span>
+                <span class="nav-icon material-icons">palette</span>
                 <span>Presets</span>
+            </div>
+            <div class="nav-section" style="margin-top: 1.5rem;">ROSTER</div>
+            <div class="nav-item" data-page="artists">
+                <span class="nav-icon material-icons">groups</span>
+                <span>Artists</span>
             </div>
             <div class="nav-section" style="margin-top: 1.5rem;">LIBRARY</div>
             <div class="nav-item" data-page="library">
-                <span class="nav-icon">📁</span>
+                <span class="nav-icon material-icons">library_music</span>
                 <span>Tracks</span>
             </div>
             <div class="nav-section" style="margin-top: 1.5rem;">SETTINGS</div>
             <div class="nav-item" data-page="admin">
-                <span class="nav-icon">⚙️</span>
+                <span class="nav-icon material-icons">settings</span>
                 <span>Admin</span>
             </div>
             <div class="nav-item" data-page="help" style="margin-top: auto;">
-                <span class="nav-icon">❓</span>
+                <span class="nav-icon material-icons">help_outline</span>
                 <span>Help</span>
             </div>
+            <a href="promo.html" target="_blank" class="nav-item" style="text-decoration: none;">
+                <span class="nav-icon material-icons">campaign</span>
+                <span>Promo</span>
+            </a>
         </nav>
 
         <!-- Main Content -->
@@ -1321,6 +1677,15 @@
             <!-- Create Page -->
             <div class="page active" id="page-create">
                 <h2 style="margin-bottom: 1.5rem;">Create New Track</h2>
+
+                <!-- Artist Selector -->
+                <div class="card">
+                    <div class="card-title"><span class="material-icons">person</span> Artist</div>
+                    <select id="artist-select" class="artist-selector" onchange="selectArtist(this.value)">
+                        <option value="">None (generic track)</option>
+                    </select>
+                    <div id="artist-info" class="artist-info-preview"></div>
+                </div>
 
                 <!-- Title -->
                 <div class="card">
@@ -1331,11 +1696,10 @@
                     </div>
                 </div>
 
-                <!-- Quick Presets with Genre Tabs -->
+                <!-- Quick Presets Accordion -->
                 <div class="card">
-                    <div class="card-title">Quick Style</div>
-                    <div class="quickstyle-tabs" id="quickstyle-tabs"></div>
-                    <div class="quickstyle-presets-scroll" id="quick-presets"></div>
+                    <div class="card-title"><span class="material-icons">auto_awesome</span> Quick Style</div>
+                    <div class="quickstyle-accordion" id="quickstyle-accordion"></div>
                 </div>
 
                 <!-- Style & Lyrics -->
@@ -1365,6 +1729,20 @@
                     </div>
                     <div class="card">
                         <div class="card-title">Lyrics</div>
+                        <div class="duet-lyrics-btns" id="duet-lyrics-btns">
+                            <span
+                                style="font-size: 0.75rem; color: var(--accent-warm); width: 100%; margin-bottom: 0.25rem;"><span
+                                    class="material-icons" style="font-size: 1rem; vertical-align: middle;">mic</span>
+                                Duet Sections:</span>
+                            <button class="structure-btn" onclick="insertLyricTag('[Verse - Female]')">Verse -
+                                Female</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Verse - Male]')">Verse -
+                                Male</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Chorus - Both]')">Chorus -
+                                Both</button>
+                            <button class="structure-btn" onclick="insertLyricTag('[Bridge - Both]')">Bridge -
+                                Both</button>
+                        </div>
                         <div class="lyrics-structure">
                             <button class="structure-btn" onclick="insertLyricTag('[Intro]')">Intro</button>
                             <button class="structure-btn" onclick="insertLyricTag('[Verse]')">Verse</button>
@@ -1386,129 +1764,150 @@
 
                 <!-- Vocal Persona -->
                 <div class="card">
-                    <div class="card-title">🎤 Vocal Persona
+                    <div class="card-title"><span class="material-icons">mic</span> Vocal Persona
                         <span class="help-icon">?
                             <span class="tooltip" style="width: 280px;">
                                 <span class="tooltip-title">Vocal Style</span>
                                 Select a vocal style to add to your generation. This appends vocal characteristics to
                                 your prompt.
-                                <span class="tooltip-example">💡 Choose "None" for instrumental or to describe vocals
+                                <span class="tooltip-example"><span class="material-icons"
+                                        style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                    Choose "None" for instrumental or to describe vocals
                                     yourself</span>
                             </span>
                         </span>
                     </div>
-                    <select id="vocal-persona"
-                        style="padding: 0.75rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); width: 100%;">
+                    <select id="vocal-persona">
                         <optgroup label="General">
                             <option value="" selected>None (no vocal modifier)</option>
-                            <option value="operatic vocals, classical trained, powerful">🎤 Operatic</option>
-                            <option value="children's choir, innocent and pure">🎤 Child Choir</option>
-                            <option value="gospel choir, powerful harmonies, spiritual">🎤 Gospel Choir</option>
-                            <option value="ambient whispered vocals, ethereal, atmospheric">🎤 Ambient Whisper</option>
-                            <option value="spoken word vocals, poetic, narrative">🎤 Spoken Word</option>
-                            <option value="robotic processed vocals, vocoder, synthetic">🎤 Robotic</option>
-                            <option value="male and female duet, harmonizing together">🎤 Duet</option>
-                            <option value="acapella vocals, layered harmonies, no instruments">🎤 Acapella</option>
+                            <option value="operatic vocals, classical trained, powerful"> Operatic</option>
+                            <option value="children's choir, innocent and pure"> Child Choir</option>
+                            <option value="gospel choir, powerful harmonies, spiritual"> Gospel Choir</option>
+                            <option value="ambient whispered vocals, ethereal, atmospheric"> Ambient Whisper</option>
+                            <option value="spoken word vocals, poetic, narrative"> Spoken Word</option>
+                            <option value="robotic processed vocals, vocoder, synthetic"> Robotic</option>
+                            <option value="male and female duet, harmonizing together"> Duet</option>
+                            <option value="acapella vocals, layered harmonies, no instruments"> Acapella</option>
                         </optgroup>
                         <optgroup label="Pop">
-                            <option value="bright female pop vocals, clear and energetic">🎤 Pop Female</option>
-                            <option value="smooth male pop vocals, radio-ready tone">🎤 Pop Male</option>
-                            <option value="breathy intimate vocals, soft and close">🎤 Breathy</option>
-                            <option value="powerful diva vocals, big range, belting">🎤 Power Diva</option>
-                            <option value="indie pop vocals, soft and dreamy, lo-fi">🎤 Indie Soft</option>
-                            <option value="k-pop vocals, bright, youthful, polished">🎤 K-Pop</option>
-                            <option value="teen pop vocals, young and fresh, bubbly">🎤 Teen Pop</option>
-                            <option value="dark pop vocals, moody, atmospheric, haunting">🎤 Dark Pop</option>
-                            <option value="whispered breathy pop vocals, intimate, ASMR-like, dark and moody">🎤 Whisper
+                            <option value="bright female pop vocals, clear and energetic"> Pop Female</option>
+                            <option value="smooth male pop vocals, radio-ready tone"> Pop Male</option>
+                            <option value="breathy intimate vocals, soft and close"> Breathy</option>
+                            <option value="powerful diva vocals, big range, belting"> Power Diva</option>
+                            <option value="indie pop vocals, soft and dreamy, lo-fi"> Indie Soft</option>
+                            <option value="k-pop vocals, bright, youthful, polished"> K-Pop</option>
+                            <option value="teen pop vocals, young and fresh, bubbly"> Teen Pop</option>
+                            <option value="dark pop vocals, moody, atmospheric, haunting"> Dark Pop</option>
+                            <option value="whispered breathy pop vocals, intimate, ASMR-like, dark and moody"> Whisper
                                 Pop</option>
-                            <option value="confessional pop vocals, clear diction, narrative storytelling, emotional">🎤
+                            <option value="confessional pop vocals, clear diction, narrative storytelling, emotional">
                                 Storyteller</option>
                         </optgroup>
                         <optgroup label="Rock">
-                            <option value="raspy rock vocals, gritty and powerful">🎤 Rock Raspy</option>
-                            <option value="powerful male rock vocals, arena-ready">🎤 Power Male</option>
-                            <option value="punk shouting vocals, raw and aggressive">🎤 Punk Shout</option>
-                            <option value="grunge vocals, angsty and raw, 90s seattle">🎤 Grunge</option>
-                            <option value="metal screaming vocals, harsh, intense">🎤 Metal Scream</option>
-                            <option value="classic rock vocals, 70s style, bluesy power">🎤 Classic Rock</option>
-                            <option value="indie rock vocals, understated, authentic">🎤 Indie Rock</option>
-                            <option value="female rock vocals, powerful and edgy">🎤 Female Rock</option>
-                            <option value="progressive rock vocals, theatrical, dramatic range">🎤 Prog Epic</option>
+                            <option value="raspy rock vocals, gritty and powerful"> Rock Raspy</option>
+                            <option value="powerful male rock vocals, arena-ready"> Power Male</option>
+                            <option value="punk shouting vocals, raw and aggressive"> Punk Shout</option>
+                            <option value="grunge vocals, angsty and raw, 90s seattle"> Grunge</option>
+                            <option value="metal screaming vocals, harsh, intense"> Metal Scream</option>
+                            <option value="classic rock vocals, 70s style, bluesy power"> Classic Rock</option>
+                            <option value="indie rock vocals, understated, authentic"> Indie Rock</option>
+                            <option value="female rock vocals, powerful and edgy"> Female Rock</option>
+                            <option value="progressive rock vocals, theatrical, dramatic range"> Prog Epic</option>
                         </optgroup>
                         <optgroup label="Hip-Hop">
-                            <option value="trap style vocals, autotune, melodic rap">🎤 Trap Flow</option>
-                            <option value="old school hip-hop vocals, classic flow, golden era">🎤 Boom Bap</option>
-                            <option value="aggressive rap vocals, hard delivery, intense">🎤 Aggressive</option>
-                            <option value="drill rap vocals, menacing, UK/Chicago style">🎤 Drill</option>
-                            <option value="melodic rap vocals, singing and rapping blend">🎤 Melodic Rap</option>
-                            <option value="chill rap vocals, laid back, relaxed flow">🎤 Lo-Fi Chill</option>
-                            <option value="conscious rap vocals, lyrical, thoughtful delivery">🎤 Conscious</option>
-                            <option value="female rapper vocals, confident, sharp flow">🎤 Female MC</option>
+                            <option value="trap style vocals, autotune, melodic rap"> Trap Flow</option>
+                            <option value="old school hip-hop vocals, classic flow, golden era"> Boom Bap</option>
+                            <option value="aggressive rap vocals, hard delivery, intense"> Aggressive</option>
+                            <option value="drill rap vocals, menacing, UK/Chicago style"> Drill</option>
+                            <option value="melodic rap vocals, singing and rapping blend"> Melodic Rap</option>
+                            <option value="chill rap vocals, laid back, relaxed flow"> Lo-Fi Chill</option>
+                            <option value="conscious rap vocals, lyrical, thoughtful delivery"> Conscious</option>
+                            <option value="female rapper vocals, confident, sharp flow"> Female MC</option>
                         </optgroup>
                         <optgroup label="EDM">
-                            <option value="dance music female vocals, euphoric and bright">🎤 Dance Female</option>
-                            <option value="ethereal trance vocals, angelic, soaring">🎤 Trance Ethereal</option>
-                            <option value="deep house vocals, soulful, filtered, sensual">🎤 Deep House</option>
-                            <option value="pitched vocal chops, electronic processing">🎤 Pitched Chops</option>
-                            <option value="whispered vocals, intimate electronic">🎤 Whisper</option>
-                            <option value="rave MC vocals, hyped, energetic shouts">🎤 Rave MC</option>
-                            <option value="vocoder processed vocals, robotic, synth-like">🎤 Vocoder</option>
+                            <option value="dance music female vocals, euphoric and bright"> Dance Female</option>
+                            <option value="ethereal trance vocals, angelic, soaring"> Trance Ethereal</option>
+                            <option value="deep house vocals, soulful, filtered, sensual"> Deep House</option>
+                            <option value="pitched vocal chops, electronic processing"> Pitched Chops</option>
+                            <option value="whispered vocals, intimate electronic"> Whisper</option>
+                            <option value="rave MC vocals, hyped, energetic shouts"> Rave MC</option>
+                            <option value="vocoder processed vocals, robotic, synth-like"> Vocoder</option>
+                            <option value="airy breathy female topline, ethereal, floating"> Airy Topline</option>
+                            <option value="powerful emotional female belter, anthem-style chorus"> Anthem Belter
+                            </option>
+                            <option value="whispered intimate female vocal, close mic, ASMR-like"> Intimate Whisper
+                            </option>
+                            <option value="dark sultry female vocal, low register, smoky, seductive"> Dark Sultry
+                            </option>
+                            <option value="ethereal layered female choir, pad-like harmonies"> Choir Pads</option>
+                            <option value="clean nordic-style female vocal, icy pristine, Scandinavian"> Nordic Clean
+                            </option>
+                            <option value="emotional restrained male falsetto, vulnerable, intimate"> Male Falsetto
+                            </option>
+                            <option value="breathless indie-pop male vocal, intimate, hushed energy"> Indie Breathless
+                            </option>
+                            <option value="smooth R&B male vocal topline, melodic, silky"> R&B Topline</option>
+                            <option value="dark moody male baritone, deep, atmospheric"> Moody Baritone</option>
+                            <option value="melodic rap-style male phrasing, rhythmic, half-sung"> Melodic Rap</option>
+                            <option value="lo-fi conversational male vocal, laid-back, relaxed"> Lo-Fi Vocal</option>
                         </optgroup>
                         <optgroup label="R&B / Soul">
-                            <option value="smooth R&B female vocals, soulful runs, sensual">🎤 R&B Female</option>
-                            <option value="smooth R&B male vocals, silky, romantic">🎤 R&B Male</option>
-                            <option value="neo-soul vocals, warm and organic">🎤 Neo-Soul</option>
-                            <option value="motown vocals, classic soul, 60s style">🎤 Motown</option>
-                            <option value="modern R&B vocals, trap-influenced, atmospheric">🎤 Modern R&B</option>
-                            <option value="falsetto R&B vocals, high and airy, prince style">🎤 Falsetto</option>
-                            <option value="gospel-powered R&B vocals, belting, spiritual intensity">🎤 Gospel Power
+                            <option value="smooth R&B female vocals, soulful runs, sensual"> R&B Female</option>
+                            <option value="smooth R&B male vocals, silky, romantic"> R&B Male</option>
+                            <option value="neo-soul vocals, warm and organic"> Neo-Soul</option>
+                            <option value="motown vocals, classic soul, 60s style"> Motown</option>
+                            <option value="modern R&B vocals, trap-influenced, atmospheric"> Modern R&B</option>
+                            <option value="falsetto R&B vocals, high and airy, prince style"> Falsetto</option>
+                            <option value="gospel-powered R&B vocals, belting, spiritual intensity"> Gospel Power
                             </option>
                         </optgroup>
                         <optgroup label="Jazz / Fusion">
-                            <option value="soulful female jazz vocals, smooth and warm">🎤 Soulful Female</option>
-                            <option value="male crooner vocals, smooth jazz, frank sinatra style">🎤 Crooner</option>
-                            <option value="jazz scat vocals, improvised vocal melodies">🎤 Scatting</option>
-                            <option value="torch singer vocals, emotional, intimate, cabaret">🎤 Torch Singer</option>
-                            <option value="bebop vocals, fast and agile, virtuosic">🎤 Bebop</option>
-                            <option value="lounge singer vocals, sultry, sophisticated, cocktail jazz">🎤 Lounge
+                            <option value="soulful female jazz vocals, smooth and warm"> Soulful Female</option>
+                            <option value="male crooner vocals, smooth jazz, frank sinatra style"> Crooner</option>
+                            <option value="jazz scat vocals, improvised vocal melodies"> Scatting</option>
+                            <option value="torch singer vocals, emotional, intimate, cabaret"> Torch Singer</option>
+                            <option value="bebop vocals, fast and agile, virtuosic"> Bebop</option>
+                            <option value="lounge singer vocals, sultry, sophisticated, cocktail jazz"> Lounge
                             </option>
-                            <option value="gospel-influenced soul vocals, powerful, spiritual">🎤 Gospel Soul</option>
+                            <option value="gospel-influenced soul vocals, powerful, spiritual"> Gospel Soul</option>
                         </optgroup>
                         <optgroup label="Country / Blues">
-                            <option value="country male vocals, warm twang, storytelling">🎤 Country Male</option>
-                            <option value="country female vocals, clear and heartfelt">🎤 Country Female</option>
-                            <option value="outlaw country vocals, gritty, rebellious, willie nelson style">🎤 Outlaw
+                            <option value="country male vocals, warm twang, storytelling"> Country Male</option>
+                            <option value="country female vocals, clear and heartfelt"> Country Female</option>
+                            <option value="outlaw country vocals, gritty, rebellious, willie nelson style"> Outlaw
                                 Grit</option>
-                            <option value="polished nashville vocals, radio-ready, modern country">🎤 Nashville Polish
+                            <option value="polished nashville vocals, radio-ready, modern country"> Nashville Polish
                             </option>
-                            <option value="bluegrass vocal harmonies, appalachian, tight harmonies">🎤 Bluegrass Harmony
+                            <option value="bluegrass vocal harmonies, appalachian, tight harmonies"> Bluegrass Harmony
                             </option>
-                            <option value="blues vocals, gritty and soulful, raw emotion">🎤 Blues Grit</option>
-                            <option value="delta blues vocals, raw, field recording style, mournful">🎤 Delta Moan
+                            <option value="blues vocals, gritty and soulful, raw emotion"> Blues Grit</option>
+                            <option value="delta blues vocals, raw, field recording style, mournful"> Delta Moan
                             </option>
                         </optgroup>
                         <optgroup label="World">
-                            <option value="latin vocals, passionate and rhythmic, spanish influence">🎤 Latin</option>
-                            <option value="african vocals, call and response, world music">🎤 African</option>
-                            <option value="bollywood vocals, dramatic, indian classical ornaments">🎤 Bollywood</option>
-                            <option value="middle eastern vocals, arabic melisma, exotic">🎤 Middle Eastern</option>
-                            <option value="celtic vocals, irish folk, pure and clear">🎤 Celtic</option>
-                            <option value="reggae vocals, jamaican patois, laid back">🎤 Reggae</option>
-                            <option value="flamenco vocals, spanish, raw emotion, passionate">🎤 Flamenco</option>
-                            <option value="throat singing, overtone vocals, mongolian style">🎤 Throat Singing</option>
+                            <option value="latin vocals, passionate and rhythmic, spanish influence"> Latin</option>
+                            <option value="african vocals, call and response, world music"> African</option>
+                            <option value="bollywood vocals, dramatic, indian classical ornaments"> Bollywood</option>
+                            <option value="middle eastern vocals, arabic melisma, exotic"> Middle Eastern</option>
+                            <option value="celtic vocals, irish folk, pure and clear"> Celtic</option>
+                            <option value="reggae vocals, jamaican patois, laid back"> Reggae</option>
+                            <option value="flamenco vocals, spanish, raw emotion, passionate"> Flamenco</option>
+                            <option value="throat singing, overtone vocals, mongolian style"> Throat Singing</option>
                         </optgroup>
                     </select>
                 </div>
 
                 <!-- Rhythm Modifiers Panel -->
                 <div class="card">
-                    <div class="card-title">🐝 Rhythm Modifiers
+                    <div class="card-title"><span class="material-icons">grain</span> Rhythm Modifiers
                         <span class="help-icon">?
                             <span class="tooltip" style="width: 280px;">
                                 <span class="tooltip-title">Advanced Beat Timing</span>
                                 Control the rhythmic feel of your track. Select modifiers to inject rhythm descriptors
                                 into your caption.
-                                <span class="tooltip-example">💡 These are injected into your prompt for the AI to
+                                <span class="tooltip-example"><span class="material-icons"
+                                        style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span> These
+                                    are injected into your prompt for the AI to
                                     interpret</span>
                             </span>
                         </span>
@@ -1526,7 +1925,7 @@
 
                 <!-- Music Settings -->
                 <div class="card">
-                    <div class="card-title">🎵 Music Settings</div>
+                    <div class="card-title"><span class="material-icons">music_note</span> Music Settings</div>
                     <p class="setting-hint">Control how your track sounds — leave on Auto for AI-chosen values</p>
                     <div class="row" style="margin-top: 1rem;">
                         <div class="form-group">
@@ -1536,7 +1935,9 @@
                                     <span class="tooltip">
                                         <span class="tooltip-title">Tempo / Speed</span>
                                         How fast your track will play. Lower = chill, higher = energetic.
-                                        <span class="tooltip-example">💡 60-80: Ballad, Lo-fi<br>100-120: Pop,
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            60-80: Ballad, Lo-fi<br>100-120: Pop,
                                             Rock<br>130-150: EDM, Dance</span>
                                     </span>
                                 </span>
@@ -1550,13 +1951,15 @@
                                     <span class="tooltip">
                                         <span class="tooltip-title">Musical Key</span>
                                         Sets the mood of your music. Major = happy/bright, Minor = sad/moody.
-                                        <span class="tooltip-example">💡 Auto lets the AI pick the best key for your
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            Auto lets the AI pick the best key for your
                                             style</span>
                                     </span>
                                 </span>
                             </label>
                             <select id="key-scale">
-                                <option value="">Auto ✨</option>
+                                <option value="">Auto</option>
                                 <option value="C major">C Major (Happy)</option>
                                 <option value="C minor">C Minor (Moody)</option>
                                 <option value="D major">D Major (Bright)</option>
@@ -1580,13 +1983,15 @@
                                     <span class="tooltip">
                                         <span class="tooltip-title">Time Signature</span>
                                         The rhythmic feel of your music — how beats are grouped.
-                                        <span class="tooltip-example">💡 4/4: Most pop/rock<br>3/4: Waltz<br>6/8:
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            4/4: Most pop/rock<br>3/4: Waltz<br>6/8:
                                             Ballads, jigs</span>
                                     </span>
                                 </span>
                             </label>
                             <select id="time-signature">
-                                <option value="">Auto ✨</option>
+                                <option value="">Auto</option>
                                 <option value="4" selected>4/4 (Standard)</option>
                                 <option value="3">3/4 (Waltz)</option>
                                 <option value="6">6/8 (Flowing)</option>
@@ -1600,17 +2005,19 @@
                                     <span class="tooltip">
                                         <span class="tooltip-title">Lyrics Language</span>
                                         What language any vocals/lyrics should be in. Only applies when you have lyrics.
-                                        <span class="tooltip-example">💡 For instrumental tracks, this setting doesn't
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            For instrumental tracks, this setting doesn't
                                             matter</span>
                                     </span>
                                 </span>
                             </label>
                             <select id="language">
-                                <option value="en" selected>🇺🇸 English</option>
-                                <option value="zh">🇨🇳 Chinese</option>
-                                <option value="ja">🇯🇵 Japanese</option>
-                                <option value="ko">🇰🇷 Korean</option>
-                                <option value="unknown">Auto ✨</option>
+                                <option value="en" selected>EN - English</option>
+                                <option value="zh">ZH - Chinese</option>
+                                <option value="ja">JA - Japanese</option>
+                                <option value="ko">KO - Korean</option>
+                                <option value="unknown">Auto</option>
                             </select>
                         </div>
                     </div>
@@ -1618,36 +2025,41 @@
 
                 <!-- Generation Settings -->
                 <div class="card">
-                    <div class="card-title">⚙️ Generation Settings</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">settings</span> Generation Settings
+                    </div>
                     <p class="setting-hint">Controls quality vs. speed — pick a preset or fine-tune manually</p>
 
                     <!-- Quality Presets -->
                     <div class="settings-presets" style="margin-top: 1rem;">
                         <button class="settings-preset-btn" onclick="applyQualityPreset('fast')">
-                            <span>⚡</span>
+                            <span class="material-icons" style="font-size: 1rem;">bolt</span>
                             <span>Fast</span>
                             <span>~30s</span>
                         </button>
                         <button class="settings-preset-btn active" onclick="applyQualityPreset('balanced')">
-                            <span>⚖️</span>
+                            <span class="material-icons" style="font-size: 1rem;">balance</span>
                             <span>Balanced</span>
                             <span>~1min</span>
                         </button>
                         <button class="settings-preset-btn" onclick="applyQualityPreset('pro')">
-                            <span>✨</span>
+                            <span class="material-icons" style="font-size: 1rem;">auto_awesome</span>
                             <span>Pro</span>
                             <span>~2min</span>
                         </button>
                         <button class="settings-preset-btn preset-ultra" onclick="applyQualityPreset('ultra')">
-                            <span>🔥</span>
+                            <span class="material-icons"
+                                style="font-size: 1rem; color: #e74c3c;">local_fire_department</span>
                             <span>Ultra</span>
                             <span>~4min</span>
                         </button>
                     </div>
                     <div class="est-time" id="est-time">
-                        <span>⏱️ Estimated time:</span>
+                        <span><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">schedule</span> Estimated time:</span>
                         <span id="est-time-value">~1 min per track</span>
-                        <span class="quality-badge good" id="quality-badge">🟢 Good</span>
+                        <span class="quality-badge good" id="quality-badge"><span class="material-icons"
+                                style="font-size: 0.7rem; vertical-align: middle;">check_circle</span> Good</span>
                     </div>
 
                     <div class="row">
@@ -1657,16 +2069,28 @@
                                 <span class="help-icon">?
                                     <span class="tooltip">
                                         <span class="tooltip-title">Track Length</span>
-                                        How long your generated track will be in seconds.
-                                        <span class="tooltip-example">💡 30-60s: Quick ideas<br>120s: Full song
-                                            intro<br>300s+: Full track</span>
+                                        How long your generated track will be in seconds. Set to <strong>Random</strong>
+                                        (-1) to let the AI decide (30-240s).
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            Random: AI picks 30-240s<br>30-60s: Quick ideas<br>120s: Full song
+                                            section<br>300s (5 min): Typical max
+                                            for most GPUs<br>600s (10 min): High-end GPUs only (24GB+ VRAM)</span>
                                     </span>
                                 </span>
                             </label>
                             <div class="slider-row">
-                                <input type="range" id="duration" min="30" max="600" value="60">
+                                <input type="range" id="duration" min="-1" max="600" value="60"
+                                    oninput="updateDurationDisplay(this)">
                                 <span class="slider-value" id="duration-value">60s</span>
                             </div>
+                            <p class="setting-hint" id="duration-hint"
+                                style="display: none; color: var(--accent); margin-top: 0.25rem;">
+                                <span class="material-icons"
+                                    style="font-size: 0.9rem; vertical-align: middle;">casino</span>
+                                Random mode: AI will choose duration between 30-240 seconds
+                            </p>
+                            <div id="duration-warning" class="duration-warning" style="display: none;"></div>
                         </div>
                         <div class="form-group">
                             <label class="label-with-help">
@@ -1676,7 +2100,9 @@
                                         <span class="tooltip-title">Number of Versions</span>
                                         How many different versions to generate at once. More variations = more choices
                                         but longer wait.
-                                        <span class="tooltip-example">💡 2-3 is usually ideal for comparing
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            2-3 is usually ideal for comparing
                                             options</span>
                                     </span>
                                 </span>
@@ -1696,7 +2122,9 @@
                                         <span class="tooltip-title">Generation Quality</span>
                                         How much time the AI spends refining the music. Higher = better quality but
                                         slower.
-                                        <span class="tooltip-example">💡 20-30: Fast preview<br>50-60: Good
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            20-30: Fast preview<br>50-60: Good
                                             balance<br>80-100: Best quality</span>
                                     </span>
                                 </span>
@@ -1714,7 +2142,9 @@
                                         <span class="tooltip-title">How Closely to Follow Your Description</span>
                                         Higher = sticks closely to your prompt (recommended for specific styles). Lower
                                         = more randomness and surprises.
-                                        <span class="tooltip-example">💡 10-15: Best balance<br>15-20: Very
+                                        <span class="tooltip-example"><span class="material-icons"
+                                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                            10-15: Best balance<br>15-20: Very
                                             precise<br>5-10: More experimental</span>
                                     </span>
                                 </span>
@@ -1733,13 +2163,17 @@
                                     <span class="tooltip-title">Reproducibility</span>
                                     Use the same seed number to recreate the exact same result. -1 means random each
                                     time.
-                                    <span class="tooltip-example">💡 Found a track you love? Note its seed to regenerate
+                                    <span class="tooltip-example"><span class="material-icons"
+                                            style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                        Found a track you love? Note its seed to regenerate
                                         it later!</span>
                                 </span>
                             </span>
                         </label>
                         <input type="number" id="seed" value="-1" placeholder="-1 for random">
-                        <p class="setting-hint">💡 Use -1 for random results, or enter a specific number to reproduce a
+                        <p class="setting-hint"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle; color: var(--accent);">lightbulb</span>
+                            Use -1 for random results, or enter a specific number to reproduce a
                             result</p>
                     </div>
                     <div class="form-group">
@@ -1749,17 +2183,17 @@
                                 <span class="tooltip">
                                     <span class="tooltip-title">Output File Format</span>
                                     Choose the audio format for generated files.
-                                    <span class="tooltip-example">💡 MP3: Smallest, good quality<br>WAV: Uncompressed,
+                                    <span class="tooltip-example"><span class="material-icons"
+                                            style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span>
+                                        MP3: Smallest, good quality<br>WAV: Uncompressed,
                                         largest<br>FLAC: Lossless, smaller than WAV</span>
                                 </span>
                             </span>
                         </label>
-                        <select id="audio-format"
-                            style="padding: 0.75rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); width: 100%;">
-                            <option value="mp3" selected style="background: #1a1a2e; color: #fff;">MP3 (Compressed)
-                            </option>
-                            <option value="wav" style="background: #1a1a2e; color: #fff;">WAV (Uncompressed)</option>
-                            <option value="flac" style="background: #1a1a2e; color: #fff;">FLAC (Lossless)</option>
+                        <select id="audio-format">
+                            <option value="mp3" selected>MP3 (Compressed)</option>
+                            <option value="wav">WAV (Uncompressed)</option>
+                            <option value="flac">FLAC (Lossless)</option>
                         </select>
                     </div>
                 </div>
@@ -1768,7 +2202,9 @@
                 <div class="card" id="final-prompt-card"
                     style="background: linear-gradient(135deg, rgba(0, 245, 212, 0.05), rgba(0, 163, 255, 0.05)); border-color: var(--accent);">
                     <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                        📝 Final Prompt Preview
+                        <span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">description</span> Final Prompt
+                        Preview
                         <button class="structure-btn" onclick="toggleFinalPrompt()"
                             style="font-size: 0.7rem; padding: 0.25rem 0.5rem;">Toggle</button>
                     </div>
@@ -1785,7 +2221,8 @@
 
                 <!-- Generate -->
                 <button class="generate-btn" id="generate-btn" onclick="generateMusic()">
-                    ⚡ Generate Music
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 0.25rem;">bolt</span>
+                    Generate Music
                 </button>
 
                 <div class="status" id="status"></div>
@@ -1796,7 +2233,8 @@
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                         <span id="progress-text">Generating...</span>
                         <button id="cancel-btn" onclick="cancelGeneration()"
-                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">close</span>
                             Cancel</button>
                     </div>
                     <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
@@ -1809,22 +2247,28 @@
                 <!-- Audio Monitor: EQ + Beat Validator -->
                 <div class="audio-monitor" id="audio-monitor">
                     <div class="audio-monitor-header">
-                        <span class="audio-monitor-title">🎚️ Audio Monitor</span>
+                        <span class="audio-monitor-title"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">equalizer</span> Audio Monitor</span>
                     </div>
                     <div class="audio-monitor-waiting">
-                        ▶️ Play a track to activate EQ visualizer and beat validator
+                        <span class="material-icons" style="font-size: 1rem; vertical-align: middle;">play_arrow</span>
+                        Play a track to activate EQ visualizer and beat validator
                     </div>
                     <div class="eq-canvas-container">
                         <canvas id="eq-canvas"></canvas>
                     </div>
                     <div class="beat-validator">
                         <button class="metronome-toggle" id="metronome-toggle">
-                            🥁 Beat Check
+                            <span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Beat Check
                         </button>
                         <span class="bpm-display" id="bpm-display">-- BPM</span>
                         <div class="beat-indicator" id="beat-indicator"></div>
                         <span class="beat-status" id="beat-status">Click Beat Check to validate timing</span>
-                        <p class="setting-hint" style="margin-top: 0.5rem; font-size: 0.7rem;">💡 BPM is a target - AI
+                        <p class="setting-hint" style="margin-top: 0.5rem; font-size: 0.7rem;"><span
+                                class="material-icons"
+                                style="font-size: 0.9rem; vertical-align: middle;">tips_and_updates</span> BPM is a
+                            target - AI
                             music may vary ±5-10 BPM</p>
                     </div>
                 </div>
@@ -1845,7 +2289,8 @@
 
             <!-- Remix Lab Page -->
             <div class="page" id="page-remix">
-                <h2 style="margin-bottom: 1rem;">🔧 Remix Lab</h2>
+                <h2 style="margin-bottom: 1rem;"><span class="material-icons"
+                        style="vertical-align: middle; margin-right: 0.25rem;">build</span> Remix Lab</h2>
                 <p class="setting-hint" style="margin-bottom: 0.5rem;">
                     Transform any song into a different style using ACE-Step's <strong>cover</strong> task.
                 </p>
@@ -1853,7 +2298,8 @@
                 <!-- How It Works Section -->
                 <div class="card"
                     style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(0, 206, 201, 0.1));">
-                    <div class="card-title">💡 How It Works</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">tips_and_updates</span> How It Works</div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
                         <p style="margin-bottom: 0.75rem;">
                             <strong>Cover Strength</strong> = how much the <em>original audio</em> influences the
@@ -1872,21 +2318,30 @@
                             <tbody>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
                                     <td style="padding: 0.4rem 0;"><strong>0.2–0.4</strong></td>
-                                    <td style="padding: 0.4rem 0;">🎨 <strong>Style wins</strong> — dramatic genre
+                                    <td style="padding: 0.4rem 0;"><span class="material-icons"
+                                            style="font-size: 0.9rem; vertical-align: middle;">palette</span>
+                                        <strong>Style wins</strong> — dramatic genre
                                         change,
-                                        original structure loosely followed</td>
+                                        original structure loosely followed
+                                    </td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--border-color);">
                                     <td style="padding: 0.4rem 0;"><strong>0.5–0.7</strong></td>
-                                    <td style="padding: 0.4rem 0;">⚖️ <strong>Balanced</strong> — melody preserved,
+                                    <td style="padding: 0.4rem 0;"><span class="material-icons"
+                                            style="font-size: 0.9rem; vertical-align: middle;">balance</span>
+                                        <strong>Balanced</strong> — melody preserved,
                                         style
-                                        applied moderately</td>
+                                        applied moderately
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 0.4rem 0;"><strong>0.8–1.0</strong></td>
-                                    <td style="padding: 0.4rem 0;">🎵 <strong>Original wins</strong> — subtle style
+                                    <td style="padding: 0.4rem 0;"><span class="material-icons"
+                                            style="font-size: 0.9rem; vertical-align: middle;">music_note</span>
+                                        <strong>Original wins</strong> — subtle style
                                         touches
-                                        only, structure intact</td>
+                                        only, structure intact
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1899,10 +2354,12 @@
 
                 <!-- Source Audio Upload -->
                 <div class="card">
-                    <div class="card-title">📂 Source Audio</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">folder_open</span> Source Audio</div>
                     <div class="dropzone" id="remix-dropzone"
                         onclick="document.getElementById('remix-audio-input').click()">
-                        <div class="dropzone-icon">🎵</div>
+                        <div class="dropzone-icon"><span class="material-icons"
+                                style="font-size: 2rem;">audio_file</span></div>
                         <div class="dropzone-text">Drop audio file here or click to browse</div>
                         <div class="dropzone-text" style="font-size: 0.75rem; margin-top: 0.5rem;">Supports MP3, WAV,
                             FLAC</div>
@@ -1911,35 +2368,50 @@
                     </div>
                     <div class="dropzone-file" id="remix-file-info">
                         <span class="dropzone-filename" id="remix-filename"></span>
-                        <button class="dropzone-clear" onclick="clearRemixFile(event)">✕</button>
+                        <button class="dropzone-clear" onclick="clearRemixFile(event)"><span class="material-icons"
+                                style="font-size: 1rem;">close</span></button>
                     </div>
                 </div>
 
                 <!-- Target Style -->
                 <div class="card">
-                    <div class="card-title">🎨 Target Style</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">palette</span> Target Style</div>
                     <p class="setting-hint">Select a genre transformation or describe your own style</p>
 
                     <div class="style-chips" style="margin-top: 1rem;" id="remix-style-chips">
                         <button class="style-chip"
-                            data-style="jazz piano trio, smooth jazz, walking bass, brush drums">🎹 Jazz</button>
+                            data-style="jazz piano trio, smooth jazz, walking bass, brush drums"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">piano</span>
+                            Jazz</button>
                         <button class="style-chip"
-                            data-style="lo-fi hip hop, vinyl crackle, mellow beats, warm Rhodes">🎧 Lo-fi</button>
+                            data-style="lo-fi hip hop, vinyl crackle, mellow beats, warm Rhodes"><span
+                                class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">headphones</span> Lo-fi</button>
                         <button class="style-chip"
-                            data-style="acoustic folk, fingerpicked guitar, warm vocals, intimate">🪕 Acoustic</button>
+                            data-style="acoustic folk, fingerpicked guitar, warm vocals, intimate"><span
+                                class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Acoustic</button>
                         <button class="style-chip"
-                            data-style="orchestral arrangement, full symphony, cinematic strings">🎻 Orchestral</button>
+                            data-style="orchestral arrangement, full symphony, cinematic strings"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">album</span>
+                            Orchestral</button>
                         <button class="style-chip"
-                            data-style="electronic dance, thumping kick, synth arpeggios, side-chain compression">⚡
+                            data-style="electronic dance, thumping kick, synth arpeggios, side-chain compression"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">bolt</span>
                             Electronic</button>
                         <button class="style-chip"
-                            data-style="80s synthwave, analog synths, gated reverb drums, retro vibes">🌆
+                            data-style="80s synthwave, analog synths, gated reverb drums, retro vibes"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">nightlife</span>
                             Synthwave</button>
                         <button class="style-chip"
-                            data-style="metal cover, heavy distorted guitars, double bass drums, aggressive">🤘
+                            data-style="metal cover, heavy distorted guitars, double bass drums, aggressive"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">whatshot</span>
                             Metal</button>
                         <button class="style-chip"
-                            data-style="bossa nova, nylon guitar, soft percussion, Brazilian jazz">🌴 Bossa
+                            data-style="bossa nova, nylon guitar, soft percussion, Brazilian jazz"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">sunny</span>
+                            Bossa
                             Nova</button>
                     </div>
 
@@ -1952,7 +2424,8 @@
 
                 <!-- Cover Strength -->
                 <div class="card">
-                    <div class="card-title">🎚️ Cover Strength</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">tune</span> Cover Strength</div>
                     <p class="setting-hint">How closely to follow the original structure</p>
 
                     <div class="slider-row" style="margin-top: 1rem;">
@@ -1971,7 +2444,9 @@
 
                 <!-- Optional New Lyrics -->
                 <div class="card">
-                    <div class="card-title">📝 New Lyrics (Optional)</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">edit_note</span> New Lyrics (Optional)
+                    </div>
                     <p class="setting-hint">Leave empty to keep instrumental or original melody</p>
                     <textarea id="remix-lyrics" rows="4"
                         placeholder="[Verse 1]&#10;New lyrics here...&#10;&#10;[Chorus]&#10;..."></textarea>
@@ -1979,7 +2454,8 @@
 
                 <!-- Generation Settings -->
                 <div class="card">
-                    <div class="card-title">⚙️ Generation Settings</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">settings</span> Generation Settings</div>
                     <div class="row">
                         <div class="form-group">
                             <label>Quality Steps</label>
@@ -2000,7 +2476,8 @@
 
                 <!-- Generate Button -->
                 <button class="generate-btn" id="remix-generate-btn" onclick="generateRemix()">
-                    🔧 Generate Remix
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 0.25rem;">build</span>
+                    Generate Remix
                 </button>
 
                 <div class="status" id="remix-status"></div>
@@ -2011,7 +2488,8 @@
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                         <span id="remix-progress-text">Generating remix...</span>
                         <button id="remix-cancel-btn" onclick="cancelRemixGeneration()"
-                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">close</span>
                             Cancel</button>
                     </div>
                     <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
@@ -2030,7 +2508,8 @@
 
             <!-- Stem Ripper Page -->
             <div class="page" id="page-stems">
-                <h2 style="margin-bottom: 1rem;">✂️ Stem Ripper</h2>
+                <h2 style="margin-bottom: 1rem;"><span class="material-icons"
+                        style="vertical-align: middle; margin-right: 0.25rem;">content_cut</span> Stem Ripper</h2>
                 <p class="setting-hint" style="margin-bottom: 0.5rem;">
                     Extract individual tracks from mixed audio using ACE-Step's <strong>extract</strong> task.
                 </p>
@@ -2038,7 +2517,8 @@
                 <!-- How It Works Section -->
                 <div class="card"
                     style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(241, 196, 15, 0.1));">
-                    <div class="card-title">💡 How It Works</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">tips_and_updates</span> How It Works</div>
                     <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
                         <p style="margin-bottom: 0.75rem;">
                             Upload a mixed track and select which instrument to extract. The AI will generate that stem
@@ -2054,10 +2534,12 @@
 
                 <!-- Source Audio Upload -->
                 <div class="card">
-                    <div class="card-title">📂 Mixed Audio</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">folder_open</span> Mixed Audio</div>
                     <div class="dropzone" id="stems-dropzone"
                         onclick="document.getElementById('stems-audio-input').click()">
-                        <div class="dropzone-icon">🎵</div>
+                        <div class="dropzone-icon"><span class="material-icons"
+                                style="font-size: 2rem;">audio_file</span></div>
                         <div class="dropzone-text">Drop mixed audio here or click to browse</div>
                         <div class="dropzone-text" style="font-size: 0.75rem; margin-top: 0.5rem;">Supports MP3, WAV,
                             FLAC</div>
@@ -2066,28 +2548,43 @@
                     </div>
                     <div class="dropzone-file" id="stems-file-info">
                         <span class="dropzone-filename" id="stems-filename"></span>
-                        <button class="dropzone-clear" onclick="clearStemsFile(event)">✕</button>
+                        <button class="dropzone-clear" onclick="clearStemsFile(event)"><span class="material-icons"
+                                style="font-size: 1rem;">close</span></button>
                     </div>
                 </div>
 
                 <!-- Track Selector -->
                 <div class="card">
-                    <div class="card-title">🎯 Select Track to Extract</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">center_focus_strong</span> Select Track to
+                        Extract</div>
                     <p class="setting-hint">Choose which instrument or part to isolate</p>
 
                     <div class="style-chips" style="margin-top: 1rem;" id="stems-track-chips">
-                        <button class="style-chip active" data-track="vocals">🎤 Vocals</button>
-                        <button class="style-chip" data-track="backing_vocals">🎙️ Backing Vocals</button>
-                        <button class="style-chip" data-track="drums">🥁 Drums</button>
-                        <button class="style-chip" data-track="bass">🎸 Bass</button>
-                        <button class="style-chip" data-track="guitar">🎸 Guitar</button>
-                        <button class="style-chip" data-track="keyboard">🎹 Keyboard</button>
-                        <button class="style-chip" data-track="strings">🎻 Strings</button>
-                        <button class="style-chip" data-track="synth">🔊 Synth</button>
-                        <button class="style-chip" data-track="percussion">🪘 Percussion</button>
-                        <button class="style-chip" data-track="brass">🎺 Brass</button>
-                        <button class="style-chip" data-track="woodwinds">🪈 Woodwinds</button>
-                        <button class="style-chip" data-track="fx">✨ FX</button>
+                        <button class="style-chip active" data-track="vocals"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">mic</span> Vocals</button>
+                        <button class="style-chip" data-track="backing_vocals"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">groups</span> Backing</button>
+                        <button class="style-chip" data-track="drums"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Drums</button>
+                        <button class="style-chip" data-track="bass"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">graphic_eq</span> Bass</button>
+                        <button class="style-chip" data-track="guitar"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Guitar</button>
+                        <button class="style-chip" data-track="keyboard"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">piano</span> Keyboard</button>
+                        <button class="style-chip" data-track="strings"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Strings</button>
+                        <button class="style-chip" data-track="synth"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">surround_sound</span> Synth</button>
+                        <button class="style-chip" data-track="percussion"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Percussion</button>
+                        <button class="style-chip" data-track="brass"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Brass</button>
+                        <button class="style-chip" data-track="woodwinds"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">music_note</span> Woodwinds</button>
+                        <button class="style-chip" data-track="fx"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">auto_awesome</span> FX</button>
                     </div>
 
                     <div
@@ -2098,9 +2595,8 @@
                     </div>
                 </div>
 
-                <!-- Generation Settings -->
                 <div class="card">
-                    <div class="card-title">⚙️ Generation Settings</div>
+                    <div class="card-title"><span class="material-icons">settings</span> Generation Settings</div>
                     <div class="row">
                         <div class="form-group">
                             <label>Quality Steps</label>
@@ -2120,7 +2616,9 @@
                 </div>
 
                 <!-- Generate Button -->
-                <button class="generate-btn" id="stems-generate-btn" onclick="generateStems()">✂️ Extract Stem</button>
+                <button class="generate-btn" id="stems-generate-btn" onclick="generateStems()"><span
+                        class="material-icons" style="vertical-align: middle; margin-right: 0.5rem;">content_cut</span>
+                    Extract Stem</button>
 
                 <!-- Status -->
                 <p id="stems-status" class="status" style="margin-top: 1rem;"></p>
@@ -2131,7 +2629,8 @@
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
                         <span id="stems-progress-text">Extracting stem...</span>
                         <button onclick="cancelStemsGeneration()"
-                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕
+                            style="background: #e74c3c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;"><span
+                                class="material-icons" style="font-size: 1rem; vertical-align: middle;">close</span>
                             Cancel</button>
                     </div>
                     <div style="background: var(--bg-secondary); border-radius: 8px; height: 12px; overflow: hidden;">
@@ -2148,17 +2647,27 @@
                 </div>
             </div>
 
+            <!-- Artists Page -->
+            <div class="page" id="page-artists">
+                <h2 style="margin-bottom: 1.5rem;">Artist Roster</h2>
+                <p class="setting-hint" style="margin-bottom: 1.5rem;">Your virtual artists. Select an artist in Studio
+                    to auto-apply their vocal persona and style.</p>
+                <div class="artist-grid" id="artist-grid"></div>
+            </div>
+
             <!-- Library Page -->
             <div class="page" id="page-library">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <h2 style="margin: 0;">Your Library</h2>
-                    <button class="structure-btn" onclick="loadLibrary()">🔄 Refresh</button>
+                    <button class="structure-btn" onclick="loadLibrary()"><span class="material-icons"
+                            style="font-size: 1rem; vertical-align: middle;">refresh</span> Refresh</button>
                 </div>
                 <div id="library-loading" style="text-align: center; padding: 2rem; display: none;">
                     <p>Loading library...</p>
                 </div>
                 <div id="library-empty" class="empty-state">
-                    <div class="empty-state-icon">🎵</div>
+                    <div class="empty-state-icon"><span class="material-icons"
+                            style="font-size: 3rem;">music_note</span></div>
                     <p>Generated tracks will appear here</p>
                 </div>
                 <div class="library-grid" id="library-grid"
@@ -2168,11 +2677,22 @@
 
             <!-- Help Page -->
             <div class="page" id="page-help">
-                <h2 style="margin-bottom: 1.5rem;">❓ Help & Troubleshooting</h2>
+                <h2 style="margin-bottom: 1.5rem;"><span class="material-icons"
+                        style="vertical-align: middle; margin-right: 0.5rem;">help_outline</span> Help & Troubleshooting
+                </h2>
+
+                <p
+                    style="font-size: 1rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(219, 131, 36, 0.1), rgba(107, 142, 35, 0.1)); border-radius: 12px; border-left: 3px solid var(--accent-warm);">
+                    <strong>Signal Horizon is a premium, artist-focused frontend that transforms ACE-Step 1.5's raw AI
+                        music generation capabilities into an intuitive creative workflow for composing, remixing, and
+                        deconstructing music through a polished dashboard interface.</strong>
+                </p>
 
                 <!-- Quick Tips -->
                 <div class="card">
-                    <div class="card-title">💡 Quick Tips for Best Results</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">lightbulb</span> Quick Tips for Best
+                        Results</div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
                         <div
                             style="padding: 1rem; background: var(--bg-surface); border-radius: 12px; border-left: 3px solid var(--accent);">
@@ -2203,7 +2723,9 @@
 
                 <!-- Common Errors -->
                 <div class="card">
-                    <div class="card-title">🔧 Common Console Messages (Don't Panic!)</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">build</span> Common Console Messages
+                        (Don't Panic!)</div>
 
                     <!-- Error 1: ConnectionResetError -->
                     <div
@@ -2219,7 +2741,9 @@
                             <p style="color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Why it happens:</strong>
                                 Windows asyncio logs this when browser connections close normally. It's cleanup noise,
                                 not an error.</p>
-                            <p style="color: var(--success);"><strong>Resolution:</strong> ✅ Ignore it — your generation
+                            <p style="color: var(--success);"><strong>Resolution:</strong> <span class="material-icons"
+                                    style="font-size: 1rem; vertical-align: middle; color: var(--success);">check_circle</span>
+                                Ignore it — your generation
                                 completed successfully!</p>
                         </div>
                     </div>
@@ -2306,7 +2830,9 @@
 
                 <!-- Settings Explained -->
                 <div class="card">
-                    <div class="card-title">⚙️ Settings Explained</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">settings</span> Settings Explained
+                    </div>
                     <div style="display: grid; gap: 1rem;">
                         <div
                             style="display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: 0.75rem; background: var(--bg-surface); border-radius: 8px;">
@@ -2343,14 +2869,19 @@
 
                 <!-- About -->
                 <div class="card">
-                    <div class="card-title">ℹ️ About Signal Horizon</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">info</span> About Signal Horizon
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text); line-height: 1.7; margin-bottom: 1rem;">
+                        <strong>Signal Horizon is a premium, artist-focused frontend that transforms ACE-Step 1.5's raw
+                            AI music generation capabilities into an intuitive creative workflow for composing,
+                            remixing, and deconstructing music through a polished dashboard interface.</strong>
+                    </p>
                     <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-                        Signal Horizon is a custom UI for <strong>ACE-Step 1.5</strong>, an open-source AI music
-                        generation model.
-                        It runs locally on your GPU, giving you full control and privacy. While it may not match
-                        cloud-based services
-                        like Suno in polish, it offers unlimited generation, no subscriptions, and the ability to create
-                        tracks up to 10 minutes long.
+                        Built on the open-source <strong>ACE-Step 1.5</strong> model, it runs locally on your GPU,
+                        giving you full control and privacy. Unlike cloud-based services, Signal Horizon offers
+                        unlimited generation, no subscriptions, and support for tracks up to 5 minutes on most GPUs (10
+                        minutes on high-end 24GB+ cards).
                     </p>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
                         <strong>Pro tip:</strong> For best results, generate multiple variations and post-process your
@@ -2361,21 +2892,26 @@
 
             <!-- Admin Page -->
             <div class="page" id="page-admin">
-                <h2 style="margin-bottom: 1.5rem;">🔧 Admin Settings</h2>
+                <h2 style="margin-bottom: 1.5rem;"><span class="material-icons"
+                        style="vertical-align: middle; margin-right: 0.5rem;">admin_panel_settings</span> Admin Settings
+                </h2>
                 <p class="setting-hint" style="margin-bottom: 1.5rem;">
                     Fine-tune quality parameters for maximum output quality. Settings are saved to your browser.
                 </p>
 
                 <!-- Quality Preset Defaults -->
                 <div class="card">
-                    <div class="card-title">🎚️ Quality Preset Definitions</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">tune</span> Quality Preset
+                        Definitions</div>
                     <p class="setting-hint">Configure what each preset button does on the Create page</p>
 
                     <div
                         style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem;">
                         <!-- Fast Preset -->
                         <div class="admin-field">
-                            <label>⚡ Fast Preset</label>
+                            <label><span class="material-icons"
+                                    style="font-size: 1rem; vertical-align: middle;">bolt</span> Fast Preset</label>
                             <div style="display: grid; gap: 0.5rem;">
                                 <div><small>Steps:</small> <input type="number" id="admin-fast-steps" value="16" min="8"
                                         max="200" style="width: 70px;"></div>
@@ -2385,7 +2921,9 @@
                         </div>
                         <!-- Balanced Preset -->
                         <div class="admin-field">
-                            <label>⚖️ Balanced Preset</label>
+                            <label><span class="material-icons"
+                                    style="font-size: 1rem; vertical-align: middle;">balance</span> Balanced
+                                Preset</label>
                             <div style="display: grid; gap: 0.5rem;">
                                 <div><small>Steps:</small> <input type="number" id="admin-balanced-steps" value="60"
                                         min="8" max="200" style="width: 70px;"></div>
@@ -2395,7 +2933,9 @@
                         </div>
                         <!-- Pro Preset -->
                         <div class="admin-field">
-                            <label>✨ Pro Preset</label>
+                            <label><span class="material-icons"
+                                    style="font-size: 1rem; vertical-align: middle;">auto_awesome</span> Pro
+                                Preset</label>
                             <div style="display: grid; gap: 0.5rem;">
                                 <div><small>Steps:</small> <input type="number" id="admin-pro-steps" value="100" min="8"
                                         max="200" style="width: 70px;"></div>
@@ -2405,7 +2945,9 @@
                         </div>
                         <!-- Ultra Preset -->
                         <div class="admin-field" style="border-color: #9b59b6;">
-                            <label>🔥 Ultra Preset (Max Quality)</label>
+                            <label><span class="material-icons"
+                                    style="font-size: 1rem; vertical-align: middle; color: #e74c3c;">local_fire_department</span>
+                                Ultra Preset (Max Quality)</label>
                             <div style="display: grid; gap: 0.5rem;">
                                 <div><small>Steps:</small> <input type="number" id="admin-ultra-steps" value="150"
                                         min="8" max="200" style="width: 70px;"></div>
@@ -2418,7 +2960,9 @@
 
                 <!-- DiT Engine Settings -->
                 <div class="card">
-                    <div class="card-title">🎛️ DiT Engine (Audio Synthesis)</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">graphic_eq</span> DiT Engine (Audio
+                        Synthesis)</div>
                     <p class="setting-hint">Advanced diffusion transformer settings for audio generation</p>
 
                     <div class="admin-grid" style="margin-top: 1rem;">
@@ -2447,7 +2991,9 @@
 
                 <!-- LLM Planner Settings -->
                 <div class="card">
-                    <div class="card-title">🧠 LLM Planner (Song Structure)</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">psychology</span> LLM Planner (Song
+                        Structure)</div>
                     <p class="setting-hint">Controls how the language model plans your music</p>
 
                     <div class="admin-grid" style="margin-top: 1rem;">
@@ -2473,7 +3019,9 @@
 
                 <!-- Audio Processing Settings -->
                 <div class="card">
-                    <div class="card-title">🔊 Audio Processing (Volume Stabilization)</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">volume_up</span> Audio Processing
+                        (Volume Stabilization)</div>
                     <p class="setting-hint">Fix volume fluctuation with loudness normalization</p>
 
                     <div class="admin-grid" style="margin-top: 1rem;">
@@ -2503,11 +3051,17 @@
                 <!-- Export/Import -->
 
                 <div class="card">
-                    <div class="card-title">💾 Backup & Restore</div>
+                    <div class="card-title"><span class="material-icons"
+                            style="vertical-align: middle; margin-right: 0.25rem;">save</span> Backup & Restore</div>
                     <div class="export-import-btns">
-                        <button onclick="exportAdminSettings()">📤 Export Settings</button>
-                        <button onclick="document.getElementById('import-file').click()">📥 Import Settings</button>
-                        <button onclick="resetAdminSettings()" style="background: #e74c3c22; border-color: #e74c3c;">🔄
+                        <button onclick="exportAdminSettings()"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">upload</span> Export Settings</button>
+                        <button onclick="document.getElementById('import-file').click()"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">download</span> Import
+                            Settings</button>
+                        <button onclick="resetAdminSettings()"
+                            style="background: #e74c3c22; border-color: #e74c3c;"><span class="material-icons"
+                                style="font-size: 1rem; vertical-align: middle;">restart_alt</span>
                             Reset to Defaults</button>
                     </div>
                     <input type="file" id="import-file" accept=".json" style="display: none;"
@@ -2517,7 +3071,8 @@
                 </div>
 
                 <button class="generate-btn" onclick="saveAdminSettings()" style="margin-top: 1rem;">
-                    💾 Save All Settings
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 0.5rem;">save</span> Save
+                    All Settings
                 </button>
                 <div id="admin-status" class="status" style="margin-top: 0.5rem;"></div>
             </div>
@@ -2531,7 +3086,8 @@
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                         <h3 id="modal-title" style="margin: 0;">Track Details</h3>
                         <button onclick="closeTrackModal()"
-                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-primary);">✕</button>
+                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text);"><span
+                                class="material-icons">close</span></button>
                     </div>
                     <div id="modal-body"></div>
                 </div>
@@ -2541,6 +3097,49 @@
 
     <script>
         const API_BASE = '';  // Same origin - served by Signal Horizon server
+
+        // Duration slider warning colors based on GPU tier limits
+        function updateDurationWarning(slider) {
+            const value = parseInt(slider.value);
+            const valueDisplay = document.getElementById('duration-value');
+            const warning = document.getElementById('duration-warning');
+
+            // Update value display
+            if (valueDisplay) {
+                valueDisplay.textContent = value + 's';
+            }
+
+            // Remove existing classes
+            slider.classList.remove('warning-yellow', 'warning-red');
+            if (valueDisplay) valueDisplay.classList.remove('warning', 'danger');
+
+            if (value > 300) {
+                // Danger zone - 5min+, most GPUs struggle
+                slider.classList.add('warning-red');
+                if (valueDisplay) valueDisplay.classList.add('danger');
+                if (warning) {
+                    warning.style.display = 'block';
+                    warning.className = 'duration-warning danger';
+                    warning.textContent = value >= 480 ?
+                        '⚠️ 8+ min requires 24GB+ GPU' :
+                        '⚠️ 5+ min may exceed GPU limits';
+                }
+            } else if (value > 180) {
+                // Warning zone - 3min+, getting long
+                slider.classList.add('warning-yellow');
+                if (valueDisplay) valueDisplay.classList.add('warning');
+                if (warning) {
+                    warning.style.display = 'block';
+                    warning.className = 'duration-warning warning';
+                    warning.textContent = '3+ min — good for most GPUs';
+                }
+            } else {
+                // Safe zone
+                if (warning) {
+                    warning.style.display = 'none';
+                }
+            }
+        }
 
         // =====================================================================
         // Audio Monitor: EQ Visualizer + Beat Validator
@@ -2814,6 +3413,182 @@
 
 
         // =====================================================================
+        // Artist Management System
+        // =====================================================================
+        const ARTISTS = {
+            'the-treq': {
+                id: 'the-treq',
+                name: 'The Treq',
+                genre: 'EDM',
+                subgenres: ['progressive house', 'melodic techno', 'trance'],
+                vocalPersona: 'dark moody male baritone, deep, atmospheric',
+                defaultPreset: 'The Treq',
+                color: '#6b7b59',
+                icon: 'equalizer',
+                isCollaboration: false
+            },
+            'avey-kay': {
+                id: 'avey-kay',
+                name: 'Avey Kay',
+                genre: 'Indie Rock',
+                subgenres: ['indie pop', 'alternative', 'dreampop'],
+                vocalPersona: 'indie rock vocals, understated, authentic, female',
+                defaultPreset: null,
+                color: '#d97706',
+                icon: 'music_note',
+                isCollaboration: false
+            },
+            'jackson-ryle': {
+                id: 'jackson-ryle',
+                name: 'Jackson Ryle',
+                genre: 'Country',
+                subgenres: ['delta blues', 'americana', 'roots'],
+                vocalPersona: 'country male vocals, warm twang, storytelling',
+                defaultPreset: 'Country',
+                color: '#92400e',
+                icon: 'audiotrack',
+                isCollaboration: false
+            },
+            'avey-jackson': {
+                id: 'avey-jackson',
+                name: 'Avey & Jackson',
+                genre: 'Americana Crossover',
+                subgenres: ['indie folk', 'country rock', 'roots'],
+                vocalPersona: 'male and female duet, harmonizing together, interweaving vocals',
+                defaultPreset: null,
+                color: '#b45309',
+                icon: 'group',
+                isCollaboration: true,
+                members: ['avey-kay', 'jackson-ryle']
+            }
+        };
+
+        let selectedArtistId = null;
+
+        // Initialize artist dropdown and grid
+        function initArtists() {
+            const select = document.getElementById('artist-select');
+            const grid = document.getElementById('artist-grid');
+            if (!select) return;
+
+            // Populate dropdown
+            Object.values(ARTISTS).forEach(artist => {
+                const option = document.createElement('option');
+                option.value = artist.id;
+                option.textContent = artist.isCollaboration ? `${artist.name} (Collab)` : artist.name;
+                select.appendChild(option);
+            });
+
+            // Populate Artists page grid
+            if (grid) {
+                renderArtistGrid();
+            }
+        }
+
+        // Render artist cards on Artists page
+        function renderArtistGrid() {
+            const grid = document.getElementById('artist-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            Object.values(ARTISTS).forEach(artist => {
+                const card = document.createElement('div');
+                card.className = `artist-card ${artist.isCollaboration ? 'collaboration' : ''}`;
+                card.style.setProperty('--artist-color', artist.color);
+                card.innerHTML = `
+                    <span class="material-icons artist-icon">${artist.icon}</span>
+                    <div class="artist-name">${artist.name}</div>
+                    <div class="artist-genre">${artist.genre}</div>
+                    <div class="artist-subgenres">${artist.subgenres.join(' • ')}</div>
+                    <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-muted);">
+                        <strong>Vocal:</strong> ${artist.vocalPersona.split(',').slice(0, 2).join(', ')}
+                    </div>
+                `;
+                card.onclick = () => {
+                    // Select this artist in the Studio
+                    const select = document.getElementById('artist-select');
+                    if (select) {
+                        select.value = artist.id;
+                        selectArtist(artist.id);
+                    }
+                    // Navigate to Studio
+                    document.querySelector('[data-page="create"]').click();
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        // Handle artist selection
+        function selectArtist(artistId) {
+            selectedArtistId = artistId;
+            const infoEl = document.getElementById('artist-info');
+            const duetBtns = document.getElementById('duet-lyrics-btns');
+            const vocalSelect = document.getElementById('vocal-persona');
+
+            if (!artistId) {
+                // Clear selection
+                infoEl?.classList.remove('visible');
+                duetBtns?.classList.remove('visible');
+                return;
+            }
+
+            const artist = ARTISTS[artistId];
+            if (!artist) return;
+
+            // Show artist info preview
+            if (infoEl) {
+                infoEl.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span class="material-icons" style="color: ${artist.color};">${artist.icon}</span>
+                        <strong>${artist.name}</strong>
+                        <span class="artist-badge" style="background: ${artist.color}; color: #fff;">${artist.genre}</span>
+                    </div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        Vocal: ${artist.vocalPersona}
+                    </div>
+                `;
+                infoEl.classList.add('visible');
+            }
+
+            // Auto-set vocal persona
+            if (vocalSelect) {
+                // Try to find matching option, otherwise set custom value
+                const matchingOption = Array.from(vocalSelect.options).find(
+                    opt => opt.value.toLowerCase().includes(artist.vocalPersona.split(',')[0].toLowerCase())
+                );
+                if (matchingOption) {
+                    vocalSelect.value = matchingOption.value;
+                } else {
+                    // Add a custom option for this artist's persona
+                    const customOpt = document.createElement('option');
+                    customOpt.value = artist.vocalPersona;
+                    customOpt.textContent = `${artist.name} Style`;
+                    customOpt.selected = true;
+                    vocalSelect.appendChild(customOpt);
+                }
+            }
+
+            // Show/hide duet buttons
+            if (duetBtns) {
+                if (artist.isCollaboration) {
+                    duetBtns.classList.add('visible');
+                } else {
+                    duetBtns.classList.remove('visible');
+                }
+            }
+
+            // Update final prompt preview
+            if (typeof updateFinalPrompt === 'function') {
+                updateFinalPrompt();
+            }
+        }
+
+        // Get selected artist for generation
+        function getSelectedArtist() {
+            return selectedArtistId ? ARTISTS[selectedArtistId] : null;
+        }
+
+        // =====================================================================
         // Common Tags System - Quick Tag Pills
         // =====================================================================
         const COMMON_TAGS = {
@@ -2949,12 +3724,16 @@
             "EDM": {
                 "Orbital Classic": { style: "orbital style progressive electronic, hypnotic synth arpeggios, pulsing bassline, four-on-the-floor kicks, atmospheric pads, acid 303 synth, 90s rave", bpm: 135, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
                 "Festival Banger": { style: "big room house, massive drops, festival anthem, euphoric synths, powerful kicks, crowd energy", bpm: 128, key: "F major", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
+                "Progressive House": { style: "progressive house, emotional anthem, cinematic build, driving synths, euphoric drop, festival EDM, soaring topline, atmospheric pads", bpm: 128, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
                 "Deep House": { style: "deep house, groovy bassline, smooth pads, underground vibe, warm chords, late night", bpm: 122, key: "G minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
+                "Tropical House": { style: "tropical house, warm relaxed vibes, marimba, steel drum accents, light airy production, beach sunset, kygo inspired", bpm: 100, key: "G major", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
+                "Tech House": { style: "tech house, minimal grooves, punchy kicks, rhythmic vocal chops, underground club, driving percussion", bpm: 126, key: "F minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
                 "Progressive Trance": { style: "progressive trance, building arpeggios, emotional melodies, uplifting breakdown, hands in the air", bpm: 138, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 180 },
                 "Melodic Techno": { style: "melodic techno, driving rhythm, atmospheric pads, hypnotic loops, berlin club sound", bpm: 125, key: "C minor", timeSig: "4", inferSteps: 80, guidance: 13, duration: 180 },
                 "Dubstep Heavy": { style: "heavy dubstep, massive wobble bass, aggressive drops, distorted synths, headbanger", bpm: 140, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
                 "Future Bass": { style: "future bass, bright supersaws, pitched vocal chops, colorful chords, uplifting drops", bpm: 150, key: "F major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 90 },
                 "Drum & Bass": { style: "liquid drum and bass, rolling breakbeats, deep sub bass, atmospheric pads, smooth and energetic", bpm: 174, key: "A minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 150 },
+                "Liquid DnB": { style: "liquid drum and bass, soulful female topline, jazzy chords, smooth melodic delivery, rolling breakbeats, atmospheric", bpm: 174, key: "D minor", timeSig: "4", inferSteps: 80, guidance: 12, duration: 180 },
                 "House Classic": { style: "classic house, piano chords, funky bassline, soulful vocal samples, chicago vibes", bpm: 124, key: "C major", timeSig: "4", inferSteps: 80, guidance: 13, duration: 150 },
                 "Hardstyle": { style: "hardstyle, hard kicks, euphoric melodies, reverse bass, intense energy, festival power", bpm: 150, key: "E minor", timeSig: "4", inferSteps: 80, guidance: 14, duration: 90 },
             },
@@ -3044,32 +3823,32 @@
         const RHYTHM_MODIFIERS = {
             swing: {
                 label: "Swing/Shuffle",
-                icon: "🎷",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">music_note</span>',
                 levels: ["subtle swing feel", "swinging rhythm, shuffled grooves", "heavy swing groove, jazzy timing"]
             },
             polyrhythm: {
                 label: "Polyrhythm",
-                icon: "🥁",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">grain</span>',
                 levels: ["hint of polyrhythmic layering", "polyrhythmic drums, layered percussion", "complex polyrhythms, interlocking cross-rhythms, african percussion"]
             },
             syncopation: {
                 label: "Syncopation",
-                icon: "⚡",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">bolt</span>',
                 levels: ["subtle syncopation", "syncopated rhythms, off-beat accents", "heavy syncopated accents, unexpected rhythmic hits"]
             },
             glitch: {
                 label: "Glitch/Stutter",
-                icon: "💥",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">flash_on</span>',
                 levels: ["subtle digital artifacts", "glitchy beats, stuttering textures", "chaotic glitch, fragmented rhythms, IDM-style beat deconstruction"]
             },
             humanize: {
                 label: "Humanize",
-                icon: "🎹",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">piano</span>',
                 levels: ["natural feel", "humanized groove, organic timing", "live performance feel, expressive dynamics, imperfect timing"]
             },
             straight: {
                 label: "Straight/Locked",
-                icon: "🔒",
+                icon: '<span class="material-icons" style="font-size: 1rem; vertical-align: middle;">lock</span>',
                 levels: ["steady pulse", "locked groove, straight time", "metronomic precision, mechanical beat, quantized"]
             }
         };
@@ -3197,16 +3976,16 @@
                 badge.className = 'quality-badge';
                 if (presetName === 'ultra') {
                     badge.classList.add('ultra');
-                    badge.textContent = '🟣 Ultra';
+                    badge.textContent = 'Ultra';
                 } else if (presetName === 'pro' || steps >= 80) {
                     badge.classList.add('high');
-                    badge.textContent = '🔵 High';
+                    badge.textContent = 'High';
                 } else if (presetName === 'balanced' || steps >= 40) {
                     badge.classList.add('good');
-                    badge.textContent = '🟢 Good';
+                    badge.textContent = 'Good';
                 } else {
                     badge.classList.add('low');
-                    badge.textContent = '🟡 Fast';
+                    badge.textContent = 'Fast';
                 }
             }
         }
@@ -3528,52 +4307,97 @@
             }
         });
 
-        // Quick Presets with Genre Tabs
+        // Quick Presets Accordion
         let currentQuickGenre = 'The Treq';
 
         function initQuickPresets() {
-            const tabsContainer = document.getElementById('quickstyle-tabs');
-            const presetsContainer = document.getElementById('quick-presets');
+            const accordion = document.getElementById('quickstyle-accordion');
+            if (!accordion) return;
 
-            // Create genre tabs
+            // Create accordion sections for each genre
             Object.keys(PRESETS).forEach((genre, i) => {
-                const tab = document.createElement('button');
-                tab.className = 'quickstyle-tab' + (genre === 'The Treq' ? ' featured active' : '');
-                tab.textContent = genre;
-                tab.onclick = () => selectQuickGenre(genre);
-                tabsContainer.appendChild(tab);
+                const section = document.createElement('div');
+                section.className = 'quickstyle-section' + (genre === 'The Treq' ? ' featured open' : '');
+                section.dataset.genre = genre;
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'quickstyle-header';
+                header.onclick = () => toggleAccordionSection(section);
+
+                const title = document.createElement('span');
+                title.className = 'quickstyle-header-title';
+
+                // Genre icons
+                const iconMap = {
+                    'The Treq': 'stars',
+                    'EDM': 'graphic_eq',
+                    'Hip-Hop': 'mic',
+                    'Rock': 'music_note',
+                    'Pop': 'queue_music',
+                    'Jazz': 'piano',
+                    'Country': 'nature',
+                    'Classical': 'music_note'
+                };
+                const iconName = iconMap[genre] || 'album';
+                title.innerHTML = `<span class="material-icons">${iconName}</span> ${genre}`;
+
+                const arrow = document.createElement('span');
+                arrow.className = 'quickstyle-header-arrow material-icons';
+                arrow.textContent = 'expand_more';
+
+                header.appendChild(title);
+                header.appendChild(arrow);
+
+                // Content
+                const content = document.createElement('div');
+                content.className = 'quickstyle-content';
+
+                const grid = document.createElement('div');
+                grid.className = 'quickstyle-presets-grid';
+
+                // Add preset cards
+                Object.entries(PRESETS[genre] || {}).forEach(([name, data]) => {
+                    const card = createPresetCard(name, data);
+                    grid.appendChild(card);
+                });
+
+                content.appendChild(grid);
+                section.appendChild(header);
+                section.appendChild(content);
+                accordion.appendChild(section);
             });
 
-            // Load default genre
-            selectQuickGenre('The Treq');
+            // Select first preset from The Treq by default
+            const treqPresets = PRESETS['The Treq'];
+            if (treqPresets) {
+                const firstPreset = Object.entries(treqPresets)[0];
+                if (firstPreset) {
+                    selectPreset(firstPreset[0], firstPreset[1]);
+                }
+            }
         }
 
+        function toggleAccordionSection(section) {
+            const wasOpen = section.classList.contains('open');
+
+            // Close all sections
+            document.querySelectorAll('.quickstyle-section').forEach(s => {
+                s.classList.remove('open');
+            });
+
+            // Toggle the clicked section
+            if (!wasOpen) {
+                section.classList.add('open');
+                currentQuickGenre = section.dataset.genre;
+            }
+        }
+
+        // Legacy function kept for compatibility
         function selectQuickGenre(genre) {
-            currentQuickGenre = genre;
-
-            // Update tab states
-            document.querySelectorAll('.quickstyle-tab').forEach(t => {
-                const isActive = t.textContent === genre;
-                t.classList.toggle('active', isActive);
-                // Featured styling for The Treq
-                if (t.textContent === 'The Treq') {
-                    t.classList.toggle('featured', true);
-                }
-            });
-
-            // Render presets for this genre
-            const container = document.getElementById('quick-presets');
-            container.innerHTML = '';
-
-            Object.entries(PRESETS[genre] || {}).forEach(([name, data]) => {
-                const card = createPresetCard(name, data);
-                container.appendChild(card);
-            });
-
-            // Select first preset by default
-            const firstPreset = Object.entries(PRESETS[genre])[0];
-            if (firstPreset) {
-                selectPreset(firstPreset[0], firstPreset[1]);
+            const section = document.querySelector(`.quickstyle-section[data-genre="${genre}"]`);
+            if (section) {
+                toggleAccordionSection(section);
             }
         }
 
@@ -3609,7 +4433,7 @@
             const durationDisplay = data.duration ? ` • ${data.duration}s` : '';
             card.innerHTML = `
                 <div class="preset-name">${name}</div>
-                <div class="preset-bpm">🎵 ${data.bpm} BPM${keyDisplay}${durationDisplay}</div>
+                <div class="preset-bpm">${data.bpm} BPM${keyDisplay}${durationDisplay}</div>
             `;
             card.onclick = () => selectPreset(name, data);
             return card;
@@ -3631,9 +4455,10 @@
             }
 
             // Apply Duration (if preset has one)
-            if (data.duration) {
-                document.getElementById('duration').value = data.duration;
-                document.getElementById('duration-value').textContent = data.duration + 's';
+            if (data.duration !== undefined) {
+                const durationSlider = document.getElementById('duration');
+                durationSlider.value = data.duration;
+                updateDurationDisplay(durationSlider);
             }
 
             // Apply Generation Settings
@@ -3673,7 +4498,7 @@
         // Sliders
         function initSliders() {
             document.getElementById('duration').oninput = (e) => {
-                document.getElementById('duration-value').textContent = e.target.value + 's';
+                updateDurationDisplay(e.target);
             };
             document.getElementById('batch').oninput = (e) => {
                 document.getElementById('batch-value').textContent = e.target.value;
@@ -3684,6 +4509,28 @@
             document.getElementById('guidance-scale').oninput = (e) => {
                 document.getElementById('guidance-scale-value').textContent = e.target.value;
             };
+        }
+
+        // Update duration display with support for random (-1)
+        function updateDurationDisplay(slider) {
+            const value = parseInt(slider.value);
+            const displayEl = document.getElementById('duration-value');
+            const hintEl = document.getElementById('duration-hint');
+
+            if (value === -1) {
+                displayEl.textContent = 'Random';
+                displayEl.style.color = 'var(--accent)';
+                if (hintEl) hintEl.style.display = 'block';
+            } else {
+                displayEl.textContent = value + 's';
+                displayEl.style.color = '';
+                if (hintEl) hintEl.style.display = 'none';
+            }
+
+            // Also call the warning function if it exists
+            if (typeof updateDurationWarning === 'function') {
+                updateDurationWarning(slider);
+            }
         }
 
         // Lyrics helper
@@ -3732,7 +4579,7 @@
             if (hasRealLyrics && instrumental) {
                 if (warning) {
                     warning.style.display = 'block';
-                    warning.textContent = '⚠️ You have lyrics but "Instrumental" is checked - lyrics will be ignored!';
+                    warning.textContent = 'You have lyrics but "Instrumental" is checked - lyrics will be ignored!';
                     warning.style.color = '#f39c12';
                 }
                 return false;
@@ -3857,7 +4704,7 @@
                     status.className = 'status';
                     // Reset UI state
                     btn.disabled = false;
-                    btn.textContent = '🎵 Generate';
+                    btn.textContent = 'Generate';
                     isGenerating = false;
                     setTimeout(() => progressContainer.classList.add('hidden'), 1000);
                     return;
@@ -3937,7 +4784,7 @@
 
             // Reset UI
             btn.disabled = false;
-            btn.textContent = '⚡ Generate Music';
+            btn.textContent = 'Generate Music';
             isGenerating = false;
             setTimeout(() => progressContainer.classList.add('hidden'), 2000);
         }
@@ -3969,7 +4816,7 @@
                     </div>
                     <audio controls src="${url}"></audio>
                     <div class="result-actions">
-                        <button onclick="window.open('${url}', '_blank')">⬇️ Download</button>
+                        <button onclick="window.open('${url}', '_blank')">Download</button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -4046,7 +4893,7 @@
 
             } catch (error) {
                 loading.style.display = 'none';
-                empty.innerHTML = `<div class="empty-state-icon">❌</div><p>Error loading library: ${error.message}</p>`;
+                empty.innerHTML = `<div class="empty-state-icon">Error:</div><p>Error loading library: ${error.message}</p>`;
                 empty.style.display = 'block';
             }
         }
@@ -4065,7 +4912,7 @@
                 <div style="margin-bottom: 1rem;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                         <span style="font-size: 0.9rem;">Variation ${i + 1}</span>
-                        <a href="${API_BASE}${url}" download="${safeTitle}-v${i + 1}.mp3" style="font-size: 0.8rem; color: var(--accent-primary); text-decoration: none;">⬇️ Download</a>
+                        <a href="${API_BASE}${url}" download="${safeTitle}-v${i + 1}.mp3" style="font-size: 0.8rem; color: var(--accent-primary); text-decoration: none;">Download</a>
                     </div>
                     <audio controls style="width: 100%;" src="${API_BASE}${url}"></audio>
                 </div>
@@ -4103,8 +4950,8 @@
                     ${audioList}
                 </div>
                 <div style="display: flex; gap: 0.5rem;">
-                    <button class="generate-btn" style="flex: 1; padding: 0.75rem;" onclick="updateTrack('${track.folder}')">💾 Save Changes</button>
-                    <button style="background: #e74c3c; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;" onclick="deleteTrack('${track.folder}')">🗑️ Delete</button>
+                    <button class="generate-btn" style="flex: 1; padding: 0.75rem;" onclick="updateTrack('${track.folder}')">Save Changes</button>
+                    <button style="background: #e74c3c; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;" onclick="deleteTrack('${track.folder}')">Delete</button>
                 </div>
             `;
 
@@ -4247,7 +5094,7 @@
         async function generateRemix() {
             if (!remixAudioFile) {
                 const status = document.getElementById('remix-status');
-                status.textContent = '❌ Please upload an audio file first';
+                status.textContent = 'Error: Please upload an audio file first';
                 status.className = 'status error';
                 return;
             }
@@ -4255,7 +5102,7 @@
             const caption = document.getElementById('remix-caption').value;
             if (!caption.trim()) {
                 const status = document.getElementById('remix-status');
-                status.textContent = '❌ Please select a style or enter a description';
+                status.textContent = 'Error: Please select a style or enter a description';
                 status.className = 'status error';
                 return;
             }
@@ -4368,14 +5215,14 @@
 
             } catch (error) {
                 if (error.name === 'AbortError') {
-                    status.textContent = '⚠️ Generation cancelled';
+                    status.textContent = 'Generation cancelled';
                 } else {
-                    status.textContent = `❌ Error: ${error.message}`;
+                    status.textContent = `Error: ${error.message}`;
                 }
                 status.className = 'status error';
             } finally {
                 btn.disabled = false;
-                btn.textContent = '🔧 Generate Remix';
+                btn.textContent = 'Generate Remix';
                 progressContainer.classList.add('hidden');
                 isRemixGenerating = false;
             }
@@ -4400,7 +5247,7 @@
                     </div>
                     <audio controls src="${API_BASE}${path}" style="width: 100%;"></audio>
                     <div class="result-actions">
-                        <button onclick="window.open('${API_BASE}${path}', '_blank')">📥 Download</button>
+                        <button onclick="window.open('${API_BASE}${path}', '_blank')">Download</button>
                     </div>
                 `;
                 resultsGrid.appendChild(card);
@@ -4490,7 +5337,7 @@
 
         async function generateStems() {
             if (!stemsAudioFile) {
-                document.getElementById('stems-status').textContent = '❌ Please upload an audio file first';
+                document.getElementById('stems-status').textContent = 'Error: Please upload an audio file first';
                 document.getElementById('stems-status').className = 'status error';
                 return;
             }
@@ -4559,14 +5406,14 @@
 
             } catch (error) {
                 if (error.name === 'AbortError') {
-                    status.textContent = '⚠️ Extraction cancelled';
+                    status.textContent = 'Extraction cancelled';
                 } else {
-                    status.textContent = `❌ Error: ${error.message}`;
+                    status.textContent = `Error: ${error.message}`;
                 }
                 status.className = 'status error';
             } finally {
                 btn.disabled = false;
-                btn.textContent = '✂️ Extract Stem';
+                btn.textContent = 'Extract Stem';
                 isStemsGenerating = false;
             }
         }
@@ -4590,7 +5437,7 @@
                     </div>
                     <audio controls src="${API_BASE}${path}" style="width: 100%;"></audio>
                     <div class="result-actions">
-                        <button onclick="window.open('${API_BASE}${path}', '_blank')">📥 Download</button>
+                        <button onclick="window.open('${API_BASE}${path}', '_blank')">Download</button>
                     </div>
                 `;
                 resultsGrid.appendChild(card);
@@ -4613,8 +5460,35 @@
             isStemsGenerating = false;
         }
 
+        // Initialize artists system
+        initArtists();
+
         // Load library when navigating to Library page
         document.querySelector('[data-page="library"]').addEventListener('click', loadLibrary);
+
+        // Load artists grid when navigating to Artists page
+        document.querySelector('[data-page="artists"]').addEventListener('click', renderArtistGrid);
+
+        // Sidebar Navigation: scroll to top on page change
+        document.querySelectorAll('.sidebar .nav-item[data-page]').forEach(navItem => {
+            navItem.addEventListener('click', function () {
+                const pageId = this.dataset.page;
+
+                // Remove active class from all nav items and pages
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+
+                // Add active class to clicked nav item and corresponding page
+                this.classList.add('active');
+                const page = document.getElementById('page-' + pageId);
+                if (page) {
+                    page.classList.add('active');
+                }
+
+                // Scroll main content to top
+                document.querySelector('.main').scrollTo(0, 0);
+            });
+        });
     </script>
 </body>
 

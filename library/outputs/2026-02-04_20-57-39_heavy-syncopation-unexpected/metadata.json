@@ -1,0 +1,30 @@
+{
+  "id": "5c9bf71d-4eb8-410a-aba5-dd2b6e389ae8",
+  "title": "heavy syncopation, unexpected",
+  "slug": "heavy-syncopation-unexpected",
+  "folder": "2026-02-04_20-57-39_heavy-syncopation-unexpected",
+  "created_at": "2026-02-04T21:03:12.977601",
+  "caption": "heavy syncopation, unexpected rhythmic hits, off-beat emphasis, experimental groove, avant-garde percussion",
+  "lyrics": "[Instrumental]",
+  "bpm": 128,
+  "key_scale": "F minor",
+  "time_signature": "4",
+  "duration": 262,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 12.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "abac9c12-186f-2cb0-f0b2-9aeb297ab1ab.mp3",
+      "seed": 1660269697
+    },
+    {
+      "file": "83807d5b-c12c-52f7-910b-b7c729909357.mp3",
+      "seed": 3249489622
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

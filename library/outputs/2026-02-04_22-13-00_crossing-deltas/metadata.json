@@ -1,0 +1,30 @@
+{
+  "id": "18ae7245-7b61-4213-be23-0883a336abb7",
+  "title": "Crossing Deltas",
+  "slug": "crossing-deltas",
+  "folder": "2026-02-04_22-13-00_crossing-deltas",
+  "created_at": "2026-02-04T22:15:33.771152",
+  "caption": "delta blues guitar riffs meets glitchy electronic beats, raw slide guitar, deep 808 bass, atmospheric synth pads, gritty and cinematic, male and female duet, harmonizing together",
+  "lyrics": "[Verse – Female]\nI remember dirt roads and the slow heat rising,\nFields breathing gold under open skies.\nYou laughed like the day had nowhere to go,\nTwo kids with nothing but time on our side.\nWe talked in circles, dreams on our sleeves,\nFound a rhythm just walking home.\n\n[Instrumental]\n(Warm lift, reflective pause — space for memory and motion)\n\n[Verse – Male]\nI remember that moment like it never left,\nThe way your voice cut through the air.\nSame small town, but the world felt wider,\nEvery step felt lighter with you there.\nWe didn’t know what forever meant,\nBut we knew we’d never walk alone.\n\n[Chorus – Both]\nWe were crossing paths before we knew the name,\nTwo lines meeting, never drifting away.\nFrom open fields to endless roads,\nEvery season only made us closer.\nCall it chance, call it fate,\nNothing can break what time has made—\nWe’re still here, still crossing paths.\n\n[Bridge – Both]\nIf the ground shakes, we stand steady,\nIf the lights go out, we still see.\nEvery turn leads back together,\nYou and me—unchanging, unready to leave.",
+  "bpm": 95,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 183,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 9.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "06136e6c-ccfd-6aeb-e457-4897e11f11b5.wav",
+      "seed": 3222616638
+    },
+    {
+      "file": "e1dd4530-f1b4-e756-023f-04ffb248c957.wav",
+      "seed": 779063788
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

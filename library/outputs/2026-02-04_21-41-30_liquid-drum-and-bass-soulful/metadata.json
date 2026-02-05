@@ -1,0 +1,30 @@
+{
+  "id": "1ddac52b-205e-46f1-9169-a15ab10b3e9a",
+  "title": "liquid drum and bass, soulful",
+  "slug": "liquid-drum-and-bass-soulful",
+  "folder": "2026-02-04_21-41-30_liquid-drum-and-bass-soulful",
+  "created_at": "2026-02-04T21:43:28.429890",
+  "caption": "liquid drum and bass, soulful female topline, jazzy chords, smooth melodic delivery, rolling breakbeats, atmospheric",
+  "lyrics": "[Verse 1]\nI choose the wrong moments, trip through time, pretend it’s discipline\nEvery step arrives crooked, nothing syncs the way it’s meant to\nI memorized the gaps, not the order they were selling me\nLearned to breathe in misalignment when the certainty gives in\n\n[Pre-Chorus]\nI don’t chase alignment\nI don’t wait for signs\nI stand inside the error\nAnd call the damage mine\n\n[Chorus]\nNothing ever lands where it should\nBut imbalance is how I keep standing\nNothing ever feels understood\nI stay upright by never landing\n\n[Verse 2]\nI count the pauses louder than the moments that appear\nTrust the miss more than the hit, let confusion steer\nEvery correction pulls me under, every rule feels thin\nSo I lean into the stagger and let the fall begin\n\n[Pre-Chorus]\nI stopped asking permission\nFrom patterns that collapse\nI move against the promise\nThat order ever lasts\n\n[Chorus]\nNothing ever lands where it should\nBut imbalance is how I keep standing\nNothing ever feels understood\nI stay upright by never landing\n\n[Bridge]\nIf this breaks me, let it be deliberate\nIf I slip, let it look designed\nI don’t need a center to keep moving\nI survive by losing the line\n\n[Break]\nWrong moment\nWrong step\nStill here\nStill held\n\n[Chorus – Final]\nNothing ever lands where it should\nBut imbalance is how I keep standing\nNothing ever feels understood\nI stay upright by never landing\n\n[Outro]\nI don’t fall apart\nI fall in pattern\nJust unstable enough\nTo stay upright",
+  "bpm": 174,
+  "key_scale": "D minor",
+  "time_signature": "4",
+  "duration": 180,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 12.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "fdc04271-f49f-d259-baf0-0f75c6c664cc.mp3",
+      "seed": 2290455955
+    },
+    {
+      "file": "af505128-ff93-dc2a-6f74-f30ad5798903.mp3",
+      "seed": 156135743
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

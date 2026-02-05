@@ -266,6 +266,8 @@ This is where I belong
 
 ## Advanced Settings
 
+> **Signal Horizon Users:** For detailed explanations of each setting including impact analysis and troubleshooting, see the [Admin Settings Reference](ADMIN_SETTINGS.md).
+
 ### DiT Parameters
 
 | Parameter | Default | Description |

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Horizon × The Treq</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-base: #02020B;
+            --accent-warm: #DB8324;
+            --accent-sage: #6B8E23;
+            --accent-cyan: #00D4FF;
+            --text: #E8E6E3;
+            --text-muted: #8A8A8A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-base);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated background gradients */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .bg-glow.warm {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-warm) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-glow.sage {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-sage) 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: 4s;
+        }
+
+        .bg-glow.cyan {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        /* Main content container */
+        .brand-container {
+            text-align: center;
+            z-index: 10;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Signal Horizon - product name (hero) */
+        .signal-horizon {
+            font-family: 'Inter', sans-serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 16px;
+            margin-right: -16px;
+            /* Compensate for letter-spacing to center text */
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.6),
+                0 0 80px rgba(0, 212, 255, 0.3);
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 40px rgba(0, 212, 255, 0.6),
+                    0 0 80px rgba(0, 212, 255, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 60px rgba(0, 212, 255, 0.8),
+                    0 0 120px rgba(0, 212, 255, 0.5);
+            }
+        }
+
+        /* Presents - transition text */
+        .presents {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 6px;
+            text-transform: lowercase;
+            margin: 1.5rem 0 2rem 0;
+            opacity: 0.7;
+        }
+
+        /* The Treq - creator brand (top) */
+        .the-treq {
+            font-family: 'Climate Crisis', cursive;
+            font-size: 5rem;
+            color: var(--accent-warm);
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(219, 131, 36, 0.6),
+                0 0 120px rgba(219, 131, 36, 0.3),
+                0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: warmGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes warmGlow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 60px rgba(219, 131, 36, 0.6),
+                    0 0 120px rgba(219, 131, 36, 0.3),
+                    0 4px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 80px rgba(219, 131, 36, 0.8),
+                    0 0 160px rgba(219, 131, 36, 0.5),
+                    0 4px 30px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* Tagline */
+        .tagline {
+            margin-top: 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .the-treq {
+                font-size: 3rem;
+            }
+
+            .signal-horizon {
+                font-size: 2rem;
+                letter-spacing: 10px;
+            }
+
+            .presents {
+                font-size: 0.85rem;
+                margin: 1rem 0 1.5rem 0;
+            }
+
+            .tagline {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .the-treq {
+                font-size: 2rem;
+            }
+
+            .signal-horizon {
+                font-size: 1.25rem;
+                letter-spacing: 6px;
+            }
+
+            .presents {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background glows -->
+    <div class="bg-glow warm"></div>
+    <div class="bg-glow sage"></div>
+    <div class="bg-glow cyan"></div>
+
+    <!-- Brand content -->
+    <div class="brand-container">
+        <div class="the-treq">The Treq</div>
+        <div class="presents">presents</div>
+        <div class="signal-horizon">Signal Horizon</div>
+        <div class="tagline">AI Music Generation • Reimagined</div>
+    </div>
+</body>
+
+</html>

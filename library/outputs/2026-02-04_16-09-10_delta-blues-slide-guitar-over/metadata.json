@@ -1,0 +1,30 @@
+{
+  "id": "01ea5874-1fd3-4fce-964a-f15041776c45",
+  "title": "delta blues slide guitar over",
+  "slug": "delta-blues-slide-guitar-over",
+  "folder": "2026-02-04_16-09-10_delta-blues-slide-guitar-over",
+  "created_at": "2026-02-04T16:11:39.207014",
+  "caption": "delta blues slide guitar over psybient textures, ambient dub, slow groove, dusty and ethereal, lo-fi warmth, emotional restrained male falsetto, vulnerable, intimate",
+  "lyrics": "[INTRO]\nI can feel it pulling\nbefore I see it\n\n[VERSE 1]\nI’ve been running on a curve of light\nlike the ground might fall away\nEvery step gets louder\nthe closer I get to the edge\n\nI didn’t come for answers\nI just needed room to breathe\nThe sky keeps opening\nlike it’s daring me\n\n[PRE-CHORUS]\nMy heart keeps counting seconds\nthat my mouth won’t say\n\n[CHORUS]\nI’m racing to the edge of the planet\nnot to jump, just to know\nIf I stop at the line or keep going\nwhen there’s nowhere left to go\n\nI want to feel the ground give up\nbefore I do\n\n[VERSE 2]\nI’ve been carrying this gravity\nlike it knows my name\nEvery memory gets heavier\nthe faster I move away\n\nI look back once\nthen I don’t\nbecause I know what I’ll see\n\n[BREAK]\nWind in my chest\nHands shaking\nStill moving\n\n[FINAL CHORUS]\nI’m racing to the edge of the planet\nwith everything I couldn’t say\nIf I disappear over the horizon\nat least I chose the way\n\nI don’t need to be saved\nI just need to arrive\n\n[OUTRO]\nThe edge is closer now\nI don’t slow down",
+  "bpm": 80,
+  "key_scale": "E minor",
+  "time_signature": "4",
+  "duration": 180,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 8.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "185be81f-86dc-5c04-9efa-8a199b8bc8bd.mp3",
+      "seed": 911202242
+    },
+    {
+      "file": "663e9da9-f27b-a613-8778-a9d95077fe04.mp3",
+      "seed": 2934977325
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

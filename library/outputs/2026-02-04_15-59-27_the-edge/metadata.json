@@ -1,0 +1,30 @@
+{
+  "id": "6fb09051-140d-4da9-b434-c06034001c1e",
+  "title": "The Edge",
+  "slug": "the-edge",
+  "folder": "2026-02-04_15-59-27_the-edge",
+  "created_at": "2026-02-04T16:00:27.255779",
+  "caption": "chaotic glitch beats, stuttering textures, fragmented rhythms, IDM-style beat deconstruction, digital artifacts, experimental electronic, ethereal trance vocals, angelic, soaring",
+  "lyrics": "[INTRO]\nI can feel it pulling\nbefore I see it\n\n[VERSE 1]\nI’ve been running on a curve of light\nlike the ground might fall away\nEvery step gets louder\nthe closer I get to the edge\n\nI didn’t come for answers\nI just needed room to breathe\nThe sky keeps opening\nlike it’s daring me\n\n[PRE-CHORUS]\nMy heart keeps counting seconds\nthat my mouth won’t say\n\n[CHORUS]\nI’m racing to the edge of the planet\nnot to jump, just to know\nIf I stop at the line or keep going\nwhen there’s nowhere left to go\n\nI want to feel the ground give up\nbefore I do\n\n[VERSE 2]\nI’ve been carrying this gravity\nlike it knows my name\nEvery memory gets heavier\nthe faster I move away\n\nI look back once\nthen I don’t\nbecause I know what I’ll see\n\n[BREAK]\nWind in my chest\nHands shaking\nStill moving\n\n[FINAL CHORUS]\nI’m racing to the edge of the planet\nwith everything I couldn’t say\nIf I disappear over the horizon\nat least I chose the way\n\nI don’t need to be saved\nI just need to arrive\n\n[OUTRO]\nThe edge is closer now\nI don’t slow down",
+  "bpm": 135,
+  "key_scale": "A minor",
+  "time_signature": "4",
+  "duration": 90,
+  "language": "en",
+  "inference_steps": 80,
+  "guidance_scale": 14.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "0b7377c5-8119-3d36-81fb-4b49e8c8e4cb.mp3",
+      "seed": 680560540
+    },
+    {
+      "file": "25815ac7-d97f-d7bf-83b0-8989d6568fe6.mp3",
+      "seed": 2807950598
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

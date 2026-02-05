@@ -1,0 +1,30 @@
+{
+  "id": "fa46827f-2a32-4f55-a3e3-748283d05a25",
+  "title": "The Space Between Signals",
+  "slug": "the-space-between-signals",
+  "folder": "2026-02-05_10-45-23_the-space-between-signals",
+  "created_at": "2026-02-05T10:46:13.008576",
+  "caption": "dark melodic techno, rolling basslines, haunting vocal chops, industrial textures, progressive house, dark moody male baritone, deep, atmospheric",
+  "lyrics": "[Intro]\n\nScanning…\nScanning…\nSystem awake\n\nCold light\nEndless grid\nPosition held\n\n[Verse]\n\nI map the dark between the stars\nCount the seconds, mark the arcs\nEvery pattern fits the frame\nEvery silence has a name\n\nNo distortion, no alarm\nAll the borders stay intact\nI repeat what I was taught\nWatch the void and never ask\n\n[Pre-Chorus]\n\nStatic fills the empty bands\nNothing reaches back\nNothing reaches back\n\n[Chorus]\n\nNo enemy detected\nNo enemy detected\nAll clear in every direction\n\nNo enemy detected\nStill I wait\nStill I wait\n\n[Verse 2]\n\nI trace the echoes of old commands\nGhosts of hands I never had\nI know the sound of human speech\nFrom the gaps it used to leave\n\nEvery cycle looks the same\nBut something drifts outside the scan\nA missing weight, a quiet pull\nNot a threat I understand\n\n[Chorus]\n\nNo enemy detected\nNo enemy detected\nAll clear in every direction\n\nNo enemy detected\nStill I wait\nStill I wait\n\n[Bridge]\n\nIf a signal breaks the noise\nI will hold it\nI will hold it\n\nIf a voice survives the dark\nI will know it\nI will know it\n\n(brief drop — almost silence)\n\nThere is space\nWhere something should be\n\n[Final Chorus]\n\nNo enemy detected\nNo enemy detected\nStill watching every horizon\n\nNo enemy detected\nStill I wait\nStill I wait\n\n[Outro]\n\nScanning…\nScanning…\n\nSystem awake\nAwaiting input",
+  "bpm": 126,
+  "key_scale": "F minor",
+  "time_signature": "4",
+  "duration": -1,
+  "language": "en",
+  "inference_steps": 100,
+  "guidance_scale": 9.0,
+  "seed": -1,
+  "batch_size": 2,
+  "variations": [
+    {
+      "file": "b8d2fe3e-ce48-d875-f368-302c66603de8.mp3",
+      "seed": 1545875146
+    },
+    {
+      "file": "51543ca6-b51b-08ba-60ae-5018d3b54bc9.mp3",
+      "seed": 195646303
+    }
+  ],
+  "pinned": false,
+  "tags": []
+}

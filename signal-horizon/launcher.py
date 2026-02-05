@@ -135,6 +135,14 @@ def main():
             return FileResponse(html_path)
         return HTMLResponse("<h1>Signal Horizon</h1><p>index.html not found</p>")
     
+    # Serve promo page
+    @app.get("/promo.html", response_class=HTMLResponse)
+    async def serve_promo():
+        promo_path = SCRIPT_DIR / "promo.html"
+        if promo_path.exists():
+            return FileResponse(promo_path)
+        return HTMLResponse("<h1>Promo Not Found</h1>")
+    
     # Try to create Gradio interface for advanced features (optional)
     try:
         init_params = {'init_llm': False, 'device': 'auto'} if init_service else None
